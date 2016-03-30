@@ -15,11 +15,12 @@ import app.view.TodoView;
  */
 public final class App extends Application {
 
-	/* (non-Javadoc)
+    /* (non-Javadoc)
 	 * @see app.framework.Application#start(javax.swing.JFrame)
 	 */
 	@Override
-	protected void start(JFrame frame) {
+	protected void start(JFrame frame)
+    {
 	    frame.setTitle("EV Simulator");
 
 	    // Set the menu bar of the application frame.
@@ -32,7 +33,8 @@ public final class App extends Application {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args)
+    {
 		new App();
 	}
 
