@@ -1,5 +1,5 @@
 # EV Simulator
-一个模拟电动汽车运行的软件，使用 Greenfoot 引擎驱动。
+一个模拟电动汽车运行的软件，使用 [Greenfoot](http://www.greenfoot.org/home) 引擎驱动。
 
 ## 文件结构
 ### - properties 
