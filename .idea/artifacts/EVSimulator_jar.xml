@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="EVSimulator:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/EVSimulator_jar</output-path>
+    <output-path>$PROJECT_DIR$/out/artifacts/EVSimulator</output-path>
     <root id="archive" name="EVSimulator.jar">
       <element id="module-output" name="EVSimulator" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/bluej.jar" path-in-jar="/" />
@@ -27,7 +27,6 @@
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/commons-logging-api-1.1.2.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/extensions/greenfoot.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/extensions/submitter.jar" path-in-jar="/" />
-      <element id="library" level="application" name="greenfoot" />
     </root>
   </artifact>
 </component>

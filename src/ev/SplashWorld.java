@@ -1,22 +1,26 @@
 /**
  * Created by liuzh on 2016/4/14.
+ * The world for splash images
  */
 package ev;
 
 import greenfoot.*;
+import fullscreen.*;
 
 import java.awt.*;
 
-public class SplashWorld extends World
+public class SplashWorld extends FullScreenWorld
 {
     public SplashWorld()
     {
-        super(Settings.getWorldWidth(), Settings.getWorldHeight(), 1);
+        super(4/3.0,1,false);
         GreenfootImage b = new GreenfootImage(this.getWidth(), this.getHeight());
         b.setColor(Color.black);
         b.fill();
         this.setBackground(b);
+        Greenfoot.setSpeed(75);
         setSplash();
+        FullScreenWindow.setCursorVisibility(false);
     }
 
     private int count = Settings.getSplashCount();
@@ -34,7 +38,7 @@ public class SplashWorld extends World
                 this.removeObject(currentSplash);
                 currentSplash = null;
             }
-            currentSplash = new SplashImage("Splash" + current + ".png");
+            currentSplash = new SplashImage("Splashes/Splash" + current + ".png");
             this.addObject(currentSplash, this.getWidth() / 2, this.getHeight() / 2);
         }
         return check;
@@ -46,12 +50,12 @@ public class SplashWorld extends World
     }
 
     @Override
-    public void act()
+    public void run()
     {
     }
 
-    public void nextSplash()
+    void nextSplash()
     {
-        if(!setSplash()) Greenfoot.setWorld(new HomeWorld());
+        if(!setSplash()) FullScreenWindow.setDisplayedWorld(new HomeWorld());
     }
 }

@@ -6,9 +6,10 @@
  */
 package ev;
 
+import fullscreen.*;
 import greenfoot.*;
 
-public class HomeWorld extends World
+class HomeWorld extends FullScreenWorld
 {
     // instance variables - replace the example below with your own
     private int x;
@@ -16,15 +17,20 @@ public class HomeWorld extends World
     /**
      * Constructor for objects of class ev.HomeWorld
      */
-    public HomeWorld()
+    HomeWorld()
     {
-        super(1024, 768, 1);
+        super(1.5, 1, false);
         setBackground("a.bmp");
-        System.out.flush();
+        FullScreenWindow.setCursorVisibility(true);
+    }
+
+    @Override
+    public void started()
+    {
     }
     
     @Override
-    public void act()
+    public void run()
     {
         
     }

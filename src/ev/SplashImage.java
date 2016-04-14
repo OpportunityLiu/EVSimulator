@@ -1,19 +1,29 @@
 /**
  * Created by liuzh on 2016/4/14.
+ * Image shows in splash screen.
  */
 package ev;
 
+import fullscreen.FullScreenWindow;
 import greenfoot.*;
 
-public class SplashImage extends Actor
+class SplashImage extends Actor
 {
-    public SplashImage(String filename) throws IllegalArgumentException
+    SplashImage(String filename) throws IllegalArgumentException
     {
         super();
         this.image = new GreenfootImage(filename);
         this.image.setTransparency(0);
-        this.image.scale(Settings.getWorldWidth(), Settings.getWorldHeight());
+        double scale = Math.max((double)FullScreenWindow.getFrameWidth() / image.getWidth(), (double)FullScreenWindow.getFrameHeight() / image.getHeight());
+        this.image.scale((int)(image.getWidth() * scale), (int)(image.getHeight() * scale));
         super.setImage(this.image);
+    }
+
+    SplashImage(String filename, int delayLength, int stepLength)
+    {
+        this(filename);
+        this.delayLength = delayLength;
+        this.stepLength = stepLength;
     }
 
     private GreenfootImage image;
@@ -22,6 +32,7 @@ public class SplashImage extends Actor
     private int delay = 0;
 
     private int delayLength = 200;
+    private int stepLength = 1;
 
     @Override
     public void act()
@@ -30,7 +41,8 @@ public class SplashImage extends Actor
         switch(state)
         {
             case 0:
-                t++;
+                t += stepLength;
+                t = t > 255 ? 255 : t;
                 if(t >= 255) state = 1;
                 break;
             case 1:
@@ -38,19 +50,15 @@ public class SplashImage extends Actor
                 if(delay > delayLength) state = 2;
                 break;
             case 2:
-                t--;
+                t -= stepLength;
+                t = t < 0 ? 0 : t;
                 if(t <= 0) state = 3;
                 break;
             case 3:
                 SplashWorld w = (SplashWorld)this.getWorld();
                 w.nextSplash();
         }
-        t = t > 255 ? 255 : t;
         this.image.setTransparency(t);
-        if(t > 255)
-        {
-
-        }
     }
 
     public int getDelayLength()
