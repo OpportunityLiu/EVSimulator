@@ -1,0 +1,6 @@
+{
+  "name": "EV Simulator",
+  "tagline": "A simulator for electric vehicle.",
+  "body": "# EV Simulator\r\n一个模拟电动汽车运行的软件，使用 [Greenfoot](http://www.greenfoot.org/home) 引擎驱动。\r\n\r\n## 文件结构\r\n### - properties \r\n配置文件\r\n### - resources \r\n资源文件\r\n#### -- images \r\n图像资源\r\n#### -- sounds \r\n声音资源\r\n### - original resources \r\n原始资源文件，不包含在生成的 JAR 中\r\n### - lib\r\n库文件\r\n### - src\r\n源代码\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
