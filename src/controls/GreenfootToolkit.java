@@ -1,4 +1,4 @@
-package fullscreen;
+package controls;
 
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * Write a description of class fullscreen.GreenfootToolkit here.
+ * Write a description of class controls.GreenfootToolkit here.
  *
  * @author Gevater_Tod4711
  * @version (a version number or a date)

@@ -4,17 +4,16 @@
  */
 package ev;
 
-import fullscreen.FullScreenWindow;
+import controls.ScenarioHelper;
 import greenfoot.*;
 
 class SplashImage extends Actor
 {
     SplashImage(String filename) throws IllegalArgumentException
     {
-        super();
         this.image = new GreenfootImage(filename);
         this.image.setTransparency(0);
-        double scale = Math.min((double)FullScreenWindow.getFrameWidth() / image.getWidth(), (double)FullScreenWindow.getFrameHeight() / image.getHeight());
+        double scale = Math.min((double)ScenarioHelper.getFrameWidth() / image.getWidth(), (double)ScenarioHelper.getFrameHeight() / image.getHeight());
         this.image.scale((int)(image.getWidth() * scale), (int)(image.getHeight() * scale));
         super.setImage(this.image);
     }

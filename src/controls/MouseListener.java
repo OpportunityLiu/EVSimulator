@@ -1,6 +1,7 @@
 package controls;
 
-import fullscreen.FullScreenMouseInfo;
+import greenfoot.MouseInfo;
+
 import java.util.EventListener;
 
 /**
@@ -13,25 +14,25 @@ public interface MouseListener extends EventListener
      * Invoked when the mouse button has been clicked (pressed
      * and released) on a component.
      */
-    public void mouseClicked(FullScreenMouseInfo e);
+    public void mouseClicked(MouseInfo e);
 
     /**
      * Invoked when the mouse is currently being dragged on a component.
      */
-    public void mouseDragged(FullScreenMouseInfo e);
+    public void mouseDragged(MouseInfo e);
 
     /**
      * Invoked when a mouse drag has ended on a component.
      */
-    public void mouseDragEnded(FullScreenMouseInfo e);
+    public void mouseDragEnded(MouseInfo e);
 
     /**
      * Invoked when the mouse has been moved on a component.
      */
-    public void mouseMoved(FullScreenMouseInfo e);
+    public void mouseMoved(MouseInfo e);
 
     /**
      * Invoked when the mouse has been pressed (changed from a non-pressed state to being pressed) on a component.
      */
-    public void mousePressed(FullScreenMouseInfo e);
+    public void mousePressed(MouseInfo e);
 }

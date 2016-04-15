@@ -1,7 +1,7 @@
 package controls;
 
-import fullscreen.FullScreenWindow;
 import greenfoot.Actor;
+import greenfoot.Greenfoot;
 
 /**
  * Default button in the program.
@@ -19,16 +19,16 @@ public class Button extends Actor
     {
         if(listener != null)
         {
-            if(FullScreenWindow.mouseClicked(this))
-                listener.mouseClicked(FullScreenWindow.getMouseInfo());
-            if(FullScreenWindow.mouseDragged(this))
-                listener.mouseDragged(FullScreenWindow.getMouseInfo());
-            if(FullScreenWindow.mouseDragEnded(this))
-                listener.mouseDragEnded(FullScreenWindow.getMouseInfo());
-            if(FullScreenWindow.mouseMoved(this))
-                listener.mouseMoved(FullScreenWindow.getMouseInfo());
-            if(FullScreenWindow.mousePressed(this))
-                listener.mousePressed(FullScreenWindow.getMouseInfo());
+            if(Greenfoot.mouseClicked(this))
+                listener.mouseClicked(Greenfoot.getMouseInfo());
+            if(Greenfoot.mouseDragged(this))
+                listener.mouseDragged(Greenfoot.getMouseInfo());
+            if(Greenfoot.mouseDragEnded(this))
+                listener.mouseDragEnded(Greenfoot.getMouseInfo());
+            if(Greenfoot.mouseMoved(this))
+                listener.mouseMoved(Greenfoot.getMouseInfo());
+            if(Greenfoot.mousePressed(this))
+                listener.mousePressed(Greenfoot.getMouseInfo());
         }
     }
 

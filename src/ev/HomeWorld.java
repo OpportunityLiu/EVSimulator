@@ -8,54 +8,55 @@ package ev;
 
 import controls.Button;
 import controls.MouseListener;
-import fullscreen.*;
-
+import controls.ScenarioHelper;
+import greenfoot.*;
+import greenfoot.MouseInfo;
 import java.awt.*;
 
-class HomeWorld extends FullScreenWorld
+class HomeWorld extends World
 {
     /**
      * Constructor for objects of class ev.HomeWorld
      */
     HomeWorld()
     {
-        super(1.5, 1, false);
+        super(1280,900,1);
         setBackground("a.bmp");
-        HomeWorld x=this;
+        getBackground().setColor(Color.white);
+        getBackground().fill();
         getBackground().setColor(Color.black);
-        x.getBackground().clear();
-        FullScreenWindow.setCursorVisibility(true);
+        ScenarioHelper.setCursorVisible(true);
         addObject(new Button().setListener(new MouseListener()
         {
             private int l=0;
             @Override
-            public void mouseClicked(FullScreenMouseInfo e)
+            public void mouseClicked(MouseInfo e)
             {
-                x.getBackground().drawString("Clicked",500,l+=20);
+                HomeWorld.this.getBackground().drawString("Clicked",500,l+=20);
             }
 
             @Override
-            public void mouseDragged(FullScreenMouseInfo e)
+            public void mouseDragged(MouseInfo e)
             {
-                x.getBackground().drawString("Dragged",500,l+=20);
+                HomeWorld.this.getBackground().drawString("Dragged",500,l+=20);
             }
 
             @Override
-            public void mouseDragEnded(FullScreenMouseInfo e)
+            public void mouseDragEnded(MouseInfo e)
             {
-                x.getBackground().drawString("DragEnded",500,l+=20);
+                HomeWorld.this.getBackground().drawString("DragEnded",500,l+=20);
             }
 
             @Override
-            public void mouseMoved(FullScreenMouseInfo e)
+            public void mouseMoved(MouseInfo e)
             {
-                x.getBackground().drawString("Moved",500,l+=20);
+                HomeWorld.this.getBackground().drawString("Moved",500,l+=20);
             }
 
             @Override
-            public void mousePressed(FullScreenMouseInfo e)
+            public void mousePressed(MouseInfo e)
             {
-                x.getBackground().drawString("Pressed",500,l+=20);
+                HomeWorld.this.getBackground().drawString("Pressed",500,l+=20);
             }
         }),100,100);
     }
@@ -66,11 +67,8 @@ class HomeWorld extends FullScreenWorld
     }
     
     @Override
-    public void run()
+    public void act()
     {
-        i++;
-        //if(i>500)
-            //FullScreenWindow.setDisplayedWorld(new SplashWorld());
     }
 
     private  int i;

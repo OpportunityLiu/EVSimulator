@@ -4,23 +4,26 @@
  */
 package ev;
 
+import controls.ScenarioHelper;
 import greenfoot.*;
-import fullscreen.*;
+import sun.security.krb5.SCDynamicStoreConfig;
 
 import java.awt.*;
 
-public class SplashWorld extends FullScreenWorld
+public class SplashWorld extends World
 {
     public SplashWorld()
     {
-        super(4/3.0,1,false);
-        GreenfootImage b = new GreenfootImage(this.getWidth(), this.getHeight());
+        super(ScenarioHelper.getFrameWidth(), ScenarioHelper.getFrameHeight(),1);
+        //super(ScenarioHelper.getFrameWidth(), ScenarioHelper.getFrameHeight(),1);
+        Greenfoot.start();
+        GreenfootImage b = new GreenfootImage(1, 1);
         b.setColor(Color.black);
         b.fill();
         this.setBackground(b);
-        Greenfoot.setSpeed(70);
         setSplash();
-        FullScreenWindow.setCursorVisibility(false);
+        ScenarioHelper.setCursorVisible(false);
+        Greenfoot.setSpeed(70);
     }
 
     private int count = Settings.getSplashCount();
@@ -50,12 +53,13 @@ public class SplashWorld extends FullScreenWorld
     }
 
     @Override
-    public void run()
+    public void act()
     {
     }
 
     void nextSplash()
     {
-        if(!setSplash()) FullScreenWindow.setDisplayedWorld(new HomeWorld());
+        if(!setSplash())
+            Greenfoot.setWorld(new HomeWorld());
     }
 }
