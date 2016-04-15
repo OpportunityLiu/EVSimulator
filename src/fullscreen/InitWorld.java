@@ -1,5 +1,6 @@
 package fullscreen;
 
+import com.sun.istack.internal.NotNull;
 import ev.SplashWorld;
 import greenfoot.Greenfoot;
 import greenfoot.World;
@@ -19,6 +20,12 @@ public class InitWorld extends World
     @Override
     public void started()
     {
-        Greenfoot.setWorld(new SplashWorld());
+        FullScreenWorld.fullScreenWindow = new FullScreenWindow();
+        FullScreenWindow.setDisplayedWorld(new SplashWorld());
+    }
+
+    @Override
+    public void act()
+    {
     }
 }

@@ -13,7 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import javax.imageio.ImageIO;
-import javax.swing.JFrame;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 /**
@@ -102,49 +102,42 @@ public class FullScreenWindow extends JFrame
     FullScreenWindow()
     {
         instance = this;
-        Image image= null;
+
+        setUndecorated(true);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setBounds(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
+        panel = new FullScreenBufferPanel();
+        panel.setBorder(new EmptyBorder(0, 0, 0, 0));
+        panel.setLayout(null);
         try
         {
-            image = ImageIO.read(getClass().getResource("/images/Icon.png"));
+            Image image = ImageIO.read(getClass().getResource("/images/Icon.png"));
             setIconImage(image);
+            setMouseCursor(ImageIO.read(getClass().getResource("/images/Cursors/Normal.png")),new Point(2,2));
         }
         catch(IOException e)
         {
             e.printStackTrace();
         }
-
-        //创建图片对象
-
-        this.setIconImage(image);
-
-        setUndecorated(true);
+        setContentPane(panel);
         setVisible(true);
-        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        setBounds(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
         addKeyListener(new GreenfootKeyListener(this));
         addMouseListener(new GreenfootMouseListener(this));
         addMouseMotionListener(new GreenfootMouseListener(this));
-        panel = new FullScreenBufferPanel();
-        panel.setBorder(new EmptyBorder(0, 0, 0, 0));
-        panel.setLayout(null);
-        setContentPane(panel);
-        if(getGraphicsConfiguration().getDevice().isFullScreenSupported())
+
+        GraphicsDevice dev = getGraphicsConfiguration().getDevice();
+        if(dev.isFullScreenSupported())
         {
-            getGraphicsConfiguration().getDevice().setFullScreenWindow(this);
+            dev.setFullScreenWindow(this);
         }
-        if(!GreenfootToolkit.getToolkit().playingOnline())
+        for(Window window : getWindows())
         {
-            for(Window window : getWindows())
+            if(!(window instanceof greenfoot.gui.GreenfootFrame) && !window.equals(this))
             {
-                if(!(window instanceof greenfoot.gui.GreenfootFrame) && !window.equals(this))
-                {
-                    window.dispose();
-                }
+                window.dispose();
             }
         }
         displayWorld();
-        cursor = panel.getCursor();
-        Greenfoot.start();
     }
     
     /**
@@ -246,6 +239,7 @@ public class FullScreenWindow extends JFrame
         MOUSE_OFFSET_Y = (int)((FRAME_HEIGHT - (scaleFactor * displayedWorld.WORLD_HEIGHT)) / 2);
         IMAGE_WIDTH = (int)(scaleFactor * displayedWorld.WORLD_WIDTH);
         IMAGE_HEIGHT = (int)(scaleFactor * displayedWorld.WORLD_HEIGHT);
+        if(panel != null) panel.notifyRedraw();
         Greenfoot.setWorld(displayedWorld);
     }
 
@@ -257,7 +251,7 @@ public class FullScreenWindow extends JFrame
      * @param image       The image of the new mouse cursor.
      * @param cursorPoint The click point of the new cursor.
      */
-    public static void setMouseCursor(BufferedImage image, Point cursorPoint)
+    public static void setMouseCursor(Image image, Point cursorPoint)
     {
         cursor = Toolkit.getDefaultToolkit().createCustomCursor(image, cursorPoint, "cursor");
         panel.setMouseCursor(cursor);
@@ -589,7 +583,8 @@ public class FullScreenWindow extends JFrame
                     drawWorldImage();
                     try
                     {
-                        Thread.currentThread().sleep(FullScreenWindow.drawingRate);
+                        Thread.currentThread();
+                        Thread.sleep(FullScreenWindow.drawingRate);
                     }
                     catch(InterruptedException ie)
                     {
@@ -614,6 +609,7 @@ public class FullScreenWindow extends JFrame
                     return originalImage;
                 }
                 System.out.println("Warning! Image resizing. Current world: " + getDisplayedWorld());
+                System.out.println("From: " + originalImage.getWidth() + "*" + originalImage.getHeight() + " To: " + width + "*" + height);
                 BufferedImage resizedImage = new BufferedImage(width, height, type);
                 Graphics2D g = resizedImage.createGraphics();
                 g.drawImage(originalImage, 0, 0, width, height, null);

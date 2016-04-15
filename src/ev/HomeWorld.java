@@ -6,14 +6,14 @@
  */
 package ev;
 
+import controls.Button;
+import controls.MouseListener;
 import fullscreen.*;
-import greenfoot.*;
+
+import java.awt.*;
 
 class HomeWorld extends FullScreenWorld
 {
-    // instance variables - replace the example below with your own
-    private int x;
-
     /**
      * Constructor for objects of class ev.HomeWorld
      */
@@ -21,7 +21,43 @@ class HomeWorld extends FullScreenWorld
     {
         super(1.5, 1, false);
         setBackground("a.bmp");
+        HomeWorld x=this;
+        getBackground().setColor(Color.black);
+        x.getBackground().clear();
         FullScreenWindow.setCursorVisibility(true);
+        addObject(new Button().setListener(new MouseListener()
+        {
+            private int l=0;
+            @Override
+            public void mouseClicked(FullScreenMouseInfo e)
+            {
+                x.getBackground().drawString("Clicked",500,l+=20);
+            }
+
+            @Override
+            public void mouseDragged(FullScreenMouseInfo e)
+            {
+                x.getBackground().drawString("Dragged",500,l+=20);
+            }
+
+            @Override
+            public void mouseDragEnded(FullScreenMouseInfo e)
+            {
+                x.getBackground().drawString("DragEnded",500,l+=20);
+            }
+
+            @Override
+            public void mouseMoved(FullScreenMouseInfo e)
+            {
+                x.getBackground().drawString("Moved",500,l+=20);
+            }
+
+            @Override
+            public void mousePressed(FullScreenMouseInfo e)
+            {
+                x.getBackground().drawString("Pressed",500,l+=20);
+            }
+        }),100,100);
     }
 
     @Override
@@ -32,6 +68,10 @@ class HomeWorld extends FullScreenWorld
     @Override
     public void run()
     {
-        
+        i++;
+        //if(i>500)
+            //FullScreenWindow.setDisplayedWorld(new SplashWorld());
     }
+
+    private  int i;
 }

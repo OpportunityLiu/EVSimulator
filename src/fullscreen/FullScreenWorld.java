@@ -23,7 +23,7 @@ import java.awt.Graphics2D;
  */
 public abstract class FullScreenWorld extends World
 {
-    private static FullScreenWindow fullScreenWindow;
+    static FullScreenWindow fullScreenWindow;
     
     int WORLD_WIDTH;
     int WORLD_HEIGHT;
@@ -101,10 +101,6 @@ public abstract class FullScreenWorld extends World
         super(width, height, cellSize, bounded);
         WORLD_WIDTH = width;
         WORLD_HEIGHT = height;
-        if(fullScreenWindow == null)
-        {
-            createFullScreenWindow();
-        }
     }
     
     /**
@@ -121,15 +117,7 @@ public abstract class FullScreenWorld extends World
      * The run mehtod is called every act cycle and works like a new act method because the act method in this class is declared final.
      */
     public abstract void run();
-    
-    /**
-     * Create the fullscreenwindow.
-     */
-    private void createFullScreenWindow()
-    {
-        FullScreenWindow.setDisplayedWorld(this);
-        fullScreenWindow = new FullScreenWindow();
-    }
+
 
     
     /**

@@ -18,7 +18,7 @@ public class SplashWorld extends FullScreenWorld
         b.setColor(Color.black);
         b.fill();
         this.setBackground(b);
-        Greenfoot.setSpeed(75);
+        Greenfoot.setSpeed(70);
         setSplash();
         FullScreenWindow.setCursorVisibility(false);
     }
