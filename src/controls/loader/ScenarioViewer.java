@@ -34,6 +34,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import javax.swing.JApplet;
 import javax.swing.JRootPane;
+import javax.swing.border.EmptyBorder;
 
 public class ScenarioViewer extends JApplet
 {
@@ -68,17 +69,20 @@ public class ScenarioViewer extends JApplet
 
     private void buildGUI()
     {
-        canvas.addComponentListener(new ComponentAdapter()
-        {
-            @Override
-            public void componentResized(ComponentEvent e)
-            {
-                canvas.setLocation((ScenarioHelper.getFrameWidth() - canvas.getWidth()) / 2, (ScenarioHelper.getFrameHeight() - canvas.getHeight()) / 2);
-            }
-        });
-        this.rootFrame.setContentPane(canvas);
-        canvas.setLocation((ScenarioHelper.getFrameWidth() - canvas.getWidth()) / 2, (ScenarioHelper.getFrameHeight() - canvas.getHeight()) / 2);
-    }
+        canvas.setBorder(new EmptyBorder(0, 0, 0, 0));
+        canvas.setLayout(null);
+        rootFrame.setContentPane(canvas);
+//        canvas.addComponentListener(new ComponentAdapter()
+//        {
+//            @Override
+//            public void componentResized(ComponentEvent e)
+//            {
+//                canvas.setLocation((ScenarioHelper.getFrameWidth() - canvas.getWidth()) / 2, (ScenarioHelper.getFrameHeight() - canvas.getHeight()) / 2);
+//            }
+//        });
+//        this.rootFrame.setContentPane(canvas);
+//        canvas.setLocation((ScenarioHelper.getFrameWidth() - canvas.getWidth()) / 2, (ScenarioHelper.getFrameHeight() - canvas.getHeight()) / 2);
+     }
 
     public String getParameter(String name)
     {
@@ -127,7 +131,7 @@ public class ScenarioViewer extends JApplet
 
     private void guiSetup()
     {
-        this.canvas = new WorldCanvas(null);
+        this.canvas = new FullScreenBufferPanel(null);
         this.canvas.addMouseListener(new MouseAdapter()
         {
             public void mouseClicked(MouseEvent e)

@@ -7,20 +7,21 @@
 package ev;
 
 import controls.Button;
+import controls.FullScreenWorld;
 import controls.MouseListener;
 import controls.ScenarioHelper;
 import greenfoot.*;
 import greenfoot.MouseInfo;
 import java.awt.*;
 
-class HomeWorld extends World
+class HomeWorld extends FullScreenWorld
 {
     /**
      * Constructor for objects of class ev.HomeWorld
      */
     HomeWorld()
     {
-        super(1280,900,1);
+        super(1);
         setBackground("a.bmp");
         getBackground().setColor(Color.white);
         getBackground().fill();

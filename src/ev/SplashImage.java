@@ -31,7 +31,7 @@ class SplashImage extends Actor
     private int delay = 0;
 
     private int delayLength = 200;
-    private int stepLength = 1;
+    private int stepLength = 3;
 
     @Override
     public void act()
