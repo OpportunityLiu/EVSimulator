@@ -3,12 +3,17 @@
     <CLASSES>
       <root url="file://$PROJECT_DIR$/lib" />
     </CLASSES>
-    <JAVADOC />
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/lib-doc/lwjgl-docs.zip!/javadoc" />
+    </JAVADOC>
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/source/loon-core-0.5-source.jar!/" />
-      <root url="jar://$PROJECT_DIR$/source/loon-javase-0.5-source.jar!/" />
-      <root url="jar://$PROJECT_DIR$/source/loon-robovm-0.5-source.jar!/" />
+      <root url="file://$PROJECT_DIR$/lib-src" />
+      <root url="file://$PROJECT_DIR$/lib-src" />
+      <root url="file://$PROJECT_DIR$/lib-src" />
+      <root url="jar://$PROJECT_DIR$/lib/lwjgl.jar!/" />
     </SOURCES>
     <jarDirectory url="file://$PROJECT_DIR$/lib" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/lib-src" recursive="false" type="SOURCES" />
+    <jarDirectory url="file://$PROJECT_DIR$/lib-src" recursive="false" type="SOURCES" />
   </library>
 </component>

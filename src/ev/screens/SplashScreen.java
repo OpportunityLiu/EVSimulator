@@ -1,20 +1,28 @@
 package ev.screens;
 
-import loon.LTexture;
-import loon.LTransition;
-import loon.Screen;
+import loon.*;
+import loon.action.sprite.ISprite;
 import loon.canvas.LColor;
 import loon.event.GameTouch;
 import loon.opengl.GLEx;
 import loon.utils.timer.LTimerContext;
+
 import java.util.ArrayList;
 
 /**
  * Created by liuzh on 2016/4/15.
+ * Splash screen
  */
 public class SplashScreen extends Screen
 {
-    private ArrayList<LTexture> splashes = new ArrayList<>();
+    private class Splash
+    {
+        LTexture image;
+        int background;
+        int x, y, width, height;
+    }
+
+    private ArrayList<Splash> splashes = new ArrayList<>();
 
     private int current = -1;
     private int counter = -1;
@@ -36,7 +44,13 @@ public class SplashScreen extends Screen
             alpha = 255;
         else
             alpha = (int)((300 - counter) * 2.55);
-        g.draw(splashes.get(current), 0, 0, getWidth(), getHeight(), new LColor(255, 255, 255, alpha));
+        Splash splash = splashes.get(current);
+        if(alpha != 0)
+        {
+            int background = LColor.withAlpha(splash.background, alpha);
+            g.fillRect(0, 0, getWidth(), getHeight(), new LColor(background));
+        }
+        g.draw(splash.image, splash.x, splash.y, splash.width, splash.height, new LColor(255, 255, 255, alpha));
         if(counter == 300)
             counter = -1;
     }
@@ -47,8 +61,31 @@ public class SplashScreen extends Screen
     @Override
     public void onLoad()
     {
-        splashes.add(LTexture.createTexture("images/Splashes/1.png"));
-        splashes.add(LTexture.createTexture("images/Splashes/2.png"));
+        Json json = LSystem.json();
+        String jsonText = null;
+        try
+        {
+            jsonText = LSystem.base().assets().getTextSync("images/splashes/splash.json");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        Json.Array splashInfo = json.parseArray(jsonText);
+        for(int i = 0; i < splashInfo.length(); i++)
+        {
+            Json.Object obj = splashInfo.getObject(i);
+            Splash splash = new Splash();
+            splash.background = new LColor(obj.getString("background")).getARGB();
+            double rawScale = obj.getDouble("scale");
+            splash.image = LTexture.createTexture("images/splashes/" + obj.getString("name"));
+            double scale = Math.min((double)getWidth() / splash.image.getWidth(), (double)getHeight() / splash.image.getHeight()) * rawScale;
+            splash.width = (int)(splash.image.getWidth() * scale);
+            splash.height = (int)(splash.image.getHeight() * scale);
+            splash.x = getHalfWidth() - splash.width / 2;
+            splash.y = getHalfHeight() - splash.height / 2;
+            splashes.add(splash);
+        }
     }
 
     @Override

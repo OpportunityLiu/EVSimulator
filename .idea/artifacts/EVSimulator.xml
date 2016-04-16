@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact name="EVSimulator">
+    <output-path>$PROJECT_DIR$/out/artifacts/EVSimulator</output-path>
+    <root id="root">
+      <element id="archive" name="EVSimulator.jar">
+        <element id="module-output" name="EVSimulator" />
+        <element id="extracted-dir" path="$PROJECT_DIR$/lib/loon-core-0.5.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$PROJECT_DIR$/lib/loon-javase-0.5.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$PROJECT_DIR$/lib/loon-live2d.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$PROJECT_DIR$/lib/lwjgl.jar" path-in-jar="/" />
+      </element>
+    </root>
+  </artifact>
+</component>

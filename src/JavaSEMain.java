@@ -48,16 +48,16 @@ public class JavaSEMain
             @Override
             public Screen onScreen()
             {
-                pic = Display.loadImage("images/Icon.png");
+                pic = Display.loadImage("images/icon.png");
                 ByteBuffer buffers[] = new ByteBuffer[2];
                 buffers[0] = getBuffer(16);
                 buffers[1] = getBuffer(32);
                 org.lwjgl.opengl.Display.setIcon(buffers);
                 try
                 {
-                    Image cursorImage = Display.loadImage("images/Cursors/normal.png");
+                    Image cursorImage = Display.loadImage("images/cursors/normal.png");
                     IntBuffer buffer= IntBuffer.wrap(cursorImage.getPixels());
-                    Cursor cursor = new Cursor(cursorImage.pixelWidth(), cursorImage.pixelHeight(), 2, 62, 1, buffer, null);
+                    Cursor cursor = new Cursor(cursorImage.pixelWidth(), cursorImage.pixelHeight(), 2,  cursorImage.pixelHeight()-2, 1, buffer, null);
                     Mouse.setNativeCursor(cursor);
                 }
                 catch(LWJGLException e)
