@@ -36,7 +36,6 @@ public class JavaSEMain
             setting.width_zoom = (int)(setting.width * scale);
             setting.height_zoom = (int)(setting.height * scale);
         }
-        setting.fps = 60;
         setting.fontName = "Microsoft Yahei UI";
         setting.appName = "EV Simulator";
         setting.gameType = GameType.SLG;

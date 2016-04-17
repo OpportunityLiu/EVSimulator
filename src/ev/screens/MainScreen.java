@@ -8,6 +8,7 @@ import loon.LTexture;
 import loon.Screen;
 import loon.component.LButton;
 import loon.component.LComponent;
+import loon.component.LPanel;
 import loon.event.ClickListener;
 import loon.event.GameTouch;
 import loon.opengl.GLEx;
@@ -22,6 +23,7 @@ import loon.utils.timer.LTimerContext;
 public class MainScreen extends Screen
 {
     private LButton buttonStart, buttonExit;
+    private LPanel panelMenu;
 
     @Override
     public void draw(GLEx g)
@@ -30,23 +32,20 @@ public class MainScreen extends Screen
         // g.draw(cpy,0,0);
     }
 
-    @Override
-    public void onCreate(int width, int height)
-    {
-        super.onCreate(width, height);
-    }
-
     /**
      * 初始化时加载的数据
      */
     @Override
     public void onLoad()
     {
-        Texture[] btn = new Texture[]{Resources.textures("blue_button02"), Resources.textures("blue_button04"), Resources.textures("blue_button05")};
-        buttonStart = new MButton(btn, "Start", 200, 200, 190, 49);
+        Texture[] btn = new Texture[]{Resources.textures("blue_button02"), Resources.textures("blue_button04"), Resources.textures("blue_button03")};
+
+        buttonStart = new MButton(btn, "Start", 0, 0, 190, 49);
         buttonStart.setFont(Resources.FontInfo.MENU.font());
-        buttonExit = new MButton(btn, "Exit", 200, 300, 190, 49);
+        buttonStart.setOffsetTop(2);
+        buttonExit = new MButton(btn, "Exit", 0, 70, 190, 49);
         buttonExit.setFont(Resources.FontInfo.MENU.font());
+        buttonExit.setOffsetTop(2);
         buttonExit.addClickListener(new ClickAdapter()
         {
             @Override
@@ -55,8 +54,10 @@ public class MainScreen extends Screen
                 LSystem.exit();
             }
         });
-        add(buttonStart);
-        add(buttonExit);
+        panelMenu = new LPanel(getHalfWidth() - 95, getHalfHeight(), 190, getHalfHeight());
+        panelMenu.add(buttonStart);
+        panelMenu.add(buttonExit);
+        add(panelMenu);
     }
 
     @Override

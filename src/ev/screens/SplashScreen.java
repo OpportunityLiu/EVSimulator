@@ -6,12 +6,19 @@ import loon.canvas.LColor;
 import loon.event.GameTouch;
 import loon.font.BMFont;
 import loon.opengl.GLEx;
+import loon.opengl.LTextureImage;
 import loon.utils.processes.GameProcess;
 import loon.utils.processes.RealtimeProcessManager;
 import loon.utils.processes.WaitProcess;
 import loon.utils.timer.LTimerContext;
+import map.GeoConverter;
+import map.LongLat;
+import map.MeterXY;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import static map.GeoConverter.*;
 
 /**
  * Created by liuzh on 2016/4/15.
@@ -34,6 +41,8 @@ public class SplashScreen extends Screen
     @Override
     public void draw(GLEx g)
     {
+        if(!isOnLoadComplete())
+            return;
         if(counter < 0)
             current++;
         //if(current >= splashes.size())
@@ -67,8 +76,6 @@ public class SplashScreen extends Screen
     @Override
     public void onLoad()
     {
-        Resources.init();
-
         Json json = LSystem.json();
         String jsonText = null;
         try
@@ -94,12 +101,21 @@ public class SplashScreen extends Screen
             splash.y = getHalfHeight() - splash.height / 2;
             splashes.add(splash);
         }
+        try
+        {
+            MeterXY[] meterXY = toMeterXY(new LongLat(100, 100));
+            int i=0;
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void alter(LTimerContext timer)
     {
-
+        Resources.init();
     }
 
     @Override

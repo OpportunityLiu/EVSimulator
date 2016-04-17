@@ -26,7 +26,7 @@ public abstract class Resources
 
     public enum FontInfo
     {
-        MENU("menu", "fonts/menu.fnt", "fonts/menu.png");
+        MENU("menu", "fonts/menu.fnt", "fonts/menu_0.png");
 
         private final String fontName;
         private IFont font;
@@ -67,20 +67,32 @@ public abstract class Resources
         return null;
     }
 
+    private static int state = 0;
+
     public static void init()
     {
-        game = LSystem.base();
-        platform = LSystem.platform();
-        assets = game.assets();
-        try
+        switch(state)
         {
-            String json = Resources.assets().getTextSync("controls/blue.json");
-            texBlue = new TextureAtlas(LTexture.createTexture("controls/blue.png"), LSystem.json().parse(json));
+            case 0:
+                game = LSystem.base();
+                platform = LSystem.platform();
+                assets = game.assets();
+                break;
+            case 1:
+                try
+                {
+                    String json = Resources.assets().getTextSync("controls/blue.json");
+                    texBlue = new TextureAtlas(LTexture.createTexture("controls/blue.png"), LSystem.json().parse(json));
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace();
+                }
+                break;
+            default:
+                break;
         }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
+        state++;
     }
 
     @Contract(pure = true)
