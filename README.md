@@ -10,11 +10,17 @@
 图像资源
 #### -- sounds 
 声音资源
+#### -- fonts
+字体文件
+#### -- controls
+控件资源
 ### - original resources 
 原始资源文件，不包含在生成的 JAR 中
 ### - lib
 库文件
 ### - lib-src
 库源代码
+### - lib-doc
+库文档
 ### - src
 源代码
