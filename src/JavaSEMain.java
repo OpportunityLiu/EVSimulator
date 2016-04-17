@@ -40,7 +40,6 @@ public class JavaSEMain
         setting.fontName = "Microsoft Yahei UI";
         setting.appName = "EV Simulator";
         setting.gameType = GameType.SLG;
-        LSystem.NOT_MOVE = true;
         Loon.register(setting, new LazyLoading.Data()
         {
             private Image pic;

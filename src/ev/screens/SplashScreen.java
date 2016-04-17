@@ -1,10 +1,14 @@
 package ev.screens;
 
+import ev.Resources;
 import loon.*;
-import loon.action.sprite.ISprite;
 import loon.canvas.LColor;
 import loon.event.GameTouch;
+import loon.font.BMFont;
 import loon.opengl.GLEx;
+import loon.utils.processes.GameProcess;
+import loon.utils.processes.RealtimeProcessManager;
+import loon.utils.processes.WaitProcess;
 import loon.utils.timer.LTimerContext;
 
 import java.util.ArrayList;
@@ -34,6 +38,7 @@ public class SplashScreen extends Screen
             current++;
         if(current >= splashes.size())
         {
+            setScreen(new MainScreen());
             return;
         }
         int alpha;
@@ -61,6 +66,8 @@ public class SplashScreen extends Screen
     @Override
     public void onLoad()
     {
+        Resources.init();
+
         Json json = LSystem.json();
         String jsonText = null;
         try
@@ -142,7 +149,11 @@ public class SplashScreen extends Screen
     @Override
     public void close()
     {
-
+        for(Splash s : splashes)
+        {
+            s.image.close();
+        }
+        splashes = null;
     }
 
     @Override
