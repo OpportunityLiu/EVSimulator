@@ -3,6 +3,7 @@ package ev;
 import loon.*;
 import loon.font.BMFont;
 import loon.font.IFont;
+import loon.utils.res.Texture;
 import loon.utils.res.TextureAtlas;
 import loon.utils.res.TextureData;
 import org.jetbrains.annotations.Contract;
@@ -21,18 +22,47 @@ public abstract class Resources
     private static LGame game;
     private static Assets assets;
     private static Platform platform;
-    private static HashMap<String, IFont> fontDictionary = new HashMap<>();
     private static TextureAtlas texBlue;
 
+    public enum FontInfo
+    {
+        MENU("menu", "fonts/menu.fnt", "fonts/menu.png");
+
+        private final String fontName;
+        private IFont font;
+
+        FontInfo(String name, String infoFile, String imageFile)
+        {
+            fontName = name;
+            try
+            {
+                font = new BMFont(infoFile, imageFile);
+            }
+            catch(Exception e)
+            {
+                font = null;
+                e.printStackTrace();
+            }
+        }
+
+        @Contract(pure = true)
+        public String fontName()
+        {
+            return fontName;
+        }
+
+        public IFont font()
+        {
+            return font;
+        }
+    }
+
     @Nullable
-    public static LTexture textures(@NotNull String name)
+    public static Texture textures(@NotNull String name)
     {
         if(name.startsWith("blue"))
         {
-            TextureData info = texBlue.getFrame(name);
-            if(info == null)
-                return null;
-            return texBlue.img().copy(info.x(), info.y(), info.w(), info.h());
+            return texBlue.getTexture(name);
         }
         return null;
     }
@@ -45,18 +75,12 @@ public abstract class Resources
         try
         {
             String json = Resources.assets().getTextSync("controls/blue.json");
-            fontDictionary.put("menu", new BMFont("fonts/menu.fnt", "fonts/menu.png"));
             texBlue = new TextureAtlas(LTexture.createTexture("controls/blue.png"), LSystem.json().parse(json));
         }
         catch(Exception e)
         {
             e.printStackTrace();
         }
-    }
-
-    public static IFont getFont(String name)
-    {
-        return fontDictionary.get(name);
     }
 
     @Contract(pure = true)

@@ -1,160 +1,264 @@
 {
-    "res": {
-        "blue_boxCheckmark": {
-            "h": 36,
-            "w": 38,
-            "y": 36,
-            "x": 380
-        },
-        "blue_boxCross": {
-            "h": 36,
-            "w": 38,
-            "y": 0,
-            "x": 380
-        },
-        "blue_boxTick": {
-            "h": 36,
-            "w": 36,
-            "y": 210,
-            "x": 386
-        },
-        "blue_button00": {
-            "h": 49,
-            "w": 190,
-            "y": 94,
-            "x": 0
-        },
-        "blue_button01": {
-            "h": 45,
-            "w": 190,
-            "y": 49,
-            "x": 190
-        },
-        "blue_button02": {
-            "h": 49,
-            "w": 190,
-            "y": 0,
-            "x": 190
-        },
-        "blue_button03": {
-            "h": 45,
-            "w": 190,
-            "y": 49,
-            "x": 0
-        },
-        "blue_button04": {
-            "h": 49,
-            "w": 190,
-            "y": 0,
-            "x": 0
-        },
-        "blue_button05": {
-            "h": 45,
-            "w": 190,
-            "y": 192,
-            "x": 0
-        },
-        "blue_button06": {
-            "h": 49,
-            "w": 49,
-            "y": 194,
-            "x": 288
-        },
-        "blue_button07": {
-            "h": 49,
-            "w": 49,
-            "y": 194,
-            "x": 239
-        },
-        "blue_button08": {
-            "h": 45,
-            "w": 49,
-            "y": 194,
-            "x": 190
-        },
-        "blue_button09": {
-            "h": 49,
-            "w": 49,
-            "y": 94,
-            "x": 339
-        },
-        "blue_button10": {
-            "h": 45,
-            "w": 49,
-            "y": 94,
-            "x": 290
-        },
-        "blue_button11": {
-            "h": 49,
-            "w": 49,
-            "y": 184,
-            "x": 337
-        },
-        "blue_button12": {
-            "h": 45,
-            "w": 49,
-            "y": 139,
-            "x": 290
-        },
-        "blue_button13": {
-            "h": 49,
-            "w": 190,
-            "y": 143,
-            "x": 0
-        },
-        "blue_checkmark": {
-            "h": 20,
-            "w": 21,
-            "y": 233,
-            "x": 337
-        },
-        "blue_circle": {
-            "h": 36,
-            "w": 36,
-            "y": 174,
-            "x": 386
-        },
-        "blue_cross": {
-            "h": 18,
-            "w": 18,
-            "y": 237,
-            "x": 0
-        },
-        "blue_panel": {
-            "h": 100,
-            "w": 100,
-            "y": 94,
-            "x": 190
-        },
-        "blue_sliderDown": {
-            "h": 42,
-            "w": 28,
-            "y": 72,
-            "x": 416
-        },
-        "blue_sliderLeft": {
-            "h": 31,
-            "w": 39,
-            "y": 143,
-            "x": 339
-        },
-        "blue_sliderRight": {
-            "h": 31,
-            "w": 39,
-            "y": 143,
-            "x": 378
-        },
-        "blue_sliderUp": {
-            "h": 42,
-            "w": 28,
-            "y": 72,
-            "x": 388
-        },
-        "blue_tick": {
-            "h": 17,
-            "w": 17,
-            "y": 239,
-            "x": 18
-        }
+  "frames" : { 
+    "blue_boxCheckmark" : {
+      "x" : 347,
+      "y" : 147,
+      "w" : 38,
+      "h" : 36,
+      "sourceW" : 38,
+      "sourceH" : 36,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_boxCross" : {
+      "x" : 386,
+      "y" : 104,
+      "w" : 38,
+      "h" : 36,
+      "sourceW" : 38,
+      "sourceH" : 36,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_boxTick" : {
+      "x" : 347,
+      "y" : 185,
+      "w" : 36,
+      "h" : 36,
+      "sourceW" : 36,
+      "sourceH" : 36,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_button00" : {
+      "x" : 2,
+      "y" : 104,
+      "w" : 190,
+      "h" : 49,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_button01" : {
+      "x" : 194,
+      "y" : 100,
+      "w" : 190,
+      "h" : 45,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "blue_button02" : {
+      "x" : 194,
+      "y" : 2,
+      "w" : 190,
+      "h" : 49,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_button03" : {
+      "x" : 2,
+      "y" : 155,
+      "w" : 190,
+      "h" : 45,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "blue_button04" : {
+      "x" : 2,
+      "y" : 53,
+      "w" : 190,
+      "h" : 49,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_button05" : {
+      "x" : 194,
+      "y" : 53,
+      "w" : 190,
+      "h" : 45,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "blue_button06" : {
+      "x" : 296,
+      "y" : 198,
+      "w" : 49,
+      "h" : 49,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_button07" : {
+      "x" : 386,
+      "y" : 53,
+      "w" : 49,
+      "h" : 49,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_button08" : {
+      "x" : 104,
+      "y" : 202,
+      "w" : 49,
+      "h" : 45,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "blue_button09" : {
+      "x" : 296,
+      "y" : 147,
+      "w" : 49,
+      "h" : 49,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_button10" : {
+      "x" : 53,
+      "y" : 202,
+      "w" : 49,
+      "h" : 45,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "blue_button11" : {
+      "x" : 386,
+      "y" : 2,
+      "w" : 49,
+      "h" : 49,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_button12" : {
+      "x" : 2,
+      "y" : 202,
+      "w" : 49,
+      "h" : 45,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "blue_button13" : {
+      "x" : 2,
+      "y" : 2,
+      "w" : 190,
+      "h" : 49,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_checkmark" : {
+      "x" : 347,
+      "y" : 223,
+      "w" : 21,
+      "h" : 20,
+      "sourceW" : 21,
+      "sourceH" : 20,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_circle" : {
+      "x" : 155,
+      "y" : 202,
+      "w" : 36,
+      "h" : 36,
+      "sourceW" : 36,
+      "sourceH" : 36,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_cross" : {
+      "x" : 426,
+      "y" : 186,
+      "w" : 18,
+      "h" : 18,
+      "sourceW" : 18,
+      "sourceH" : 18,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_panel" : {
+      "x" : 194,
+      "y" : 147,
+      "w" : 100,
+      "h" : 100,
+      "sourceW" : 100,
+      "sourceH" : 100,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_sliderDown" : {
+      "x" : 417,
+      "y" : 142,
+      "w" : 28,
+      "h" : 42,
+      "sourceW" : 28,
+      "sourceH" : 42,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_sliderLeft" : {
+      "x" : 385,
+      "y" : 219,
+      "w" : 39,
+      "h" : 31,
+      "sourceW" : 39,
+      "sourceH" : 31,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_sliderRight" : {
+      "x" : 385,
+      "y" : 186,
+      "w" : 39,
+      "h" : 31,
+      "sourceW" : 39,
+      "sourceH" : 31,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_sliderUp" : {
+      "x" : 387,
+      "y" : 142,
+      "w" : 28,
+      "h" : 42,
+      "sourceW" : 28,
+      "sourceH" : 42,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_tick" : {
+      "x" : 426,
+      "y" : 206,
+      "w" : 17,
+      "h" : 17,
+      "sourceW" : 17,
+      "sourceH" : 17,
+      "offX" : 0,
+      "offY" : 0
     }
+  }
 }

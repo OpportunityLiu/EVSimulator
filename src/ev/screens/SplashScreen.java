@@ -36,7 +36,8 @@ public class SplashScreen extends Screen
     {
         if(counter < 0)
             current++;
-        if(current >= splashes.size())
+        //if(current >= splashes.size())
+            if(counter >= 10)
         {
             setScreen(new MainScreen());
             return;
