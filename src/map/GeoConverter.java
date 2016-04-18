@@ -63,30 +63,11 @@ public class GeoConverter
         }
     }
 
-    private static String uriMeterXY = "http://api.map.baidu.com/geoconv/v1/?coords=%s&from=5&to=6&ak=" + Map.AK;
-    private static String uriLongLat = "http://api.map.baidu.com/geoconv/v1/?coords=%s&from=6&to=5&ak=" + Map.AK;
+    private static String uriCovert = "http://api.map.baidu.com/geoconv/v1/?coords=%s&from=%d&to=%d&ak=" + MapInfo.AK;
     
     public static MeterXY[] toMeterXY(LongLat... coordinates) throws IOException
     {
-        StringBuilder sb = new StringBuilder();
-        for(LongLat coordinate : coordinates)
-        {
-            sb.append(coordinate.longitude);
-            sb.append(',');
-            sb.append(coordinate.latitude);
-            sb.append(';');
-        }
-        sb.deleteCharAt(sb.length() - 1);
-        String requestUri = String.format(uriMeterXY, sb.toString());
-        URL url = new URL(requestUri);
-        URLConnection connection = url.openConnection();
-        connection.connect();
-        String response = convertStreamToString(connection.getInputStream());
-        Json.Object resJson = LSystem.json().parse(response);
-        int status = resJson.getInt("status");
-        if(status != 0)
-            throw new IOException(ErrorCode.getError(status).name());
-        Json.Array results = resJson.getArray("result");
+        Json.Array results = convert(coordinates, 5, 6);
         int count = results.length();
         MeterXY[] ret = new MeterXY[count];
         for(int i = 0; i < count; i++)
@@ -104,25 +85,7 @@ public class GeoConverter
 
     public static LongLat[] toLongLat(MeterXY... coordinates) throws IOException
     {
-        StringBuilder sb = new StringBuilder();
-        for(MeterXY coordinate : coordinates)
-        {
-            sb.append(coordinate.x);
-            sb.append(',');
-            sb.append(coordinate.y);
-            sb.append(';');
-        }
-        sb.deleteCharAt(sb.length() - 1);
-        String requestUri = String.format(uriLongLat, sb.toString());
-        URL url = new URL(requestUri);
-        URLConnection connection = url.openConnection();
-        connection.connect();
-        String response = convertStreamToString(connection.getInputStream());
-        Json.Object resJson = LSystem.json().parse(response);
-        int status = resJson.getInt("status");
-        if(status != 0)
-            throw new IOException(ErrorCode.getError(status).name());
-        Json.Array results = resJson.getArray("result");
+        Json.Array results = convert(coordinates, 6, 5);
         int count = results.length();
         LongLat[] ret = new LongLat[count];
         for(int i = 0; i < count; i++)
@@ -138,7 +101,30 @@ public class GeoConverter
         return toLongLat(new MeterXY[]{coordinate})[0];
     }
 
-    static String convertStreamToString(java.io.InputStream is)
+    private static Json.Array convert(ICoordinate[] coordinates, int from, int to) throws IOException
+    {
+        StringBuilder sb = new StringBuilder();
+        for(ICoordinate coordinate : coordinates)
+        {
+            sb.append(coordinate.x());
+            sb.append(',');
+            sb.append(coordinate.y());
+            sb.append(';');
+        }
+        sb.deleteCharAt(sb.length() - 1);
+        String requestUri = String.format(uriCovert, sb.toString(), from, to);
+        URL url = new URL(requestUri);
+        URLConnection connection = url.openConnection();
+        connection.connect();
+        String response = convertStreamToString(connection.getInputStream());
+        Json.Object resJson = LSystem.json().parse(response);
+        int status = resJson.getInt("status");
+        if(status != 0)
+            throw new IOException(ErrorCode.getError(status).name());
+        return resJson.getArray("result");
+    }
+
+    private static String convertStreamToString(java.io.InputStream is)
     {
         java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
         return s.hasNext() ? s.next() : "";

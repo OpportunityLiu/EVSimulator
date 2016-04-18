@@ -1,5 +1,6 @@
 package ev.screens;
 
+import ev.DebugSettings;
 import ev.Resources;
 import loon.*;
 import loon.canvas.LColor;
@@ -15,6 +16,7 @@ import map.GeoConverter;
 import map.LongLat;
 import map.MeterXY;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -45,8 +47,15 @@ public class SplashScreen extends Screen
             return;
         if(counter < 0)
             current++;
-        //if(current >= splashes.size())
-            if(counter >= 10)
+        if(DebugSettings.skipSplash)
+        {
+            if(Resources.loaded())
+            {
+                setScreen(new MainScreen());
+                return;
+            }
+        }
+        else if(current >= splashes.size())
         {
             setScreen(new MainScreen());
             return;
@@ -100,15 +109,6 @@ public class SplashScreen extends Screen
             splash.x = getHalfWidth() - splash.width / 2;
             splash.y = getHalfHeight() - splash.height / 2;
             splashes.add(splash);
-        }
-        try
-        {
-            MeterXY[] meterXY = toMeterXY(new LongLat(100, 100));
-            int i=0;
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
         }
     }
 

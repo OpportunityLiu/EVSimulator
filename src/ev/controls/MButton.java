@@ -39,6 +39,8 @@ public class MButton extends LButton
     @Override
     public void createUI(GLEx g, int x, int y, LComponent component, LTexture[] buttonImage)
     {
+        if(_alpha <= 0.1)
+            return;
         float destX = x;
         float destY = y;
         LButton button = (LButton)component;
@@ -70,7 +72,7 @@ public class MButton extends LButton
                 color = LColor.white;
             destX = x + data.offX();
             destY = y + data.offY();
-            g.draw(texture, destX, destY,data.w(), data.h(), data.x(), data.y(), data.w(), data.h(), color);
+            g.draw(texture, destX, destY, data.w(), data.h(), data.x(), data.y(), data.w(), data.h(), color);
 
         }
         if(getText() != null)

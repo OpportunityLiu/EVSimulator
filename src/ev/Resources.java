@@ -88,11 +88,20 @@ public abstract class Resources
                 {
                     e.printStackTrace();
                 }
+                finally
+                {
+                    state = -1;
+                }
                 break;
             default:
                 break;
         }
         state++;
+    }
+
+    public static boolean loaded()
+    {
+        return state == -1;
     }
 
     @Contract(pure = true)
