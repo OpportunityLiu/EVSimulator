@@ -5,6 +5,7 @@ import loon.*;
 import loon.Display;
 import loon.canvas.*;
 import loon.canvas.Image;
+import map.Direction;
 import map.GeoConverter;
 import map.LongLat;
 import map.MeterXY;
@@ -24,11 +25,11 @@ public class JavaSEMain
 {
 
     public static void main(String[] args)
-    {
+    {	MeterXY from=new MeterXY(4459159.7815731,12474104.174136);
+        MeterXY to=new MeterXY(4443397.5494082,12474104.174136);
         try
         {
-            LongLat[] longLat = GeoConverter.toLongLat(new MeterXY[]{new MeterXY(10000, 1000),new MeterXY(123456,123456)});
-            longLat[0].x();
+            MeterXY[] re= Direction.getDirection(from,to,"北京",null);
         }
         catch(IOException e)
         {

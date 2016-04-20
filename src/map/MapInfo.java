@@ -7,4 +7,10 @@ package map;
 class MapInfo
 {
     static final String AK="IyNOuhmURakqti0KikUfmTkXUXcneZrm";
+
+    static String convertStreamToString(java.io.InputStream is)
+    {
+        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
+        return s.hasNext() ? s.next() : "";
+    }
 }

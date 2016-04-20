@@ -8,12 +8,15 @@ import org.jetbrains.annotations.NotNull;
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Formatter;
+
+import static map.MapInfo.convertStreamToString;
 
 /**
  * Created by liuzh on 2016/4/17.
  * Convert different kinds of coordinates
  */
-public class GeoConverter
+public abstract class GeoConverter
 {
     private enum ErrorCode
     {
@@ -101,14 +104,12 @@ public class GeoConverter
         return toLongLat(new MeterXY[]{coordinate})[0];
     }
 
-    private static Json.Array convert(ICoordinate[] coordinates, int from, int to) throws IOException
+    private static Json.Array convert(CoordinateBase[] coordinates, int from, int to) throws IOException
     {
         StringBuilder sb = new StringBuilder();
-        for(ICoordinate coordinate : coordinates)
+        for(CoordinateBase coordinate : coordinates)
         {
-            sb.append(coordinate.x());
-            sb.append(',');
-            sb.append(coordinate.y());
+            sb.append(coordinate);
             sb.append(';');
         }
         sb.deleteCharAt(sb.length() - 1);
@@ -122,12 +123,6 @@ public class GeoConverter
         if(status != 0)
             throw new IOException(ErrorCode.getError(status).name());
         return resJson.getArray("result");
-    }
-
-    private static String convertStreamToString(java.io.InputStream is)
-    {
-        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
-        return s.hasNext() ? s.next() : "";
     }
 
 

@@ -5,12 +5,14 @@ import ev.controls.ActionHelper;
 import ev.controls.MButton;
 import ev.event.ActionAdapter;
 import ev.event.ClickAdapter;
-import loon.LGame;
+import javafx.animation.FadeTransition;
 import loon.LSystem;
 import loon.LTexture;
+import loon.LTransition;
 import loon.Screen;
 import loon.action.*;
 import loon.action.sprite.*;
+import loon.action.sprite.effect.FadeEffect;
 import loon.canvas.LColor;
 import loon.component.*;
 import loon.event.GameTouch;
@@ -36,7 +38,7 @@ public class MainScreen extends Screen
     {
         centerUserDraw();
     }
-
+    
     
     @Override
     public void draw(GLEx g)
@@ -77,14 +79,14 @@ public class MainScreen extends Screen
     public void onLoad()
     {
         logo = new LPanel(0, 200, 1, 1);
-        logo.setBackground("images/home/logo.png");
+        logo.setBackground(Resources.images("home/logo.png"));
         logo.setSize(500, 120);
         logo.setX(getHalfWidth() - logo.getWidth() / 2);
         logo.setAlpha(0);
         add(logo);
         
-        Texture[] btn = new Texture[]{Resources.textures("blue_button02"), Resources.textures("blue_button04"), Resources.textures("blue_button03")};
-        LTexture backgroundTexture = LTexture.createTexture("images/home/background.png");
+        Texture[] btn = new Texture[]{Resources.controls("blue_button02"), Resources.controls("blue_button04"), Resources.controls("blue_button03")};
+        LTexture backgroundTexture = Resources.images("home/background.png");
         setBackground(backgroundTexture);
         scale = backgroundTexture.width() / getWidth();
         
@@ -95,12 +97,20 @@ public class MainScreen extends Screen
         add(panelMenu);
         
         buttonStart = new MButton(btn, "Start", (panelMenu.width() - 190) / 2, 30, 190, 49);
-        buttonStart.setFont(Resources.FontInfo.MENU.font());
+        buttonStart.setFont(Resources.fonts("menu"));
         buttonStart.setOffsetTop(2);
         buttonStart.setAlpha(0);
+        buttonStart.addClickListener(new ClickAdapter()
+        {
+            @Override
+            public void DoClick(LComponent comp)
+            {
+                setScreen(new GameScreen());
+            }
+        });
         
         buttonExit = new MButton(btn, "Exit", (panelMenu.width() - 190) / 2, 100, 190, 49);
-        buttonExit.setFont(Resources.FontInfo.MENU.font());
+        buttonExit.setFont(Resources.fonts("menu"));
         buttonExit.setOffsetTop(2);
         buttonExit.setAlpha(0);
         buttonExit.addClickListener(new ClickAdapter()
@@ -116,33 +126,33 @@ public class MainScreen extends Screen
         panelMenu.add(buttonExit);
         
         
-        p1 = LTexture.createTexture("images/home/p1.png");
-        p2 = LTexture.createTexture("images/home/p2.png");
-        p3 = LTexture.createTexture("images/home/p3.png");
-        p4 = LTexture.createTexture("images/home/p4.png");
-
+        p1 = Resources.images("home/p1.png");
+        p2 = Resources.images("home/p2.png");
+        p3 = Resources.images("home/p3.png");
+        p4 = Resources.images("home/p4.png");
+        
         c3 = new LPanel(-500, 0, 0, 0);
-        c3.setBackground(LTexture.createTexture("images/home/car3.png"));
+        c3.setBackground(Resources.images("home/car3.png"));
         c3.setScale(0.8f);
         add(c3);
         addAction(repeatMoveActionDelay(1300, 830, -300, 830, 20), c3);
         c1 = new LPanel(-500, 0, 0, 0);
-        c1.setBackground(LTexture.createTexture("images/home/car1.png"));
+        c1.setBackground(Resources.images("home/car1.png"));
         c1.setScale(0.8f);
         add(c1);
         addAction(repeatMoveActionDelay(-300, 820, 1300, 820, 17), c1);
         c2 = new LPanel(-500, 0, 0, 0);
-        c2.setBackground(LTexture.createTexture("images/home/car2.png"));
+        c2.setBackground(Resources.images("home/car2.png"));
         c2.setScale(0.8f);
         add(c2);
         addAction(repeatMoveActionDelay(-300, 820, 1300, 820, 14), c2);
         c4 = new LPanel(-500, 0, 0, 0);
-        c4.setBackground(LTexture.createTexture("images/home/car4.png"));
+        c4.setBackground(Resources.images("home/car4.png"));
         c4.setScale(0.8f);
         add(c4);
         addAction(repeatMoveActionDelay(-300, 800, 1300, 800, 11), c4);
     }
-
+    
     private ActionEvent repeatMoveActionDelay(float x1, float y1, float x2, float y2, int speed)
     {
         return ActionHelper.runAfter(MathUtils.random(10f), repeatMoveAction(x1, y1, x2, y2, speed));
@@ -158,7 +168,7 @@ public class MainScreen extends Screen
             {
                 o.setLocation(x1, y1);
             }
-
+            
             @Override
             public void stop(ActionBind o)
             {

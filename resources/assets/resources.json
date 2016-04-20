@@ -1,0 +1,23 @@
+{
+  "images": [
+    "home/background.png",
+    "home/car1.png",
+    "home/car2.png",
+    "home/car3.png",
+    "home/car4.png",
+    "home/cloud.png",
+    "home/logo.png",
+    "home/p1.png",
+    "home/p2.png",
+    "home/p3.png",
+    "home/p4.png"
+  ],
+  "bmfonts": [
+    {
+      "name": "menu",
+      "info": "menu.fnt",
+      "image": "menu_0.png"
+    }
+  ],
+  "sounds": []
+}

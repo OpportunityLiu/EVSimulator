@@ -5,31 +5,22 @@ package map;
  * x & y coordinates.
  */
 
-public final class MeterXY implements ICoordinate
+public final class MeterXY extends CoordinateBase
 {
-    private final double x, y;
-
     public MeterXY(double x, double y)
     {
-        this.x = x;
-        this.y = y;
+        super(x, y);
     }
 
     @Override
-    public double x()
-    {
-        return x;
-    }
-
-    @Override
-    public double y()
-    {
-        return y;
-    }
-
-    @Override
-    public int type()
+    public int typeCode()
     {
         return 6;
+    }
+
+    @Override
+    public String typeString()
+    {
+        return "bd09mc";
     }
 }

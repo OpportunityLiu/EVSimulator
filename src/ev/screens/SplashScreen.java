@@ -51,13 +51,13 @@ public class SplashScreen extends Screen
         {
             if(Resources.loaded())
             {
-                setScreen(new MainScreen());
+                this.runNextScreen();
                 return;
             }
         }
         else if(current >= splashes.size())
         {
-            setScreen(new MainScreen());
+            this.runNextScreen();
             return;
         }
         int alpha;
@@ -110,6 +110,7 @@ public class SplashScreen extends Screen
             splash.y = getHalfHeight() - splash.height / 2;
             splashes.add(splash);
         }
+        addScreen(new MainScreen());
     }
 
     @Override
@@ -133,7 +134,8 @@ public class SplashScreen extends Screen
     @Override
     public void touchUp(GameTouch e)
     {
-
+        if(isOnLoadComplete() && Resources.loaded())
+            runNextScreen();
     }
 
     @Override
