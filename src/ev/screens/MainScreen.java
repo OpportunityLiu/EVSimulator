@@ -3,13 +3,11 @@ package ev.screens;
 import ev.Resources;
 import ev.controls.ActionHelper;
 import ev.controls.MButton;
+import ev.effects.MFadeEffect;
 import ev.event.ActionAdapter;
 import ev.event.ClickAdapter;
 import javafx.animation.FadeTransition;
-import loon.LSystem;
-import loon.LTexture;
-import loon.LTransition;
-import loon.Screen;
+import loon.*;
 import loon.action.*;
 import loon.action.sprite.*;
 import loon.action.sprite.effect.FadeEffect;
@@ -20,25 +18,22 @@ import loon.opengl.GLEx;
 import loon.utils.MathUtils;
 import loon.utils.res.Texture;
 import loon.utils.timer.LTimerContext;
+import org.lwjgl.opengl.Display;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by liuzh on 2016/4/16.
  * Main menu of ev sim.
  */
-public class MainScreen extends Screen
+class MainScreen extends Screen
 {
     private LButton buttonStart, buttonExit;
     private LPanel panelMenu, logo;
     private LTexture p1, p2, p3, p4;
     private float scale;
     private LPanel c1, c2, c3, c4;
-    private float r1, r2, r3, r4, a;
-    
-    public MainScreen()
-    {
-        centerUserDraw();
-    }
-    
+    private float r1, r2, r3, r4;
     
     @Override
     public void draw(GLEx g)
@@ -53,23 +48,6 @@ public class MainScreen extends Screen
         g.draw(p2, 75.44f, 672.48f, p2.width() / scale, p2.height() / scale, r2);
         g.draw(p3, 155.68f, 750.56f, p3.width() / scale, p3.height() / scale, r3);
         g.draw(p4, 1077.68f, 446.4f, p4.width() / scale, p4.height() / scale, r4);
-        if(a > 1)
-        {
-            a = -1;
-            ActionEvent a1 = new FadeTo(ISprite.TYPE_FADE_OUT, 20f);
-            ActionEvent a2 = a1.cpy();
-            addAction(ActionHelper.runAfter(0.5f, a1), buttonStart);
-            addAction(ActionHelper.runAfter(1f, a2), buttonExit);
-            addAction(new FadeTo(ISprite.TYPE_FADE_OUT, 40f), panelMenu);
-            addAction(new FadeTo(ISprite.TYPE_FADE_OUT, 10f), logo);
-            addAction(new MoveBy(logo.getX(), 300, 10), logo);
-        }
-        else if(a >= 0)
-        {
-            a += elapsedTime * 0.001;
-            g.setAlpha(1 - a);
-            g.fillRect(0, 0, getWidth(), getHeight(), LColor.black);
-        }
     }
     
     /**
@@ -78,6 +56,11 @@ public class MainScreen extends Screen
     @Override
     public void onLoad()
     {
+        {
+            setFristOrder(DRAW_USER_PAINT());
+            setSecondOrder(DRAW_DESKTOP_PAINT());
+            setLastOrder(DRAW_SPRITE_PAINT());
+        }
         logo = new LPanel(0, 200, 1, 1);
         logo.setBackground(Resources.images("home/logo.png"));
         logo.setSize(500, 120);
@@ -102,10 +85,21 @@ public class MainScreen extends Screen
         buttonStart.setAlpha(0);
         buttonStart.addClickListener(new ClickAdapter()
         {
+            MFadeEffect fade = new MFadeEffect(FadeEffect.TYPE_FADE_OUT, LColor.black)
+            {
+                @Override
+                public void onFinished()
+                {
+                    remove(this);
+                    runNextScreen();
+                }
+            };
+
             @Override
             public void DoClick(LComponent comp)
             {
-                setScreen(new GameScreen());
+                if(!contains(fade))
+                    add(fade);
             }
         });
         
@@ -115,10 +109,21 @@ public class MainScreen extends Screen
         buttonExit.setAlpha(0);
         buttonExit.addClickListener(new ClickAdapter()
         {
+            MFadeEffect fade = new MFadeEffect(FadeEffect.TYPE_FADE_OUT, LColor.black)
+            {
+                @Override
+                public void onFinished()
+                {
+                    getGame().status.emit(LGame.Status.EXIT);
+                    System.exit(0);
+                }
+            };
+
             @Override
             public void DoClick(LComponent comp)
             {
-                LSystem.exit();
+                if(!contains(fade))
+                    add(fade);
             }
         });
         
@@ -151,6 +156,22 @@ public class MainScreen extends Screen
         c4.setScale(0.8f);
         add(c4);
         addAction(repeatMoveActionDelay(-300, 800, 1300, 800, 11), c4);
+
+        add(new MFadeEffect(MFadeEffect.TYPE_FADE_IN, LColor.black)
+        {
+            @Override
+            public void onFinished()
+            {
+                ActionEvent a1 = new FadeTo(ISprite.TYPE_FADE_OUT, 20f);
+                ActionEvent a2 = a1.cpy();
+                addAction(ActionHelper.runAfter(0.5f, a1), buttonStart);
+                addAction(ActionHelper.runAfter(1f, a2), buttonExit);
+                addAction(new FadeTo(ISprite.TYPE_FADE_OUT, 40f), panelMenu);
+                addAction(new FadeTo(ISprite.TYPE_FADE_OUT, 10f), logo);
+                addAction(new MoveBy(logo.getX(), 300, 10), logo);
+                remove(this);
+            }
+        });
     }
     
     private ActionEvent repeatMoveActionDelay(float x1, float y1, float x2, float y2, int speed)

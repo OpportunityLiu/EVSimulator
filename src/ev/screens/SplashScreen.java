@@ -2,8 +2,12 @@ package ev.screens;
 
 import ev.DebugSettings;
 import ev.Resources;
+import ev.effects.MFadeEffect;
 import loon.*;
+import loon.action.FadeTo;
+import loon.action.sprite.effect.FadeEffect;
 import loon.canvas.LColor;
+import loon.component.LTextBar;
 import loon.event.GameTouch;
 import loon.font.BMFont;
 import loon.opengl.GLEx;
@@ -35,6 +39,10 @@ public class SplashScreen extends Screen
         int x, y, width, height;
     }
 
+    private LTextBar textBarSkip;
+
+    private boolean skipping = false;
+
     private ArrayList<Splash> splashes = new ArrayList<>();
 
     private int current = -1;
@@ -45,23 +53,7 @@ public class SplashScreen extends Screen
     {
         if(!isOnLoadComplete())
             return;
-        if(counter < 0)
-            current++;
-        if(DebugSettings.skipSplash)
-        {
-            if(Resources.loaded())
-            {
-                this.runNextScreen();
-                return;
-            }
-        }
-        else if(current >= splashes.size())
-        {
-            this.runNextScreen();
-            return;
-        }
         int alpha;
-        counter++;
         if(counter <= 100)
             alpha = (int)(counter * 2.55);
         else if(counter < 200)
@@ -85,6 +77,7 @@ public class SplashScreen extends Screen
     @Override
     public void onLoad()
     {
+        fristUserDraw();
         Json json = LSystem.json();
         String jsonText = null;
         try
@@ -110,13 +103,52 @@ public class SplashScreen extends Screen
             splash.y = getHalfHeight() - splash.height / 2;
             splashes.add(splash);
         }
+
         addScreen(new MainScreen());
+        addScreen(new GameScreen());
+
+        textBarSkip = new LTextBar("点击屏幕跳过...", 0, 0);
+        textBarSkip.setHideBackground(true);
+        textBarSkip.setX(getHalfWidth() - textBarSkip.width() / 2);
+        textBarSkip.setY(getHeight() * 0.8f - textBarSkip.height() / 2);
+        textBarSkip.setBackground(new LColor(0, 0, 0, 0.7f));
+        textBarSkip.setAlpha(0);
+        add(textBarSkip);
+        Resources.addLoadingListener(new Resources.LoadingListener()
+        {
+            @Override
+            public void onLoaded()
+            {
+                if(DebugSettings.skipSplash)
+                    touchUp(null);
+                else
+                    addAction(new FadeTo(FadeEffect.TYPE_FADE_OUT, 10f), textBarSkip);
+            }
+
+            @Override
+            public void onLoading(int currentStep, int overallStep)
+            {
+            }
+        });
     }
 
     @Override
     public void alter(LTimerContext timer)
     {
+        if(!isOnLoadComplete())
+            return;
         Resources.init();
+        if(!skipping)
+        {
+            if(counter < 0)
+                current++;
+            if(current >= splashes.size())
+            {
+                this.runNextScreen();
+                return;
+            }
+            counter++;
+        }
     }
 
     @Override
@@ -134,8 +166,20 @@ public class SplashScreen extends Screen
     @Override
     public void touchUp(GameTouch e)
     {
-        if(isOnLoadComplete() && Resources.loaded())
-            runNextScreen();
+        if(isOnLoadComplete() && Resources.loaded() && !skipping)
+        {
+            skipping = true;
+            addAction(new FadeTo(FadeEffect.TYPE_FADE_IN, 10f), textBarSkip);
+            add(new MFadeEffect(FadeEffect.TYPE_FADE_OUT, LColor.black)
+            {
+                @Override
+                public void onFinished()
+                {
+                    remove(this);
+                    runNextScreen();
+                }
+            });
+        }
     }
 
     @Override

@@ -5,6 +5,7 @@ import loon.*;
 import loon.Display;
 import loon.canvas.*;
 import loon.canvas.Image;
+import loon.javase.JavaSEGame;
 import map.Direction;
 import map.GeoConverter;
 import map.LongLat;
@@ -23,13 +24,13 @@ import java.nio.IntBuffer;
 
 public class JavaSEMain
 {
-
     public static void main(String[] args)
-    {	MeterXY from=new MeterXY(4459159.7815731,12474104.174136);
-        MeterXY to=new MeterXY(4443397.5494082,12474104.174136);
+    {
+        MeterXY from = new MeterXY(4459159.7815731, 12474104.174136);
+        MeterXY to = new MeterXY(4443397.5494082, 12474104.174136);
         try
         {
-            MeterXY[] re= Direction.getDirection(from,to,"北京",null);
+            MeterXY[] re = Direction.getDirection(from, to, "北京", null);
         }
         catch(IOException e)
         {
@@ -49,7 +50,7 @@ public class JavaSEMain
             setting.width_zoom = (int)(setting.width * scale);
             setting.height_zoom = (int)(setting.height * scale);
         }
-        setting.fontName = "Microsoft Yahei UI";
+        setting.fontName = "Tsentsiu HG";
         setting.appName = "EV Simulator";
         setting.gameType = GameType.SLG;
         Loon.register(setting, new LazyLoading.Data()

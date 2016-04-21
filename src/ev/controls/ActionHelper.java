@@ -12,7 +12,7 @@ public abstract class ActionHelper
     public static ActionEvent runAfter(float delay, ActionEvent action)
     {
         DelayTo d = new DelayTo(delay);
-        d.setActionListener(new ContinueWith(action));
+        d.setActionListener(new ContinueWithListener(action));
         return d;
     }
 }

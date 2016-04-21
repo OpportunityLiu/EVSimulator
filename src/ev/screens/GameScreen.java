@@ -1,19 +1,21 @@
 package ev.screens;
 
 import loon.Screen;
+import loon.canvas.LColor;
 import loon.event.GameTouch;
 import loon.opengl.GLEx;
 import loon.utils.timer.LTimerContext;
 
 /**
  * Created by liuzh on 2016/4/20.
+ * Main gaming screen
  */
 public class GameScreen extends Screen
 {
     @Override
     public void draw(GLEx g)
     {
-
+        g.drawString("Game", 100, 100, LColor.white);
     }
 
     /**

@@ -9,12 +9,12 @@ import loon.action.ActionListener;
  * Created by liuzh on 2016/4/18.
  * Continue to play next action
  */
-public class ContinueWith implements ActionListener
+class ContinueWithListener implements ActionListener
 {
     private final ActionEvent next;
     private boolean finished;
 
-    public ContinueWith(ActionEvent next)
+    ContinueWithListener(ActionEvent next)
     {
         this.next = next;
     }
