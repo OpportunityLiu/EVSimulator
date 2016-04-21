@@ -9,6 +9,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.concurrent.ExecutionException;
 
@@ -49,7 +50,6 @@ public abstract class Resources
         return fontsHashtable.get(name.toLowerCase());
     }
 
-
     public static Sound sounds(@NotNull String name)
     {
         return soundsHashtable.get(name.toLowerCase());
@@ -63,7 +63,7 @@ public abstract class Resources
         private static Json.Array imageList, soundList, bmfontList;
         private static int counter;
 
-        public static void init()
+        static void init()
         {
             try
             {
@@ -85,6 +85,7 @@ public abstract class Resources
                         imageList = resourceList.getArray("images");
                         soundList = resourceList.getArray("sounds");
                         bmfontList = resourceList.getArray("bmfonts");
+                        overall = imageList.length() + soundList.length() + bmfontList.length();
                         state++;
                         break;
                     case 3:
@@ -92,6 +93,7 @@ public abstract class Resources
                         {
                             String resourceName = imageList.getString(counter);
                             addImage(resourceName, resourceName);
+                            current++;
                             counter++;
                         }
                         else
@@ -105,6 +107,7 @@ public abstract class Resources
                         {
                             Json.Object resource = bmfontList.getObject(counter);
                             addBMFont(resource.getString("name"), resource.getString("info"), resource.getString("image"));
+                            current++;
                             counter++;
                         }
                         else
@@ -118,6 +121,7 @@ public abstract class Resources
                         {
                             String resource = soundList.getString(counter);
                             addSound(resource, resource);
+                            current++;
                             counter++;
                         }
                         else
@@ -128,7 +132,7 @@ public abstract class Resources
                         break;
                     default:
                         if(state != -1)
-                            game.log().debug("Resource loaded.");
+                            game.log().info("Resource loaded.");
                         state = -1;
                         break;
                 }
@@ -139,9 +143,27 @@ public abstract class Resources
             }
         }
 
+        private static int overall, current;
+
+        @Contract(pure = true)
+        static int current()
+        {
+            if(state < 3)
+                return 0;
+            return current;
+        }
+
+        @Contract(pure = true)
+        static int overall()
+        {
+            if(state < 3)
+                return 1;
+            return overall;
+        }
+
         @NotNull
         @Contract(pure = true)
-        public static Boolean loaded()
+        static Boolean loaded()
         {
             return state == -1;
         }
@@ -171,14 +193,47 @@ public abstract class Resources
 
     public static void init()
     {
-        Initailizer.init();
+        if(loaded())
+        {
+            listeners.forEach(LoadingListener::onLoaded);
+            listeners.clear();
+        }
+        else
+        {
+            Initailizer.init();
+            if(!listeners.isEmpty())
+            {
+                final int current = Initailizer.current(), overall = Initailizer.overall();
+                listeners.forEach(loadingListener -> loadingListener.onLoading(current, overall));
+            }
+        }
     }
-
 
     @Contract(pure = true)
     public static boolean loaded()
     {
         return Initailizer.loaded();
+    }
+
+    private static final ArrayList<LoadingListener> listeners = new ArrayList<>();
+
+    public static void addLoadingListener(@NotNull LoadingListener listener)
+    {
+        if(loaded())
+        {
+            listener.onLoaded();
+        }
+        else
+        {
+            listeners.add(listener);
+        }
+    }
+
+    public interface LoadingListener
+    {
+        public void onLoaded();
+
+        public void onLoading(int currentStep, int overallStep);
     }
 
     @Contract(pure = true)
