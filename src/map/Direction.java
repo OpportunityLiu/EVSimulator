@@ -1,8 +1,14 @@
 package map;
 
+import ev.Resources;
+import loon.Json;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by liuzh on 2016/4/18.
@@ -11,31 +17,39 @@ import java.io.IOException;
 public abstract class Direction
 {
     private static final String uri = "http://api.map.baidu.com/direction/v1" +
-            "?origin=%s" +
+            "?mode=driving" +
+            "&origin=%s" +
             "&destination=%s" +
             "&origin_region=%s" +
-            "&destination_region=%s" +
-            "&output=json" +
+            "&destination_region=%<s" +
             "&coord_type=%s" +
-            /*"&waypoints="*/ "%s" +
-            "&ak=" + MapInfo.AK;
+            "&output=json&ak=" + MapInfo.AK;
 
-    public static <T extends CoordinateBase> T[] getDirection(T origin, T destination, String region, @Nullable T[] wayPoints) throws IOException
+    public static <T extends CoordinateBase> List<LongLat> getDirection(T origin, T destination, String region) throws IOException
     {
-        String wayPoint;
-        if(wayPoints != null)
+        region = URLEncoder.encode(region, "utf-8");
+        String reqUri = String.format(uri, origin.toYXString(), destination.toYXString(), region, origin.typeString());
+        Json.Object response = MapInfo.httpGet(reqUri);
+        if(response.getInt("status") != 0)
+            throw new IOException(response.getString("message"));
+        ArrayList<LongLat> route = new ArrayList<>();
+        Json.Object routeJson=response.getObject("result").getArray("routes").getObject(0);
+        Json.Array stepsJson = routeJson.getArray("steps");
+        for(int i = 0; i < stepsJson.length(); i++)
         {
-            String[] wayPointString = new String[wayPoints.length];
-            for(int i = 0; i < wayPoints.length; i++)
+            Json.Object stepJson = stepsJson.getObject(i);
+            Json.Object o = stepJson.getObject("stepOriginLocation");
+            //Json.Object d = step.getObject("stepDestinationLocation");
+            String p = stepJson.getString("path");
+            route.add(new LongLat(o.getDouble("lng"), o.getDouble("lat")));
+            final String[] paths = p.split("[;]");
+            for(String path : paths)
             {
-                wayPointString[i] = wayPoints[i].toString();
+                route.add(LongLat.parse(path));
             }
-            wayPoint = "&waypoints=" + String.join("|", (CharSequence[])wayPointString);
         }
-        else
-            wayPoint = "";
-        String reqUri = String.format(uri, origin, destination, region, region, origin.typeString(), wayPoint);
-
-        return null;
+        Json.Object d=routeJson.getObject("destinationLocation");
+        route.add(new LongLat(d.getDouble("lng"), d.getDouble("lat")));
+        return route;
     }
 }

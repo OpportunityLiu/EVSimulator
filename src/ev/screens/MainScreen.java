@@ -16,6 +16,9 @@ import loon.component.*;
 import loon.event.GameTouch;
 import loon.opengl.GLEx;
 import loon.utils.MathUtils;
+import loon.utils.reply.ActView;
+import loon.utils.reply.GoFuture;
+import loon.utils.reply.Try;
 import loon.utils.res.Texture;
 import loon.utils.timer.LTimerContext;
 import org.lwjgl.opengl.Display;
@@ -61,6 +64,34 @@ class MainScreen extends Screen
             setSecondOrder(DRAW_DESKTOP_PAINT());
             setLastOrder(DRAW_SPRITE_PAINT());
         }
+
+
+        p1 = Resources.images("home/p1.png");
+        p2 = Resources.images("home/p2.png");
+        p3 = Resources.images("home/p3.png");
+        p4 = Resources.images("home/p4.png");
+
+        c3 = new LPanel(-500, 0, 0, 0);
+        c3.setBackground(Resources.images("home/car3.png"));
+        c3.setScale(0.8f);
+        add(c3);
+        addAction(repeatMoveActionDelay(1300, 830, -300, 830, 20), c3);
+        c1 = new LPanel(-500, 0, 0, 0);
+        c1.setBackground(Resources.images("home/car1.png"));
+        c1.setScale(0.8f);
+        add(c1);
+        addAction(repeatMoveActionDelay(-300, 820, 1300, 820, 17), c1);
+        c2 = new LPanel(-500, 0, 0, 0);
+        c2.setBackground(Resources.images("home/car2.png"));
+        c2.setScale(0.8f);
+        add(c2);
+        addAction(repeatMoveActionDelay(-300, 820, 1300, 820, 14), c2);
+        c4 = new LPanel(-500, 0, 0, 0);
+        c4.setBackground(Resources.images("home/car4.png"));
+        c4.setScale(0.8f);
+        add(c4);
+        addAction(repeatMoveActionDelay(-300, 800, 1300, 800, 11), c4);
+
         logo = new LPanel(0, 200, 1, 1);
         logo.setBackground(Resources.images("home/logo.png"));
         logo.setSize(500, 120);
@@ -98,6 +129,8 @@ class MainScreen extends Screen
             @Override
             public void DoClick(LComponent comp)
             {
+                if(comp.getAlpha() < 0.2)
+                    return;
                 if(!contains(fade))
                     add(fade);
             }
@@ -122,6 +155,8 @@ class MainScreen extends Screen
             @Override
             public void DoClick(LComponent comp)
             {
+                if(comp.getAlpha() < 0.2)
+                    return;
                 if(!contains(fade))
                     add(fade);
             }
@@ -129,33 +164,6 @@ class MainScreen extends Screen
         
         panelMenu.add(buttonStart);
         panelMenu.add(buttonExit);
-        
-        
-        p1 = Resources.images("home/p1.png");
-        p2 = Resources.images("home/p2.png");
-        p3 = Resources.images("home/p3.png");
-        p4 = Resources.images("home/p4.png");
-        
-        c3 = new LPanel(-500, 0, 0, 0);
-        c3.setBackground(Resources.images("home/car3.png"));
-        c3.setScale(0.8f);
-        add(c3);
-        addAction(repeatMoveActionDelay(1300, 830, -300, 830, 20), c3);
-        c1 = new LPanel(-500, 0, 0, 0);
-        c1.setBackground(Resources.images("home/car1.png"));
-        c1.setScale(0.8f);
-        add(c1);
-        addAction(repeatMoveActionDelay(-300, 820, 1300, 820, 17), c1);
-        c2 = new LPanel(-500, 0, 0, 0);
-        c2.setBackground(Resources.images("home/car2.png"));
-        c2.setScale(0.8f);
-        add(c2);
-        addAction(repeatMoveActionDelay(-300, 820, 1300, 820, 14), c2);
-        c4 = new LPanel(-500, 0, 0, 0);
-        c4.setBackground(Resources.images("home/car4.png"));
-        c4.setScale(0.8f);
-        add(c4);
-        addAction(repeatMoveActionDelay(-300, 800, 1300, 800, 11), c4);
 
         add(new MFadeEffect(MFadeEffect.TYPE_FADE_IN, LColor.black)
         {

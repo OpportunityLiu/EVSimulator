@@ -6,6 +6,6 @@ package ev;
  */
 public class DebugSettings
 {
-    public static final boolean skipSplash = false;
+    public static final boolean skipSplash = true;
     public static final boolean fullscreen = false;
 }

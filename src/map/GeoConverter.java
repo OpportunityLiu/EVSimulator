@@ -18,54 +18,6 @@ import static map.MapInfo.convertStreamToString;
  */
 public abstract class GeoConverter
 {
-    private enum ErrorCode
-    {
-        Ok(0),
-
-        /**
-         * 内部错误
-         */
-        UnknownError(1),
-        
-        /**
-         * from非法
-         */
-        InvalidForm(21),
-        
-        /**
-         * to非法
-         */
-        InvalidTo(22),
-        
-        /**
-         * coords格式非法
-         */
-        InvalidCoordinateFormat(24),
-        
-        /**
-         * coords个数非法，超过限制
-         */
-        InvalidCoordinateCount(25);
-        
-        ErrorCode(int error)
-        {
-            code = error;
-        }
-        
-        private int code;
-        
-        @NotNull
-        public static ErrorCode getError(int errorCode)
-        {
-            for(ErrorCode code : ErrorCode.values())
-            {
-                if(code.code == errorCode)
-                    return code;
-            }
-            return UnknownError;
-        }
-    }
-
     private static String uriCovert = "http://api.map.baidu.com/geoconv/v1/?coords=%s&from=%d&to=%d&ak=" + MapInfo.AK;
     
     public static MeterXY[] toMeterXY(LongLat... coordinates) throws IOException
@@ -114,14 +66,10 @@ public abstract class GeoConverter
         }
         sb.deleteCharAt(sb.length() - 1);
         String requestUri = String.format(uriCovert, sb.toString(), from, to);
-        URL url = new URL(requestUri);
-        URLConnection connection = url.openConnection();
-        connection.connect();
-        String response = convertStreamToString(connection.getInputStream());
-        Json.Object resJson = LSystem.json().parse(response);
+        Json.Object resJson = MapInfo.httpGet(requestUri);
         int status = resJson.getInt("status");
         if(status != 0)
-            throw new IOException(ErrorCode.getError(status).name());
+            throw new IOException(resJson.getString("message"));
         return resJson.getArray("result");
     }
 

@@ -6,25 +6,14 @@ import ev.effects.MFadeEffect;
 import loon.*;
 import loon.action.FadeTo;
 import loon.action.sprite.effect.FadeEffect;
+import loon.canvas.Image;
 import loon.canvas.LColor;
 import loon.component.LTextBar;
 import loon.event.GameTouch;
-import loon.font.BMFont;
 import loon.opengl.GLEx;
-import loon.opengl.LTextureImage;
-import loon.utils.processes.GameProcess;
-import loon.utils.processes.RealtimeProcessManager;
-import loon.utils.processes.WaitProcess;
 import loon.utils.timer.LTimerContext;
-import map.GeoConverter;
-import map.LongLat;
-import map.MeterXY;
 
-import javax.swing.*;
-import java.io.IOException;
 import java.util.ArrayList;
-
-import static map.GeoConverter.*;
 
 /**
  * Created by liuzh on 2016/4/15.
@@ -32,6 +21,8 @@ import static map.GeoConverter.*;
  */
 public class SplashScreen extends Screen
 {
+    private Image i;
+
     private class Splash
     {
         LTexture image;
@@ -138,6 +129,7 @@ public class SplashScreen extends Screen
         if(!isOnLoadComplete())
             return;
         Resources.init();
+
         if(!skipping)
         {
             if(counter < 0)

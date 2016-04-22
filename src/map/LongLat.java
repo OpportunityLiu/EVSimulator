@@ -38,4 +38,10 @@ public final class LongLat extends CoordinateBase
     {
         return "bd09ll";
     }
+
+    public static LongLat parse(String value)
+    {
+        String[] c = value.split(",");
+        return new LongLat(Double.parseDouble(c[0]), Double.parseDouble(c[1]));
+    }
 }
