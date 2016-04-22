@@ -92,7 +92,7 @@ class MainScreen extends Screen
         add(c4);
         addAction(repeatMoveActionDelay(-300, 800, 1300, 800, 11), c4);
 
-        logo = new LPanel(0, 200, 1, 1);
+        logo = new LPanel(0, 50, 1, 1);
         logo.setBackground(Resources.images("home/logo.png"));
         logo.setSize(500, 120);
         logo.setX(getHalfWidth() - logo.getWidth() / 2);
@@ -104,7 +104,7 @@ class MainScreen extends Screen
         setBackground(backgroundTexture);
         scale = backgroundTexture.width() / getWidth();
         
-        panelMenu = new LPanel(getHalfWidth() - 125, getHalfHeight(), 250, 178);
+        panelMenu = new LPanel(getHalfWidth() - 125, getHalfHeight() - 150, 250, 178);
         LColor c = new LColor(1f, 1f, 1f, 0.5f);
         panelMenu.setBackground(c);
         panelMenu.setAlpha(0);
@@ -176,7 +176,7 @@ class MainScreen extends Screen
                 addAction(ActionHelper.runAfter(1f, a2), buttonExit);
                 addAction(new FadeTo(ISprite.TYPE_FADE_OUT, 40f), panelMenu);
                 addAction(new FadeTo(ISprite.TYPE_FADE_OUT, 10f), logo);
-                addAction(new MoveBy(logo.getX(), 300, 10), logo);
+                addAction(new MoveBy(logo.getX(), 150, 10), logo);
                 remove(this);
             }
         });
