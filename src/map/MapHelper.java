@@ -12,7 +12,7 @@ import java.net.URLConnection;
  * Created by liuzh on 2016/4/17.
  * Baidu map API
  */
-class MapInfo
+class MapHelper
 {
     static final String AK="IyNOuhmURakqti0KikUfmTkXUXcneZrm";
 

@@ -46,9 +46,9 @@ import loon.opengl.TextureUtils;
 public abstract class LComponent extends LObject implements ActionBind, XY,
         BoxSize {
 
-    public static interface CallListener {
+    public interface CallListener {
 
-        public void act(long elapsedTime);
+        void act(long elapsedTime);
 
     }
 

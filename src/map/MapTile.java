@@ -46,6 +46,7 @@ public class MapTile implements LRelease
     private final int x, y, scale;
     private final double scaler;
     private LTexture texture;
+    private boolean loaded;
 
     public LTexture texture()
     {
@@ -54,7 +55,7 @@ public class MapTile implements LRelease
 
     public boolean isLoaded()
     {
-        return texture != null;
+        return loaded;
     }
 
     /**
@@ -74,23 +75,31 @@ public class MapTile implements LRelease
         texture = img.texture();
         img.destroy();
         image = null;
+        loaded = true;
     }
 
     public MapTile onSuccess(ActView.Listener<MapTile> slot)
     {
-        image.state.onSuccess(event -> slot.onEmit(MapTile.this));
+        if(loaded)
+            slot.onEmit(this);
+        else
+            image.state.onSuccess(event -> slot.onEmit(MapTile.this));
         return this;
     }
 
     public MapTile onFailure(ActView.Listener<Throwable> slot)
     {
-        image.state.onFailure(slot);
+        if(!loaded)
+            image.state.onFailure(slot);
         return this;
     }
 
     public MapTile onComplete(ActView.Listener<Try<MapTile>> slot)
     {
-        image.state.onComplete(event -> slot.onEmit(event.map(input -> MapTile.this)));
+        if(loaded)
+            slot.onEmit(Try.success(this));
+        else
+            image.state.onComplete(event -> slot.onEmit(event.map(input -> MapTile.this)));
         return this;
     }
 

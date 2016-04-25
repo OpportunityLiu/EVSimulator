@@ -3,27 +3,24 @@ package ev.screens;
 import ev.Resources;
 import ev.controls.ActionHelper;
 import ev.controls.MButton;
+import ev.controls.MTextList;
+import ev.controls.MiniMap;
 import ev.effects.MFadeEffect;
 import ev.event.ActionAdapter;
 import ev.event.ClickAdapter;
-import javafx.animation.FadeTransition;
 import loon.*;
 import loon.action.*;
-import loon.action.sprite.*;
 import loon.action.sprite.effect.FadeEffect;
 import loon.canvas.LColor;
 import loon.component.*;
 import loon.event.GameTouch;
 import loon.opengl.GLEx;
 import loon.utils.MathUtils;
-import loon.utils.reply.ActView;
-import loon.utils.reply.GoFuture;
-import loon.utils.reply.Try;
 import loon.utils.res.Texture;
 import loon.utils.timer.LTimerContext;
-import org.lwjgl.opengl.Display;
-
-import java.util.concurrent.TimeUnit;
+import map.CityInfo;
+import map.MapTile;
+import map.MeterXY;
 
 /**
  * Created by liuzh on 2016/4/16.
@@ -31,12 +28,27 @@ import java.util.concurrent.TimeUnit;
  */
 class MainScreen extends Screen
 {
-    private LButton buttonStart, buttonExit;
-    private LPanel panelMenu, logo;
-    private LTexture p1, p2, p3, p4;
     private float scale;
-    private LPanel c1, c2, c3, c4;
+
+    private boolean animating = true;
+    
+    //for background
+    private LTexture p1, p2, p3, p4;
     private float r1, r2, r3, r4;
+    private LPanel c1, c2, c3, c4;
+    
+    private LPanel logo;
+    
+    //for main menu
+    private LPanel mainMenu;
+    private MButton mButtonStart, mButtonExit;
+    
+    //for select menu
+    private LPanel selectMenu, sPanel;
+    private MButton sButtonStart, sButtonBack;
+    private MTextList<CityInfo.Province> provinceList;
+    private MTextList<CityInfo.City> cityList;
+    private MiniMap mapPanel;
     
     @Override
     public void draw(GLEx g)
@@ -65,33 +77,14 @@ class MainScreen extends Screen
             setLastOrder(DRAW_SPRITE_PAINT());
         }
 
-
-        p1 = Resources.images("home/p1.png");
-        p2 = Resources.images("home/p2.png");
-        p3 = Resources.images("home/p3.png");
-        p4 = Resources.images("home/p4.png");
-
-        c3 = new LPanel(-500, 0, 0, 0);
-        c3.setBackground(Resources.images("home/car3.png"));
-        c3.setScale(0.8f);
-        add(c3);
-        addAction(repeatMoveActionDelay(1300, 830, -300, 830, 20), c3);
-        c1 = new LPanel(-500, 0, 0, 0);
-        c1.setBackground(Resources.images("home/car1.png"));
-        c1.setScale(0.8f);
-        add(c1);
-        addAction(repeatMoveActionDelay(-300, 820, 1300, 820, 17), c1);
-        c2 = new LPanel(-500, 0, 0, 0);
-        c2.setBackground(Resources.images("home/car2.png"));
-        c2.setScale(0.8f);
-        add(c2);
-        addAction(repeatMoveActionDelay(-300, 820, 1300, 820, 14), c2);
-        c4 = new LPanel(-500, 0, 0, 0);
-        c4.setBackground(Resources.images("home/car4.png"));
-        c4.setScale(0.8f);
-        add(c4);
-        addAction(repeatMoveActionDelay(-300, 800, 1300, 800, 11), c4);
-
+        LTexture backgroundTexture = Resources.images("home/background.png");
+        setBackground(backgroundTexture);
+        scale = backgroundTexture.width() / getWidth();
+        
+        initBackground();
+        initMain();
+        initSelect();
+        
         logo = new LPanel(0, 50, 1, 1);
         logo.setBackground(Resources.images("home/logo.png"));
         logo.setSize(500, 120);
@@ -99,48 +92,81 @@ class MainScreen extends Screen
         logo.setAlpha(0);
         add(logo);
         
-        Texture[] btn = new Texture[]{Resources.controls("blue_button02"), Resources.controls("blue_button04"), Resources.controls("blue_button03")};
-        LTexture backgroundTexture = Resources.images("home/background.png");
-        setBackground(backgroundTexture);
-        scale = backgroundTexture.width() / getWidth();
-        
-        panelMenu = new LPanel(getHalfWidth() - 125, getHalfHeight() - 150, 250, 178);
-        LColor c = new LColor(1f, 1f, 1f, 0.5f);
-        panelMenu.setBackground(c);
-        panelMenu.setAlpha(0);
-        add(panelMenu);
-        
-        buttonStart = new MButton(btn, "Start", (panelMenu.width() - 190) / 2, 30, 190, 49);
-        buttonStart.setFont(Resources.fonts("menu"));
-        buttonStart.setOffsetTop(2);
-        buttonStart.setAlpha(0);
-        buttonStart.addClickListener(new ClickAdapter()
+        add(new MFadeEffect(MFadeEffect.TYPE_FADE_IN, LColor.black)
         {
-            MFadeEffect fade = new MFadeEffect(FadeEffect.TYPE_FADE_OUT, LColor.black)
+            @Override
+            public void onFinished()
             {
-                @Override
-                public void onFinished()
-                {
-                    remove(this);
-                    runNextScreen();
-                }
-            };
+                addAction(new MoveBy(logo.getX(), 150, 10), logo);
+                addAction(new FadeTo(FadeEffect.TYPE_FADE_OUT, 10f), logo);
+                showMain();
+                remove(this);
+            }
+        });
+    }
+    
+    private void initBackground()
+    {
+        p1 = Resources.images("home/p1.png");
+        p2 = Resources.images("home/p2.png");
+        p3 = Resources.images("home/p3.png");
+        p4 = Resources.images("home/p4.png");
+        
+        c3 = new LPanel(-500, 0, 0, 0);
+        c3.setBackground(Resources.images("home/car3.png"));
+        c3.setScale(0.8f);
+        add(c3);
+        addAction(repeatMoveActionDelay(1300, 830, -300, 830, 20), c3);
+        
+        c1 = new LPanel(-500, 0, 0, 0);
+        c1.setBackground(Resources.images("home/car1.png"));
+        c1.setScale(0.8f);
+        add(c1);
+        addAction(repeatMoveActionDelay(-300, 820, 1300, 820, 17), c1);
+        
+        c2 = new LPanel(-500, 0, 0, 0);
+        c2.setBackground(Resources.images("home/car2.png"));
+        c2.setScale(0.8f);
+        add(c2);
+        addAction(repeatMoveActionDelay(-300, 820, 1300, 820, 14), c2);
+        
+        c4 = new LPanel(-500, 0, 0, 0);
+        c4.setBackground(Resources.images("home/car4.png"));
+        c4.setScale(0.8f);
+        add(c4);
+        addAction(repeatMoveActionDelay(-300, 800, 1300, 800, 11), c4);
+    }
+    
+    private void initMain()
+    {
+        Texture[] btn1 = new Texture[]{Resources.controls("blue_button02"), Resources.controls("blue_button04"), Resources.controls("blue_button03")};
+        Texture[] btn2 = new Texture[]{Resources.controls("red_button02"), Resources.controls("red_button04"), Resources.controls("red_button03")};
 
+        mainMenu = new LPanel(getHalfWidth() - 125, getHalfHeight() - 150, 250, 178);
+        LColor c = new LColor(1f, 1f, 1f, 0.5f);
+        mainMenu.setBackground(c);
+        mainMenu.setAlpha(0);
+        
+        mButtonStart = new MButton(btn1, "Start", (mainMenu.width() - 190) / 2, 30, 190, 49);
+        mButtonStart.setFont(Resources.fonts("menu"));
+        mButtonStart.setOffsetTop(2);
+        mButtonStart.setAlpha(0);
+        mButtonStart.addClickListener(new ClickAdapter()
+        {
             @Override
             public void DoClick(LComponent comp)
             {
-                if(comp.getAlpha() < 0.2)
+                if(comp.getAlpha() < 0.2 || animating)
                     return;
-                if(!contains(fade))
-                    add(fade);
+                toSelect();
             }
         });
         
-        buttonExit = new MButton(btn, "Exit", (panelMenu.width() - 190) / 2, 100, 190, 49);
-        buttonExit.setFont(Resources.fonts("menu"));
-        buttonExit.setOffsetTop(2);
-        buttonExit.setAlpha(0);
-        buttonExit.addClickListener(new ClickAdapter()
+        mButtonExit = new MButton(btn2, "Exit", (mainMenu.width() - 190) / 2, 100, 190, 49);
+        mButtonExit.setFont(Resources.fonts("menu"));
+        mButtonExit.setOffsetTop(2);
+        mButtonExit.setAlpha(0);
+        mButtonExit.addClickListener(new ClickAdapter()
         {
             MFadeEffect fade = new MFadeEffect(FadeEffect.TYPE_FADE_OUT, LColor.black)
             {
@@ -151,35 +177,255 @@ class MainScreen extends Screen
                     System.exit(0);
                 }
             };
-
+            
             @Override
             public void DoClick(LComponent comp)
             {
-                if(comp.getAlpha() < 0.2)
+                if(comp.getAlpha() < 0.2 || animating)
                     return;
+                animating = true;
                 if(!contains(fade))
                     add(fade);
             }
         });
         
-        panelMenu.add(buttonStart);
-        panelMenu.add(buttonExit);
+        mainMenu.add(mButtonStart);
+        mainMenu.add(mButtonExit);
 
-        add(new MFadeEffect(MFadeEffect.TYPE_FADE_IN, LColor.black)
+        mainMenu.setVisible(false);
+        add(mainMenu);
+    }
+    
+    private void showMain()
+    {
+        mainMenu.setVisible(true);
+
+        ActionEvent a1 = new FadeTo(FadeEffect.TYPE_FADE_OUT, 20f);
+        ActionEvent a2 = a1.cpy();
+        addAction(ActionHelper.runAfter(0.5f, a1), mButtonStart);
+        addAction(ActionHelper.runAfter(1f, a2), mButtonExit);
+        addAction(new FadeTo(FadeEffect.TYPE_FADE_OUT, 40f), mainMenu);
+
+        animating = false;
+    }
+    
+    private void toMain()
+    {
+        animating = true;
+        removeAllActions(selectMenu);
+        removeAllActions(sPanel);
+        removeAllActions(sButtonStart);
+        removeAllActions(sButtonBack);
+        removeAllActions(provinceList);
+        removeAllActions(cityList);
+        removeAllActions(mapPanel);
+
+        ActionEvent fadeB1 = new FadeTo(FadeEffect.TYPE_FADE_IN, 5f);
+        ActionEvent fadeB2 = fadeB1.cpy();
+        ActionEvent fadeLP = fadeB1.cpy();
+        ActionEvent fadeLC = fadeB1.cpy();
+        ActionEvent fadeP = fadeB1.cpy();
+        ActionEvent fadeMap = fadeB1.cpy();
+        ActionEvent fadeM = fadeB1.cpy();
+        fadeM.setActionListener(new ActionAdapter()
         {
             @Override
-            public void onFinished()
+            public void stop(ActionBind o)
             {
-                ActionEvent a1 = new FadeTo(ISprite.TYPE_FADE_OUT, 20f);
-                ActionEvent a2 = a1.cpy();
-                addAction(ActionHelper.runAfter(0.5f, a1), buttonStart);
-                addAction(ActionHelper.runAfter(1f, a2), buttonExit);
-                addAction(new FadeTo(ISprite.TYPE_FADE_OUT, 40f), panelMenu);
-                addAction(new FadeTo(ISprite.TYPE_FADE_OUT, 10f), logo);
-                addAction(new MoveBy(logo.getX(), 150, 10), logo);
-                remove(this);
+                selectMenu.setVisible(false);
+                showMain();
             }
         });
+        ActionEvent moveLogo = new MoveBy(logo.getX(), 150, 10);
+
+        addAction(fadeB1, sButtonStart);
+        addAction(fadeB2, sButtonBack);
+        addAction(fadeP, sPanel);
+        addAction(moveLogo, logo);
+        addAction(fadeLP, provinceList);
+        addAction(fadeLC, cityList);
+        addAction(fadeMap, mapPanel);
+        addAction(fadeM, selectMenu);
+    }
+    
+    private void initSelect()
+    {
+        selectMenu = new LPanel(0, 0, getWidth(), getHeight());
+        selectMenu.setBackground(new LColor(0, 0, 0, 0.6f));
+        selectMenu.setAlpha(0);
+
+        sPanel = new LPanel(915, 681, 250, 178);
+        LColor c = new LColor(1f, 1f, 1f, 0.7f);
+        sPanel.setBackground(c);
+        sPanel.setAlpha(0);
+        selectMenu.add(sPanel);
+
+        Texture[] btn1 = new Texture[]{Resources.controls("green_button02"), Resources.controls("green_button04"), Resources.controls("green_button03")};
+        Texture[] btn2 = new Texture[]{Resources.controls("blue_button02"), Resources.controls("blue_button04"), Resources.controls("blue_button03")};
+
+        sButtonStart = new MButton(btn1, "Start", (sPanel.width() - 190) / 2, 30, 190, 49);
+        sButtonStart.setFont(Resources.fonts("menu"));
+        sButtonStart.setOffsetTop(2);
+        sButtonStart.setAlpha(0);
+        sButtonStart.addClickListener(new ClickAdapter()
+        {
+            MFadeEffect fade = new MFadeEffect(FadeEffect.TYPE_FADE_OUT, LColor.black)
+            {
+                @Override
+                public void onFinished()
+                {
+                    remove(this);
+                    setScreen(new GameScreen());
+                }
+            };
+
+            @Override
+            public void DoClick(LComponent comp)
+            {
+                if(comp.getAlpha() < 0.2 || animating)
+                    return;
+                animating = true;
+                if(!contains(fade))
+                    add(fade);
+            }
+        });
+
+        sButtonBack = new MButton(btn2, "Back", (sPanel.width() - 190) / 2, 100, 190, 49);
+        sButtonBack.setFont(Resources.fonts("menu"));
+        sButtonBack.setOffsetTop(2);
+        sButtonBack.setAlpha(0);
+        sButtonBack.addClickListener(new ClickAdapter()
+        {
+            @Override
+            public void DoClick(LComponent comp)
+            {
+                if(comp.getAlpha() < 0.2 || animating)
+                    return;
+                toMain();
+            }
+        });
+
+        sPanel.add(sButtonStart);
+        sPanel.add(sButtonBack);
+
+        mapPanel = new MiniMap(850, 210, 380, 380);
+        mapPanel.setAlpha(0);
+        selectMenu.add(mapPanel);
+
+        provinceList = new MTextList<>(35, 50, 210, 350, 700, 5, null, null, null, null, null);
+        provinceList.setAlpha(0);
+
+        cityList = new MTextList<>(35, 450, 210, 350, 700, 5, null, null, null, null, null);
+        cityList.setAlpha(0);
+
+        selectMenu.add(provinceList);
+        selectMenu.add(cityList);
+
+        selectMenu.setVisible(false);
+        add(selectMenu);
+
+        //Load data
+        final CityInfo.Province[] provinces = CityInfo.data();
+        provinceList.setItemSource(provinces);
+        provinceList.addClickListener(new ClickAdapter()
+        {
+            int index = -1;
+
+            @Override
+            public void UpClick(LComponent comp, float x, float y)
+            {
+                int newIndex = provinceList.getSelectedIndex();
+                if(newIndex == -1)
+                    return;
+                if(index == newIndex)
+                {
+                    needRefreshCity = true;
+                }
+            }
+
+            @Override
+            public void DownClick(LComponent comp, float x, float y)
+            {
+                int newIndex = provinceList.getSelectedIndex();
+                if(newIndex == -1)
+                    return;
+                index = newIndex;
+            }
+        });
+        cityList.addClickListener(new ClickAdapter()
+        {
+            int index = -1;
+
+            @Override
+            public void UpClick(LComponent comp, float x, float y)
+            {
+                int newIndex = cityList.getSelectedIndex();
+                if(newIndex == -1)
+                    return;
+                if(index == newIndex)
+                {
+                    needRefreshImage = true;
+                }
+            }
+
+            @Override
+            public void DownClick(LComponent comp, float x, float y)
+            {
+                int newIndex = cityList.getSelectedIndex();
+                if(newIndex == -1)
+                    return;
+                index = newIndex;
+            }
+        });
+    }
+
+    private void showSelect()
+    {
+        selectMenu.setVisible(true);
+
+        addAction(new FadeTo(FadeEffect.TYPE_FADE_OUT, 5f), selectMenu);
+
+        addAction(new FadeTo(FadeEffect.TYPE_FADE_OUT, 5f), provinceList);
+
+        addAction(new FadeTo(FadeEffect.TYPE_FADE_OUT, 5f), cityList);
+
+        ActionEvent a1 = new FadeTo(FadeEffect.TYPE_FADE_OUT, 10f);
+        ActionEvent a2 = a1.cpy();
+        ActionEvent aMap = a1.cpy();
+        addAction(ActionHelper.runAfter(0.6f, a1), sButtonStart);
+        addAction(ActionHelper.runAfter(1f, a2), sButtonBack);
+        addAction(new FadeTo(FadeEffect.TYPE_FADE_OUT, 40f), sPanel);
+        addAction(ActionHelper.runAfter(0.3f, aMap), mapPanel);
+
+        animating = false;
+    }
+    
+    private void toSelect()
+    {
+        animating = true;
+
+        removeAllActions(mainMenu);
+        removeAllActions(mButtonStart);
+        removeAllActions(mButtonExit);
+
+        ActionEvent fadeB1 = new FadeTo(FadeEffect.TYPE_FADE_IN, 5f);
+        ActionEvent fadeB2 = fadeB1.cpy();
+        ActionEvent fadeP = fadeB1.cpy();
+        fadeP.setActionListener(new ActionAdapter()
+        {
+            @Override
+            public void stop(ActionBind o)
+            {
+                mainMenu.setVisible(false);
+                showSelect();
+            }
+        });
+        ActionEvent moveLogo = new MoveBy(logo.getX(), 50, 10);
+
+        addAction(fadeB1, mButtonStart);
+        addAction(fadeB2, mButtonExit);
+        addAction(fadeP, mainMenu);
+        addAction(moveLogo, logo);
     }
     
     private ActionEvent repeatMoveActionDelay(float x1, float y1, float x2, float y2, int speed)
@@ -206,10 +452,29 @@ class MainScreen extends Screen
         });
         return r;
     }
+
+    private boolean needRefreshCity = true, needRefreshImage;
+
     
     @Override
     public void alter(LTimerContext timer)
     {
+        if(!isOnLoadComplete())
+            return;
+        if(needRefreshCity)
+        {
+            cityList.setItemSource(provinceList.getSelectedValue().cities);
+            needRefreshCity = false;
+        }
+        if(needRefreshImage)
+        {
+            final CityInfo.City city = cityList.getSelectedValue();
+            if(city != null)
+            {
+               mapPanel.setTile(city.getTile());
+            }
+            needRefreshImage = false;
+        }
     }
     
     @Override

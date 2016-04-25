@@ -5,13 +5,13 @@ import loon.font.BMFont;
 import loon.font.IFont;
 import loon.utils.res.Texture;
 import loon.utils.res.TextureAtlas;
+import loon.utils.res.TextureData;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by liuzh on 2016/4/16.
@@ -24,7 +24,7 @@ public abstract class Resources
     private static Assets assets;
     private static Platform platform;
 
-    private static TextureAtlas texBlue;
+    private static TextureAtlas textureAtlasUI;
 
     private static final Hashtable<String, IFont> fontsHashtable = new Hashtable<>();
     private static final Hashtable<String, LTexture> imagesHashtable = new Hashtable<>();
@@ -33,16 +33,28 @@ public abstract class Resources
     @Nullable
     public static Texture controls(@NotNull String name)
     {
-        if(name.startsWith("blue"))
-        {
-            return texBlue.getTexture(name);
-        }
-        return null;
+        return textureAtlasUI.getTexture(name);
+    }
+
+    @Nullable
+    public static LTexture controlsTexture(@NotNull String name)
+    {
+        Texture t = controls(name);
+        if(t == null)
+            return null;
+        TextureData data = t.getTextureData();
+        return t.img().copy(data.x(), data.y(), data.w(), data.h());
     }
 
     public static LTexture images(@NotNull String name)
     {
-        return imagesHashtable.get(name.toLowerCase());
+        final LTexture texture = imagesHashtable.get(name.toLowerCase());
+        if(texture.isClose())
+        {
+            return Initailizer.addImage(name, texture.getSource());
+        }
+        else
+            return texture;
     }
 
     public static IFont fonts(@NotNull String name)
@@ -76,8 +88,8 @@ public abstract class Resources
                         state++;
                         break;
                     case 1:
-                        String json = Resources.assets().getTextSync("controls/blue.json");
-                        texBlue = new TextureAtlas(LTexture.createTexture("controls/blue.png"), LSystem.json().parse(json));
+                        String json = Resources.assets().getTextSync("controls/ui.json");
+                        textureAtlasUI = new TextureAtlas(LTexture.createTexture("controls/ui.png"), LSystem.json().parse(json));
                         state++;
                         break;
                     case 2:
@@ -168,26 +180,31 @@ public abstract class Resources
             return state == -1;
         }
 
-        private static void addBMFont(String name, String infoFile, String imageFile) throws Exception
+        private static BMFont addBMFont(String name, String infoFile, String imageFile) throws Exception
         {
             final String prefix = "fonts/";
 
             BMFont font = new BMFont(prefix + infoFile, prefix + imageFile);
             fontsHashtable.put(name.toLowerCase(), font);
+            return font;
         }
 
-        private static void addImage(String name, String file)
+        private static LTexture addImage(String name, String file)
         {
             final String prefix = "images/";
-
-            imagesHashtable.put(name.toLowerCase(), LTexture.createTexture(prefix + file));
+            final String source = file.startsWith(prefix) ? file : (prefix + file);
+            imagesHashtable.remove(name);
+            final LTexture texture = LTexture.createTexture(source);
+            imagesHashtable.put(name.toLowerCase(), texture);
+            return texture;
         }
 
-        private static void addSound(String name, String file)
+        private static Sound addSound(String name, String file)
         {
             final String prefix = "sounds/";
-
-            soundsHashtable.put(name.toLowerCase(), assets().getSound(prefix + file));
+            final Sound sound = assets().getSound(prefix + file);
+            soundsHashtable.put(name.toLowerCase(), sound);
+            return sound;
         }
     }
 
@@ -231,9 +248,9 @@ public abstract class Resources
 
     public interface LoadingListener
     {
-        public void onLoaded();
+        void onLoaded();
 
-        public void onLoading(int currentStep, int overallStep);
+        void onLoading(int currentStep, int overallStep);
     }
 
     @Contract(pure = true)

@@ -60,6 +60,8 @@ public class GameScreen extends Screen
         if(!isOnLoadComplete())
             return;
         progress.setPercentage(map.getProgress());
+        if(map.getProgress() > 0.1)
+            runPreviousScreen();
     }
 
     @Override

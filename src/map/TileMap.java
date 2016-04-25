@@ -17,12 +17,12 @@ import loon.utils.MathUtils;
  */
 public class TileMap extends LContainer implements LRelease
 {
-    public static interface DrawListener
+    public interface DrawListener
     {
 
-        public void update(long elapsedTime);
+        void update(long elapsedTime);
 
-        public void draw(GLEx g, float x, float y);
+        void draw(GLEx g, float x, float y);
 
     }
 

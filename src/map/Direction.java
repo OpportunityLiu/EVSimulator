@@ -1,11 +1,8 @@
 package map;
 
-import ev.Resources;
 import loon.Json;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,13 +20,13 @@ public abstract class Direction
             "&origin_region=%s" +
             "&destination_region=%<s" +
             "&coord_type=%s" +
-            "&output=json&ak=" + MapInfo.AK;
+            "&output=json&ak=" + MapHelper.AK;
 
     public static <T extends CoordinateBase> List<LongLat> getDirection(T origin, T destination, String region) throws IOException
     {
         region = URLEncoder.encode(region, "utf-8");
         String reqUri = String.format(uri, origin.toYXString(), destination.toYXString(), region, origin.typeString());
-        Json.Object response = MapInfo.httpGet(reqUri);
+        Json.Object response = MapHelper.httpGet(reqUri);
         if(response.getInt("status") != 0)
             throw new IOException(response.getString("message"));
         ArrayList<LongLat> route = new ArrayList<>();

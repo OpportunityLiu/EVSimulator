@@ -1,0 +1,1464 @@
+{
+  "frames" : { 
+    "blue_boxCheckmark" : {
+      "x" : 1013,
+      "y" : 392,
+      "w" : 38,
+      "h" : 36,
+      "sourceW" : 38,
+      "sourceH" : 36,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_boxCross" : {
+      "x" : 992,
+      "y" : 430,
+      "w" : 38,
+      "h" : 36,
+      "sourceW" : 38,
+      "sourceH" : 36,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_boxTick" : {
+      "x" : 1010,
+      "y" : 468,
+      "w" : 36,
+      "h" : 36,
+      "sourceW" : 36,
+      "sourceH" : 36,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_button00" : {
+      "x" : 493,
+      "y" : 104,
+      "w" : 190,
+      "h" : 49,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_button01" : {
+      "x" : 590,
+      "y" : 347,
+      "w" : 190,
+      "h" : 45,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "blue_button02" : {
+      "x" : 488,
+      "y" : 155,
+      "w" : 190,
+      "h" : 49,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_button03" : {
+      "x" : 871,
+      "y" : 284,
+      "w" : 190,
+      "h" : 45,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "blue_button04" : {
+      "x" : 296,
+      "y" : 461,
+      "w" : 190,
+      "h" : 49,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_button05" : {
+      "x" : 590,
+      "y" : 300,
+      "w" : 190,
+      "h" : 45,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "blue_button06" : {
+      "x" : 539,
+      "y" : 461,
+      "w" : 49,
+      "h" : 49,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_button07" : {
+      "x" : 539,
+      "y" : 410,
+      "w" : 49,
+      "h" : 49,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_button08" : {
+      "x" : 641,
+      "y" : 446,
+      "w" : 49,
+      "h" : 45,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "blue_button09" : {
+      "x" : 539,
+      "y" : 359,
+      "w" : 49,
+      "h" : 49,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_button10" : {
+      "x" : 590,
+      "y" : 446,
+      "w" : 49,
+      "h" : 45,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "blue_button11" : {
+      "x" : 539,
+      "y" : 308,
+      "w" : 49,
+      "h" : 49,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_button12" : {
+      "x" : 1063,
+      "y" : 331,
+      "w" : 49,
+      "h" : 45,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "blue_button13" : {
+      "x" : 296,
+      "y" : 410,
+      "w" : 190,
+      "h" : 49,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_checkmark" : {
+      "x" : 807,
+      "y" : 481,
+      "w" : 21,
+      "h" : 20,
+      "sourceW" : 21,
+      "sourceH" : 20,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_circle" : {
+      "x" : 1114,
+      "y" : 354,
+      "w" : 36,
+      "h" : 36,
+      "sourceW" : 36,
+      "sourceH" : 36,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_cross" : {
+      "x" : 1035,
+      "y" : 357,
+      "w" : 18,
+      "h" : 18,
+      "sourceW" : 18,
+      "sourceH" : 18,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_panel" : {
+      "x" : 2,
+      "y" : 410,
+      "w" : 100,
+      "h" : 100,
+      "sourceW" : 100,
+      "sourceH" : 100,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_sliderDown" : {
+      "x" : 863,
+      "y" : 392,
+      "w" : 28,
+      "h" : 42,
+      "sourceW" : 28,
+      "sourceH" : 42,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_sliderLeft" : {
+      "x" : 1089,
+      "y" : 477,
+      "w" : 39,
+      "h" : 31,
+      "sourceW" : 39,
+      "sourceH" : 31,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_sliderRight" : {
+      "x" : 1089,
+      "y" : 444,
+      "w" : 39,
+      "h" : 31,
+      "sourceW" : 39,
+      "sourceH" : 31,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_sliderUp" : {
+      "x" : 842,
+      "y" : 436,
+      "w" : 28,
+      "h" : 42,
+      "sourceW" : 28,
+      "sourceH" : 42,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "blue_tick" : {
+      "x" : 1133,
+      "y" : 97,
+      "w" : 17,
+      "h" : 17,
+      "sourceW" : 17,
+      "sourceH" : 17,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "dropdownBottom" : {
+      "x" : 590,
+      "y" : 420,
+      "w" : 190,
+      "h" : 24,
+      "sourceW" : 190,
+      "sourceH" : 24,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "dropdownMid" : {
+      "x" : 590,
+      "y" : 394,
+      "w" : 190,
+      "h" : 24,
+      "sourceW" : 190,
+      "sourceH" : 24,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "dropdownTop" : {
+      "x" : 871,
+      "y" : 331,
+      "w" : 190,
+      "h" : 24,
+      "sourceW" : 190,
+      "sourceH" : 24,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "green_boxCheckmark" : {
+      "x" : 970,
+      "y" : 468,
+      "w" : 38,
+      "h" : 36,
+      "sourceW" : 38,
+      "sourceH" : 36,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "green_boxCross" : {
+      "x" : 973,
+      "y" : 392,
+      "w" : 38,
+      "h" : 36,
+      "sourceW" : 38,
+      "sourceH" : 36,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "green_boxTick" : {
+      "x" : 833,
+      "y" : 354,
+      "w" : 36,
+      "h" : 36,
+      "sourceW" : 36,
+      "sourceH" : 36,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "green_button00" : {
+      "x" : 296,
+      "y" : 359,
+      "w" : 190,
+      "h" : 49,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "green_button01" : {
+      "x" : 590,
+      "y" : 253,
+      "w" : 190,
+      "h" : 45,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "green_button02" : {
+      "x" : 296,
+      "y" : 308,
+      "w" : 190,
+      "h" : 49,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "green_button03" : {
+      "x" : 871,
+      "y" : 237,
+      "w" : 190,
+      "h" : 45,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "green_button04" : {
+      "x" : 296,
+      "y" : 257,
+      "w" : 190,
+      "h" : 49,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "green_button05" : {
+      "x" : 872,
+      "y" : 190,
+      "w" : 190,
+      "h" : 45,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "green_button06" : {
+      "x" : 539,
+      "y" : 257,
+      "w" : 49,
+      "h" : 49,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "green_button07" : {
+      "x" : 539,
+      "y" : 206,
+      "w" : 49,
+      "h" : 49,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "green_button08" : {
+      "x" : 782,
+      "y" : 390,
+      "w" : 49,
+      "h" : 45,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "green_button09" : {
+      "x" : 488,
+      "y" : 461,
+      "w" : 49,
+      "h" : 49,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "green_button10" : {
+      "x" : 1063,
+      "y" : 284,
+      "w" : 49,
+      "h" : 45,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "green_button11" : {
+      "x" : 488,
+      "y" : 410,
+      "w" : 49,
+      "h" : 49,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "green_button12" : {
+      "x" : 782,
+      "y" : 343,
+      "w" : 49,
+      "h" : 45,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "green_button13" : {
+      "x" : 296,
+      "y" : 206,
+      "w" : 190,
+      "h" : 49,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "green_checkmark" : {
+      "x" : 784,
+      "y" : 481,
+      "w" : 21,
+      "h" : 20,
+      "sourceW" : 21,
+      "sourceH" : 20,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "green_circle" : {
+      "x" : 1114,
+      "y" : 316,
+      "w" : 36,
+      "h" : 36,
+      "sourceW" : 36,
+      "sourceH" : 36,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "green_cross" : {
+      "x" : 1053,
+      "y" : 398,
+      "w" : 18,
+      "h" : 18,
+      "sourceW" : 18,
+      "sourceH" : 18,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "green_panel" : {
+      "x" : 2,
+      "y" : 308,
+      "w" : 100,
+      "h" : 100,
+      "sourceW" : 100,
+      "sourceH" : 100,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "green_sliderDown" : {
+      "x" : 833,
+      "y" : 392,
+      "w" : 28,
+      "h" : 42,
+      "sourceW" : 28,
+      "sourceH" : 42,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "green_sliderLeft" : {
+      "x" : 1073,
+      "y" : 411,
+      "w" : 39,
+      "h" : 31,
+      "sourceW" : 39,
+      "sourceH" : 31,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "green_sliderRight" : {
+      "x" : 1048,
+      "y" : 463,
+      "w" : 39,
+      "h" : 31,
+      "sourceW" : 39,
+      "sourceH" : 31,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "green_sliderUp" : {
+      "x" : 812,
+      "y" : 437,
+      "w" : 28,
+      "h" : 42,
+      "sourceW" : 28,
+      "sourceH" : 42,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "green_tick" : {
+      "x" : 1133,
+      "y" : 78,
+      "w" : 17,
+      "h" : 17,
+      "sourceW" : 17,
+      "sourceH" : 17,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "grey_arrowDownGrey" : {
+      "x" : 590,
+      "y" : 493,
+      "w" : 15,
+      "h" : 10,
+      "sourceW" : 15,
+      "sourceH" : 10,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "grey_arrowDownWhite" : {
+      "x" : 1133,
+      "y" : 140,
+      "w" : 15,
+      "h" : 10,
+      "sourceW" : 15,
+      "sourceH" : 10,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "grey_arrowUpGrey" : {
+      "x" : 1133,
+      "y" : 128,
+      "w" : 15,
+      "h" : 10,
+      "sourceW" : 15,
+      "sourceH" : 10,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "grey_arrowUpWhite" : {
+      "x" : 1133,
+      "y" : 116,
+      "w" : 15,
+      "h" : 10,
+      "sourceW" : 15,
+      "sourceH" : 10,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "grey_box" : {
+      "x" : 952,
+      "y" : 430,
+      "w" : 38,
+      "h" : 36,
+      "sourceW" : 38,
+      "sourceH" : 36,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "grey_boxCheckmark" : {
+      "x" : 930,
+      "y" : 468,
+      "w" : 38,
+      "h" : 36,
+      "sourceW" : 38,
+      "sourceH" : 36,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "grey_boxCross" : {
+      "x" : 933,
+      "y" : 392,
+      "w" : 38,
+      "h" : 36,
+      "sourceW" : 38,
+      "sourceH" : 36,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "grey_boxTick" : {
+      "x" : 833,
+      "y" : 316,
+      "w" : 36,
+      "h" : 36,
+      "sourceW" : 36,
+      "sourceH" : 36,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "grey_button00" : {
+      "x" : 302,
+      "y" : 53,
+      "w" : 190,
+      "h" : 49,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "grey_button01" : {
+      "x" : 877,
+      "y" : 143,
+      "w" : 190,
+      "h" : 45,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "grey_button02" : {
+      "x" : 302,
+      "y" : 2,
+      "w" : 190,
+      "h" : 49,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "grey_button03" : {
+      "x" : 890,
+      "y" : 96,
+      "w" : 190,
+      "h" : 45,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "grey_button04" : {
+      "x" : 301,
+      "y" : 104,
+      "w" : 190,
+      "h" : 49,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "grey_button05" : {
+      "x" : 890,
+      "y" : 49,
+      "w" : 190,
+      "h" : 45,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "grey_button06" : {
+      "x" : 488,
+      "y" : 359,
+      "w" : 49,
+      "h" : 49,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "grey_button07" : {
+      "x" : 488,
+      "y" : 308,
+      "w" : 49,
+      "h" : 49,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "grey_button08" : {
+      "x" : 1063,
+      "y" : 237,
+      "w" : 49,
+      "h" : 45,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "grey_button09" : {
+      "x" : 488,
+      "y" : 257,
+      "w" : 49,
+      "h" : 49,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "grey_button10" : {
+      "x" : 782,
+      "y" : 296,
+      "w" : 49,
+      "h" : 45,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "grey_button11" : {
+      "x" : 488,
+      "y" : 206,
+      "w" : 49,
+      "h" : 49,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "grey_button12" : {
+      "x" : 782,
+      "y" : 249,
+      "w" : 49,
+      "h" : 45,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "grey_button13" : {
+      "x" : 296,
+      "y" : 155,
+      "w" : 190,
+      "h" : 49,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "grey_button14" : {
+      "x" : 104,
+      "y" : 104,
+      "w" : 195,
+      "h" : 49,
+      "sourceW" : 195,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "grey_button15" : {
+      "x" : 104,
+      "y" : 461,
+      "w" : 190,
+      "h" : 49,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "grey_checkmarkGrey" : {
+      "x" : 761,
+      "y" : 490,
+      "w" : 21,
+      "h" : 20,
+      "sourceW" : 21,
+      "sourceH" : 20,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "grey_checkmarkWhite" : {
+      "x" : 738,
+      "y" : 490,
+      "w" : 21,
+      "h" : 20,
+      "sourceW" : 21,
+      "sourceH" : 20,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "grey_circle" : {
+      "x" : 1114,
+      "y" : 278,
+      "w" : 36,
+      "h" : 36,
+      "sourceW" : 36,
+      "sourceH" : 36,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "grey_crossGrey" : {
+      "x" : 1053,
+      "y" : 378,
+      "w" : 18,
+      "h" : 18,
+      "sourceW" : 18,
+      "sourceH" : 18,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "grey_crossWhite" : {
+      "x" : 870,
+      "y" : 480,
+      "w" : 18,
+      "h" : 18,
+      "sourceW" : 18,
+      "sourceH" : 18,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "grey_panel" : {
+      "x" : 2,
+      "y" : 206,
+      "w" : 100,
+      "h" : 100,
+      "sourceW" : 100,
+      "sourceH" : 100,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "grey_sliderDown" : {
+      "x" : 782,
+      "y" : 437,
+      "w" : 28,
+      "h" : 42,
+      "sourceW" : 28,
+      "sourceH" : 42,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "grey_sliderEnd" : {
+      "x" : 877,
+      "y" : 102,
+      "w" : 8,
+      "h" : 10,
+      "sourceW" : 8,
+      "sourceH" : 10,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "grey_sliderHorizontal" : {
+      "x" : 698,
+      "y" : 96,
+      "w" : 190,
+      "h" : 4,
+      "sourceW" : 190,
+      "sourceH" : 4,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "grey_sliderLeft" : {
+      "x" : 1073,
+      "y" : 378,
+      "w" : 39,
+      "h" : 31,
+      "sourceW" : 39,
+      "sourceH" : 31,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "grey_sliderRight" : {
+      "x" : 1032,
+      "y" : 430,
+      "w" : 39,
+      "h" : 31,
+      "sourceW" : 39,
+      "sourceH" : 31,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "grey_sliderUp" : {
+      "x" : 752,
+      "y" : 446,
+      "w" : 28,
+      "h" : 42,
+      "sourceW" : 28,
+      "sourceH" : 42,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "grey_sliderVertical" : {
+      "x" : 104,
+      "y" : 2,
+      "w" : 4,
+      "h" : 100,
+      "sourceW" : 4,
+      "sourceH" : 100,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "grey_tickGrey" : {
+      "x" : 1133,
+      "y" : 59,
+      "w" : 17,
+      "h" : 17,
+      "sourceW" : 17,
+      "sourceH" : 17,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "grey_tickWhite" : {
+      "x" : 1133,
+      "y" : 40,
+      "w" : 17,
+      "h" : 17,
+      "sourceW" : 17,
+      "sourceH" : 17,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "red_boxCheckmark" : {
+      "x" : 912,
+      "y" : 430,
+      "w" : 38,
+      "h" : 36,
+      "sourceW" : 38,
+      "sourceH" : 36,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "red_boxCross" : {
+      "x" : 893,
+      "y" : 392,
+      "w" : 38,
+      "h" : 36,
+      "sourceW" : 38,
+      "sourceH" : 36,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "red_boxTick" : {
+      "x" : 1114,
+      "y" : 240,
+      "w" : 36,
+      "h" : 36,
+      "sourceW" : 36,
+      "sourceH" : 36,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "red_button00" : {
+      "x" : 104,
+      "y" : 410,
+      "w" : 190,
+      "h" : 49,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "red_button01" : {
+      "x" : 890,
+      "y" : 2,
+      "w" : 190,
+      "h" : 45,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "red_button02" : {
+      "x" : 104,
+      "y" : 359,
+      "w" : 190,
+      "h" : 49,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "red_button03" : {
+      "x" : 698,
+      "y" : 49,
+      "w" : 190,
+      "h" : 45,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "red_button04" : {
+      "x" : 104,
+      "y" : 308,
+      "w" : 190,
+      "h" : 49,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "red_button05" : {
+      "x" : 698,
+      "y" : 2,
+      "w" : 190,
+      "h" : 45,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "red_button06" : {
+      "x" : 647,
+      "y" : 53,
+      "w" : 49,
+      "h" : 49,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "red_button07" : {
+      "x" : 647,
+      "y" : 2,
+      "w" : 49,
+      "h" : 49,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "red_button08" : {
+      "x" : 782,
+      "y" : 202,
+      "w" : 49,
+      "h" : 45,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "red_button09" : {
+      "x" : 596,
+      "y" : 53,
+      "w" : 49,
+      "h" : 49,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "red_button10" : {
+      "x" : 1064,
+      "y" : 190,
+      "w" : 49,
+      "h" : 45,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "red_button11" : {
+      "x" : 596,
+      "y" : 2,
+      "w" : 49,
+      "h" : 49,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "red_button12" : {
+      "x" : 1069,
+      "y" : 143,
+      "w" : 49,
+      "h" : 45,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "red_button13" : {
+      "x" : 104,
+      "y" : 257,
+      "w" : 190,
+      "h" : 49,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "red_checkmark" : {
+      "x" : 715,
+      "y" : 490,
+      "w" : 21,
+      "h" : 20,
+      "sourceW" : 21,
+      "sourceH" : 20,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "red_circle" : {
+      "x" : 833,
+      "y" : 278,
+      "w" : 36,
+      "h" : 36,
+      "sourceW" : 36,
+      "sourceH" : 36,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "red_cross" : {
+      "x" : 850,
+      "y" : 480,
+      "w" : 18,
+      "h" : 18,
+      "sourceW" : 18,
+      "sourceH" : 18,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "red_panel" : {
+      "x" : 2,
+      "y" : 104,
+      "w" : 100,
+      "h" : 100,
+      "sourceW" : 100,
+      "sourceH" : 100,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "red_sliderDown" : {
+      "x" : 722,
+      "y" : 446,
+      "w" : 28,
+      "h" : 42,
+      "sourceW" : 28,
+      "sourceH" : 42,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "red_sliderLeft" : {
+      "x" : 994,
+      "y" : 357,
+      "w" : 39,
+      "h" : 31,
+      "sourceW" : 39,
+      "sourceH" : 31,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "red_sliderRight" : {
+      "x" : 953,
+      "y" : 357,
+      "w" : 39,
+      "h" : 31,
+      "sourceW" : 39,
+      "sourceH" : 31,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "red_sliderUp" : {
+      "x" : 692,
+      "y" : 446,
+      "w" : 28,
+      "h" : 42,
+      "sourceW" : 28,
+      "sourceH" : 42,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "red_tick" : {
+      "x" : 1133,
+      "y" : 21,
+      "w" : 17,
+      "h" : 17,
+      "sourceW" : 17,
+      "sourceH" : 17,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "yellow_boxCheckmark" : {
+      "x" : 890,
+      "y" : 474,
+      "w" : 38,
+      "h" : 36,
+      "sourceW" : 38,
+      "sourceH" : 36,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "yellow_boxCross" : {
+      "x" : 872,
+      "y" : 436,
+      "w" : 38,
+      "h" : 36,
+      "sourceW" : 38,
+      "sourceH" : 36,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "yellow_boxTick" : {
+      "x" : 833,
+      "y" : 240,
+      "w" : 36,
+      "h" : 36,
+      "sourceW" : 36,
+      "sourceH" : 36,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "yellow_button00" : {
+      "x" : 104,
+      "y" : 206,
+      "w" : 190,
+      "h" : 49,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "yellow_button01" : {
+      "x" : 685,
+      "y" : 104,
+      "w" : 190,
+      "h" : 45,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "yellow_button02" : {
+      "x" : 104,
+      "y" : 155,
+      "w" : 190,
+      "h" : 49,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "yellow_button03" : {
+      "x" : 680,
+      "y" : 155,
+      "w" : 190,
+      "h" : 45,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "yellow_button04" : {
+      "x" : 110,
+      "y" : 53,
+      "w" : 190,
+      "h" : 49,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "yellow_button05" : {
+      "x" : 590,
+      "y" : 206,
+      "w" : 190,
+      "h" : 45,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "yellow_button06" : {
+      "x" : 545,
+      "y" : 53,
+      "w" : 49,
+      "h" : 49,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "yellow_button07" : {
+      "x" : 545,
+      "y" : 2,
+      "w" : 49,
+      "h" : 49,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "yellow_button08" : {
+      "x" : 1082,
+      "y" : 96,
+      "w" : 49,
+      "h" : 45,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "yellow_button09" : {
+      "x" : 494,
+      "y" : 53,
+      "w" : 49,
+      "h" : 49,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "yellow_button10" : {
+      "x" : 1082,
+      "y" : 49,
+      "w" : 49,
+      "h" : 45,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "yellow_button11" : {
+      "x" : 494,
+      "y" : 2,
+      "w" : 49,
+      "h" : 49,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "yellow_button12" : {
+      "x" : 1082,
+      "y" : 2,
+      "w" : 49,
+      "h" : 45,
+      "sourceW" : 49,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 4
+    }, 
+    "yellow_button13" : {
+      "x" : 110,
+      "y" : 2,
+      "w" : 190,
+      "h" : 49,
+      "sourceW" : 190,
+      "sourceH" : 49,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "yellow_checkmark" : {
+      "x" : 692,
+      "y" : 490,
+      "w" : 21,
+      "h" : 20,
+      "sourceW" : 21,
+      "sourceH" : 20,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "yellow_circle" : {
+      "x" : 833,
+      "y" : 202,
+      "w" : 36,
+      "h" : 36,
+      "sourceW" : 36,
+      "sourceH" : 36,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "yellow_cross" : {
+      "x" : 830,
+      "y" : 481,
+      "w" : 18,
+      "h" : 18,
+      "sourceW" : 18,
+      "sourceH" : 18,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "yellow_panel" : {
+      "x" : 2,
+      "y" : 2,
+      "w" : 100,
+      "h" : 100,
+      "sourceW" : 100,
+      "sourceH" : 100,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "yellow_sliderDown" : {
+      "x" : 1115,
+      "y" : 196,
+      "w" : 28,
+      "h" : 42,
+      "sourceW" : 28,
+      "sourceH" : 42,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "yellow_sliderLeft" : {
+      "x" : 912,
+      "y" : 357,
+      "w" : 39,
+      "h" : 31,
+      "sourceW" : 39,
+      "sourceH" : 31,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "yellow_sliderRight" : {
+      "x" : 871,
+      "y" : 357,
+      "w" : 39,
+      "h" : 31,
+      "sourceW" : 39,
+      "sourceH" : 31,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "yellow_sliderUp" : {
+      "x" : 1120,
+      "y" : 152,
+      "w" : 28,
+      "h" : 42,
+      "sourceW" : 28,
+      "sourceH" : 42,
+      "offX" : 0,
+      "offY" : 0
+    }, 
+    "yellow_tick" : {
+      "x" : 1133,
+      "y" : 2,
+      "w" : 17,
+      "h" : 17,
+      "sourceW" : 17,
+      "sourceH" : 17,
+      "offX" : 0,
+      "offY" : 0
+    }
+  }
+}

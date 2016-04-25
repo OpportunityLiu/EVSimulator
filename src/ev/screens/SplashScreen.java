@@ -96,7 +96,6 @@ public class SplashScreen extends Screen
         }
 
         addScreen(new MainScreen());
-        addScreen(new GameScreen());
 
         textBarSkip = new LTextBar("点击屏幕跳过...", 0, 0);
         textBarSkip.setHideBackground(true);
