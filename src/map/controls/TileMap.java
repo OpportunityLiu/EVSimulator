@@ -1,4 +1,4 @@
-package map;
+package map.controls;
 
 import loon.LRelease;
 import loon.LTexture;
@@ -10,6 +10,8 @@ import loon.geom.RectBox;
 import loon.geom.Vector2f;
 import loon.opengl.GLEx;
 import loon.utils.MathUtils;
+import map.MapTile;
+import map.MeterXY;
 
 /**
  * Created by liuzh on 2016/4/22.

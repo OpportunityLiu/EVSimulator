@@ -9,7 +9,7 @@ import loon.geom.Vector2f;
 import loon.opengl.GLEx;
 import loon.utils.timer.LTimerContext;
 import map.MeterXY;
-import map.TileMap;
+import map.controls.TileMap;
 
 /**
  * Created by liuzh on 2016/4/20.

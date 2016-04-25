@@ -4,7 +4,7 @@ import ev.Resources;
 import ev.controls.ActionHelper;
 import ev.controls.MButton;
 import ev.controls.MTextList;
-import ev.controls.MiniMap;
+import map.controls.MiniMap;
 import ev.effects.MFadeEffect;
 import ev.event.ActionAdapter;
 import ev.event.ClickAdapter;
@@ -19,8 +19,6 @@ import loon.utils.MathUtils;
 import loon.utils.res.Texture;
 import loon.utils.timer.LTimerContext;
 import map.CityInfo;
-import map.MapTile;
-import map.MeterXY;
 
 /**
  * Created by liuzh on 2016/4/16.
@@ -330,6 +328,7 @@ class MainScreen extends Screen
         provinceList.addClickListener(new ClickAdapter()
         {
             int index = -1;
+            boolean down = false;
 
             @Override
             public void UpClick(LComponent comp, float x, float y)
@@ -341,11 +340,15 @@ class MainScreen extends Screen
                 {
                     needRefreshCity = true;
                 }
+                down = false;
             }
 
             @Override
             public void DownClick(LComponent comp, float x, float y)
             {
+                if(down)
+                    return;
+                down = true;
                 int newIndex = provinceList.getSelectedIndex();
                 if(newIndex == -1)
                     return;
@@ -355,6 +358,7 @@ class MainScreen extends Screen
         cityList.addClickListener(new ClickAdapter()
         {
             int index = -1;
+            boolean down = false;
 
             @Override
             public void UpClick(LComponent comp, float x, float y)
@@ -366,11 +370,15 @@ class MainScreen extends Screen
                 {
                     needRefreshImage = true;
                 }
+                down = false;
             }
 
             @Override
             public void DownClick(LComponent comp, float x, float y)
             {
+                if(down)
+                    return;
+                down = true;
                 int newIndex = cityList.getSelectedIndex();
                 if(newIndex == -1)
                     return;
@@ -471,7 +479,7 @@ class MainScreen extends Screen
             final CityInfo.City city = cityList.getSelectedValue();
             if(city != null)
             {
-               mapPanel.setTile(city.getTile());
+                mapPanel.setTile(city.getTile());
             }
             needRefreshImage = false;
         }
