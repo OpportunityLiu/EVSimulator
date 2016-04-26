@@ -310,7 +310,7 @@ public class MTextList<T> extends LComponent
                 }
                 else
                 {
-                    drawString(g, this.items[i].toString(), this.drawX, this.drawY, defaultStringColor);
+                    drawString(g, this.items[i].toString(), this.drawX, this.drawY, this.defaultStringColor);
                 }
 
                 this.loop += 1;

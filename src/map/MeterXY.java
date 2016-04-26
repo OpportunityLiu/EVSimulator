@@ -34,7 +34,7 @@ public final class MeterXY extends CoordinateBase
 
     public MapTileInfo getTileOfThis(final int scale)
     {
-        int scaler = 1 << (26 - scale);
+        final int scaler = 1 << (26 - scale);
         return new MapTileInfo(MathUtils.floor((float)(x() / scaler)), MathUtils.floor((float)(y() / scaler)), scale);
     }
 
@@ -48,5 +48,10 @@ public final class MeterXY extends CoordinateBase
             this.y = y;
             this.scale = scale;
         }
+    }
+
+    public LongLat toLongLat()
+    {
+        return GeoConverter.toLongLat(this);
     }
 }

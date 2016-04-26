@@ -8,6 +8,7 @@ import loon.event.GameTouch;
 import loon.geom.Vector2f;
 import loon.opengl.GLEx;
 import loon.utils.timer.LTimerContext;
+import map.LongLat;
 import map.MeterXY;
 import map.controls.TileMap;
 
@@ -19,6 +20,16 @@ public class GameScreen extends Screen
 {
     private TileMap map;
     private LProgress progress;
+
+    private int positionX, positionY, scale, size;
+
+    public void init(int positionX, int positionY, int scale, int size)
+    {
+        this.positionX = positionX;
+        this.positionY = positionY;
+        this.scale = scale;
+        this.size = size;
+    }
 
     @Override
     public void draw(GLEx g)
@@ -33,7 +44,7 @@ public class GameScreen extends Screen
     @Override
     public void onLoad()
     {
-        map = new TileMap(getWidth(), getHeight(), 12644, 12644 + 8, 4703, 4703 + 8, 16);
+        map = new TileMap(getWidth(), getHeight(), positionX, positionX + size, positionY, positionY + size, scale);
         map.addClickListener(new ClickAdapter()
         {
             @Override
@@ -43,7 +54,7 @@ public class GameScreen extends Screen
                 y = y - comp.getY();
                 Vector2f p = map.pixelsToTiles(x, y);
                 MeterXY pp = map.tilesToCoordinates(p.x, p.y);
-                getGame().log().debug(pp.toString());
+                getGame().log().debug(pp.toLongLat().toString());
             }
         });
         add(map);
@@ -60,8 +71,6 @@ public class GameScreen extends Screen
         if(!isOnLoadComplete())
             return;
         progress.setPercentage(map.getProgress());
-        if(map.getProgress() > 0.1)
-            runPreviousScreen();
     }
 
     @Override

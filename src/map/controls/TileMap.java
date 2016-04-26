@@ -91,6 +91,7 @@ public class TileMap extends LContainer implements LRelease
         maxX = maxX > 0 ? maxX : 0;
         maxY = maxY > 0 ? maxY : 0;
         this.maxOffset.set(maxX, maxY);
+        this.setOffset(offset);
     }
 
     public void draw(GLEx g)
@@ -139,14 +140,14 @@ public class TileMap extends LContainer implements LRelease
         recalculateMaxOffset();
     }
 
-    private int tilesToPixelsX(float x)
+    private float tilesToPixelsX(float x)
     {
-        return (int)(x * tileWidth);
+        return (x * tileWidth);
     }
 
-    private int tilesToPixelsY(float y)
+    private float tilesToPixelsY(float y)
     {
-        return (int)(y * tileHeight);
+        return (y * tileHeight);
     }
 
     private int pixelsToTilesWidth(float x)
@@ -168,8 +169,8 @@ public class TileMap extends LContainer implements LRelease
      */
     public Vector2f tilesToPixels(float x, float y)
     {
-        float xprime = x * tileWidth - offset.x;
-        float yprime = y * tileHeight - offset.y;
+        float xprime = tilesToPixelsX(x) - offset.x;
+        float yprime = tilesToPixelsY(y) - offset.y;
         return new Vector2f(xprime, yprime);
     }
 
@@ -198,7 +199,17 @@ public class TileMap extends LContainer implements LRelease
 
     public Vector2f coordinatesToTiles(MeterXY coordinate)
     {
-        return new Vector2f((float)coordinate.x() / scaler - minRawX, maxRawY - (float)coordinate.y() / scaler);
+        double x = coordinate.x() / scaler - minRawX;
+        double y = maxRawY - coordinate.y() / scaler;
+        return new Vector2f((float)x, (float)y);
+    }
+
+    public void setPosition(MeterXY center)
+    {
+        final Vector2f centerInTile = this.coordinatesToTiles(center);
+        centerInTile.x -= getWidth() / 2 / tileWidth;
+        centerInTile.y -= getHeight() / 2 / tileHeight;
+        this.setOffset(tilesToPixelsX(centerInTile.x), tilesToPixelsY(centerInTile.y));
     }
 
     /**
@@ -241,9 +252,21 @@ public class TileMap extends LContainer implements LRelease
         return tileWidth;
     }
 
+    public void setTileWidth(int tileWidth)
+    {
+        this.tileWidth = tileWidth;
+        recalculateMaxOffset();
+    }
+
     public int getTileHeight()
     {
         return tileHeight;
+    }
+
+    public void setTileHeight(int tileHeight)
+    {
+        this.tileHeight = tileHeight;
+        recalculateMaxOffset();
     }
 
     public int getMapWidth()
@@ -352,9 +375,9 @@ public class TileMap extends LContainer implements LRelease
     }
 
     @Override
-    public void dragClick()
+    protected void processTouchDragged()
     {
-        super.dragClick();
+        super.processTouchDragged();
         if(canDrag)
         {
             setOffset(offset.x - input.getTouchDX(), offset.y - input.getTouchDY());

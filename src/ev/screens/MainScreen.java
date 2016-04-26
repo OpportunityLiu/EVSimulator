@@ -4,6 +4,7 @@ import ev.Resources;
 import ev.controls.ActionHelper;
 import ev.controls.MButton;
 import ev.controls.MTextList;
+import map.MapTile;
 import map.controls.MiniMap;
 import ev.effects.MFadeEffect;
 import ev.event.ActionAdapter;
@@ -34,6 +35,7 @@ class MainScreen extends Screen
     private LTexture p1, p2, p3, p4;
     private float r1, r2, r3, r4;
     private LPanel c1, c2, c3, c4;
+    private LTexture backgroundTexture;
     
     private LPanel logo;
     
@@ -75,10 +77,6 @@ class MainScreen extends Screen
             setLastOrder(DRAW_SPRITE_PAINT());
         }
 
-        LTexture backgroundTexture = Resources.images("home/background.png");
-        setBackground(backgroundTexture);
-        scale = backgroundTexture.width() / getWidth();
-        
         initBackground();
         initMain();
         initSelect();
@@ -105,6 +103,10 @@ class MainScreen extends Screen
     
     private void initBackground()
     {
+        backgroundTexture = Resources.images("home/background.png");
+        scale = backgroundTexture.width() / getWidth();
+        setBackground(backgroundTexture);
+
         p1 = Resources.images("home/p1.png");
         p2 = Resources.images("home/p2.png");
         p3 = Resources.images("home/p3.png");
@@ -273,18 +275,34 @@ class MainScreen extends Screen
                 public void onFinished()
                 {
                     remove(this);
-                    setScreen(new GameScreen());
+                    GameScreen s = (GameScreen)getScreen("game");
+                    if(s == null)
+                    {
+                        s = new GameScreen();
+                        addScreen("game", s);
+                    }
+                    MapTile tile = city.getTile();
+                    s.init(tile.getX() * 16, tile.getY() * 16, 16, 16);
+                    runScreen("game");
+                    animating = false;
                 }
             };
+
+            CityInfo.City city;
 
             @Override
             public void DoClick(LComponent comp)
             {
                 if(comp.getAlpha() < 0.2 || animating)
                     return;
+                if(currentCity == null)
+                    return;
+                city = currentCity;
                 animating = true;
                 if(!contains(fade))
+                {
                     add(fade);
+                }
             }
         });
 
@@ -310,10 +328,10 @@ class MainScreen extends Screen
         mapPanel.setAlpha(0);
         selectMenu.add(mapPanel);
 
-        provinceList = new MTextList<>(35, 50, 210, 350, 700, 5, null, null, null, null, null);
+        provinceList = new MTextList<>(35, 50, 210, 350, 700, 0, null, null, null, null, null);
         provinceList.setAlpha(0);
 
-        cityList = new MTextList<>(35, 450, 210, 350, 700, 5, null, null, null, null, null);
+        cityList = new MTextList<>(35, 450, 210, 350, 700, 0, null, null, null, null, null);
         cityList.setAlpha(0);
 
         selectMenu.add(provinceList);
@@ -463,8 +481,8 @@ class MainScreen extends Screen
 
     private boolean needRefreshCity = true, needRefreshImage;
 
-    
-    @Override
+    private CityInfo.City currentCity;
+
     public void alter(LTimerContext timer)
     {
         if(!isOnLoadComplete())
@@ -476,10 +494,14 @@ class MainScreen extends Screen
         }
         if(needRefreshImage)
         {
-            final CityInfo.City city = cityList.getSelectedValue();
-            if(city != null)
+            CityInfo.City old = currentCity;
+            currentCity = cityList.getSelectedValue();
+            if(currentCity != old)
             {
-                mapPanel.setTile(city.getTile());
+                if(currentCity != null)
+                    mapPanel.setCenter(currentCity.coordinate, 12);
+                else
+                    currentCity = old;
             }
             needRefreshImage = false;
         }
@@ -533,6 +555,6 @@ class MainScreen extends Screen
     @Override
     public void close()
     {
-        
+        needRefreshCity = true;
     }
 }

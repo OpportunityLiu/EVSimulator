@@ -6,6 +6,12 @@ package map;
  */
 public final class LongLat extends CoordinateBase
 {
+    /**
+     * 表示地图上的经纬度坐标
+     *
+     * @param longitude 经度
+     * @param latitude  纬度
+     */
     public LongLat(double longitude, double latitude)
     {
         super(longitude, latitude);
@@ -43,5 +49,10 @@ public final class LongLat extends CoordinateBase
     {
         String[] c = value.split(",");
         return new LongLat(Double.parseDouble(c[0]), Double.parseDouble(c[1]));
+    }
+
+    public MeterXY toMeterXY()
+    {
+        return GeoConverter.toMeterXY(this);
     }
 }

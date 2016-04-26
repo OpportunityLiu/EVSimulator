@@ -1,19 +1,14 @@
 package map;
 
-
-import loon.Json;
-import loon.utils.MathUtils;
-import loon.utils.TArray;
-
-import java.io.*;
+import static java.lang.Math.*;
 
 /**
  * Created by liuzh on 2016/4/17.
  * Convert different kinds of coordinates
  */
-public abstract class GeoConverter
+abstract class GeoConverter
 {
-    private static String uriCovert = "http://api.map.baidu.com/geoconv/v1/?coords=%s&from=%d&to=%d&ak=" + MapHelper.AK;
+    /*private static String uriCovert = "http://api.map.baidu.com/geoconv/v1/?coords=%s&from=%d&to=%d&ak=" + MapHelper.AK;
     
     public static MeterXY[] toMeterXY(LongLat... coordinates) throws IOException
     {
@@ -96,5 +91,41 @@ public abstract class GeoConverter
         if(status != 0)
             throw new IOException(resJson.getString("message"));
         return resJson.getArray("result");
+    }*/
+
+    private static final double K = 6.378206400868922e+06;
+    private static final double E = 0.082271872055083;
+    private static final double E_2 = E / 2;
+    private static final double r2d = 180 / PI;
+    private static final double d2r = PI / 180;
+    private static final double PI_4 = PI / 4;
+    private static final double PI_2 = PI / 2;
+
+    static MeterXY toMeterXY(LongLat coordinate)
+    {
+        final double L = coordinate.longitude() * d2r;
+        final double B = coordinate.latitude() * d2r;
+        final double x = K * L;
+        final double ESinB = E * sin(B);
+        final double y = K * log(tan(PI_4 + B / 2) * pow((1 - ESinB) / (1 + ESinB), E_2));
+        return new MeterXY(x, y);
     }
+
+    static LongLat toLongLat(MeterXY coordinate)
+    {
+        final double x = coordinate.x();
+        final double y = coordinate.y();
+        final double L = x / K;
+        final double kk = exp(y / K);
+        //迭代初值
+        double B = 2 * atan(kk) - PI_2;
+        //迭代 8 次
+        for(int i = 0; i < 8; i++)
+        {
+            double ESinB = E * sin(B);
+            B = 2 * atan(kk / pow((1 - ESinB) / (1 + ESinB), E_2)) - PI_2;
+        }
+        return new LongLat(L * r2d, B * r2d);
+    }
+
 }
