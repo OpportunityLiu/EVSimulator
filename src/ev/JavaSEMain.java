@@ -15,13 +15,28 @@ import loon.javase.Loon;
 
 import java.awt.*;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
+import java.util.Arrays;
 
 public class JavaSEMain
 {
     public static void main(String[] args)
     {
+        for(String arg : args)
+        {
+            switch(arg.toLowerCase())
+            {
+                case "debug":
+                    DebugSettings.setMode(true);
+                    break;
+                case "release":
+                    DebugSettings.setMode(false);
+                    break;
+            }
+        }
+
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         LSetting setting = new LSetting();
         setting.isFPS = true;

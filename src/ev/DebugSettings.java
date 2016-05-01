@@ -6,6 +6,15 @@ package ev;
  */
 public class DebugSettings
 {
-    public static final boolean skipSplash = true;
-    public static final boolean fullscreen = false;
+    public static void setMode(boolean debug)
+    {
+        if(debug)
+        {
+            skipSplash = true;
+            fullscreen = false;
+        }
+    }
+
+    public static boolean skipSplash = false;
+    public static boolean fullscreen = true;
 }
