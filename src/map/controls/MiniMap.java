@@ -86,6 +86,6 @@ public class MiniMap extends LComponent
     @Override
     public String getUIName()
     {
-        return null;
+        return "MiniMap";
     }
 }

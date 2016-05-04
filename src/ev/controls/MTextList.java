@@ -78,7 +78,8 @@ public class MTextList<T> extends LComponent
 
     public MTextList(int capacity, int x, int y, int width, int height, int scrollButtonWidth)
     {
-        this(capacity, x, y, width, height, scrollButtonWidth, DefUI.getDefaultTextures(2), DefUI.getDefaultTextures(11), DefUI.getDefaultTextures(3), null, null);
+        this(capacity, x, y, width, height, scrollButtonWidth, DefUI.getDefaultTextures(2), DefUI.getDefaultTextures(11), DefUI
+                .getDefaultTextures(3), null, null);
     }
 
     /**
@@ -94,7 +95,17 @@ public class MTextList<T> extends LComponent
      * @param scrollFlagA       滚轴上下标识用图(A)
      * @param scrollFlagB       滚轴上下标识用图(B)
      */
-    public MTextList(int capacity, int x, int y, int width, int height, int scrollButtonWidth, LTexture bg, LTexture choice, LTexture scroll, LTexture scrollFlagA, LTexture scrollFlagB)
+    public MTextList(int capacity,
+                     int x,
+                     int y,
+                     int width,
+                     int height,
+                     int scrollButtonWidth,
+                     LTexture bg,
+                     LTexture choice,
+                     LTexture scroll,
+                     LTexture scrollFlagA,
+                     LTexture scrollFlagB)
     {
         super(x, y, (width - scrollButtonWidth), height);
         this.reset(capacity);
@@ -178,7 +189,9 @@ public class MTextList<T> extends LComponent
         this.defaultStringColor = stringNewColor;
     }
 
-    public void setDefaultStringColor(LColor newStringColor, LColor newChoiceStringColor, LColor newChoiceStringBoxColor)
+    public void setDefaultStringColor(LColor newStringColor,
+                                      LColor newChoiceStringColor,
+                                      LColor newChoiceStringBoxColor)
     {
         this.defaultStringColor = newStringColor;
         this.choiceStringColor = newChoiceStringColor;
@@ -216,7 +229,7 @@ public class MTextList<T> extends LComponent
     {
         if(this.selectedIndex >= 0)
         {
-            return (T)this.items[this.selectedIndex];
+            return (T) this.items[this.selectedIndex];
         }
         return null;
     }
@@ -262,7 +275,7 @@ public class MTextList<T> extends LComponent
                 g.draw(bgTexture, x, y, getWidth(), getHeight());
             }
 
-            this.drawNum = (int)((getHeight() - 10) / fontSize);
+            this.drawNum = (int) ((getHeight() - 10) / fontSize);
             this.loop = 0;
             this.selectedIndex = -1;
 
@@ -316,9 +329,9 @@ public class MTextList<T> extends LComponent
                 this.loop += 1;
             }
 
-            this.scrollBarX = (int)(x + getWidth() + 1);
+            this.scrollBarX = (int) (x + getWidth() + 1);
 
-            this.scrollBarHeight_max = (int)(getHeight() - this.scrollButtonHeight * 2);
+            this.scrollBarHeight_max = (int) (getHeight() - this.scrollButtonHeight * 2);
 
             if((this.drawNum < this.num) && (this.drawNum > 0))
             {
@@ -381,7 +394,7 @@ public class MTextList<T> extends LComponent
 
             }
 
-            this.scrollButtonX = (int)(x + getWidth());
+            this.scrollButtonX = (int) (x + getWidth());
             this.scrollButtonY = y;
 
             if(scrollFlagATexture == null)
@@ -418,8 +431,8 @@ public class MTextList<T> extends LComponent
                 }
                 this.scrollUpButtonON = true;
             }
-            this.scrollButtonX = (int)(x + getWidth());
-            this.scrollButtonY = (int)(y + getHeight() - this.scrollButtonHeight);
+            this.scrollButtonX = (int) (x + getWidth());
+            this.scrollButtonY = (int) (y + getHeight() - this.scrollButtonHeight);
             this.scrollDownButtonON = false;
             if((!this.scrollBarDrag) && isFocusable() && (mouseX > this.scrollButtonX) && (mouseX <= this.scrollButtonX + this.scrollButtonWidth) && (mouseY > this.scrollButtonY) && (mouseY < this.scrollButtonY + this.scrollButtonHeight))
             {
@@ -476,7 +489,8 @@ public class MTextList<T> extends LComponent
         }
         else
         {
-            draw(g, x, y, ((LScrollContainer)getContainer()).getScrollX() + SysTouch.getX(), ((LScrollContainer)getContainer()).getScrollY() + SysTouch.getY());
+            draw(g, x, y, ((LScrollContainer) getContainer()).getScrollX() + SysTouch.getX(), ((LScrollContainer) getContainer())
+                    .getScrollY() + SysTouch.getY());
         }
     }
 

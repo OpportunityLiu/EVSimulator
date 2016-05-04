@@ -73,7 +73,7 @@ public class SplashScreen extends Screen
         String jsonText = null;
         try
         {
-            jsonText = LSystem.base().assets().getTextSync("images/splashes/splash.json");
+            jsonText = LSystem.base().assets().getTextSync("images/splash/splash.json");
         }
         catch(Exception e)
         {
@@ -86,7 +86,7 @@ public class SplashScreen extends Screen
             Splash splash = new Splash();
             splash.background = new LColor(obj.getString("background")).getARGB();
             double rawScale = obj.getDouble("scale");
-            splash.image = LTexture.createTexture("images/splashes/" + obj.getString("name"));
+            splash.image = LTexture.createTexture("images/splash/" + obj.getString("name"));
             double scale = Math.min((double)getWidth() / splash.image.getWidth(), (double)getHeight() / splash.image.getHeight()) * rawScale;
             splash.width = (int)(splash.image.getWidth() * scale);
             splash.height = (int)(splash.image.getHeight() * scale);

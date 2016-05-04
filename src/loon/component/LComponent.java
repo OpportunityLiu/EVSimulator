@@ -1,13 +1,12 @@
 /**
- *
  * Copyright 2008 - 2011
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -44,9 +43,11 @@ import loon.opengl.GLEx;
 import loon.opengl.TextureUtils;
 
 public abstract class LComponent extends LObject implements ActionBind, XY,
-        BoxSize {
+                                                            BoxSize
+{
 
-    public interface CallListener {
+    public interface CallListener
+    {
 
         void act(long elapsedTime);
 
@@ -54,25 +55,30 @@ public abstract class LComponent extends LObject implements ActionBind, XY,
 
     public ClickListener Click;
 
-    public void addClickListener(ClickListener c) {
+    public void addClickListener(ClickListener c)
+    {
         Click = c;
     }
 
-    public void SetClick(ClickListener c) {
+    public void SetClick(ClickListener c)
+    {
         Click = c;
     }
 
-    public ClickListener GetClick() {
+    public ClickListener GetClick()
+    {
         return Click;
     }
 
     public CallListener Call;
 
-    public void SetCall(CallListener u) {
+    public void SetCall(CallListener u)
+    {
         Call = u;
     }
 
-    public CallListener GetCall() {
+    public CallListener GetCall()
+    {
         return Call;
     }
 
@@ -134,29 +140,35 @@ public abstract class LComponent extends LObject implements ActionBind, XY,
      * @param width
      * @param height
      */
-    public LComponent(int x, int y, int width, int height) {
+    public LComponent(int x, int y, int width, int height)
+    {
         this.setLocation(x, y);
         this.width = width;
         this.height = height;
         this.screenRect = LSystem.viewSize.getRect();
-        if (this.width == 0) {
+        if(this.width == 0)
+        {
             this.width = 10;
         }
-        if (this.height == 0) {
+        if(this.height == 0)
+        {
             this.height = 10;
         }
 
     }
 
-    public Screen getScreen() {
+    public Screen getScreen()
+    {
         return desktop.input;
     }
 
-    public int getScreenWidth() {
+    public int getScreenWidth()
+    {
         return screenRect.width;
     }
 
-    public int getScreenHeight() {
+    public int getScreenHeight()
+    {
         return screenRect.height;
     }
 
@@ -166,35 +178,49 @@ public abstract class LComponent extends LObject implements ActionBind, XY,
      * @param x
      * @param y
      */
-    public void moveCamera(int x, int y) {
-        if (!this.isLimitMove) {
+    public void moveCamera(int x, int y)
+    {
+        if(!this.isLimitMove)
+        {
             setLocation(x, y);
             return;
         }
         int tempX = x;
         int tempY = y;
-        int tempWidth = (int) (getWidth() - screenRect.width);
-        int tempHeight = (int) (getHeight() - screenRect.height);
+        int tempWidth = (int)(getWidth() - screenRect.width);
+        int tempHeight = (int)(getHeight() - screenRect.height);
 
         int limitX = tempX + tempWidth;
         int limitY = tempY + tempHeight;
 
-        if (width >= screenRect.width) {
-            if (limitX > tempWidth) {
-                tempX = (int) (screenRect.width - width);
-            } else if (limitX < 1) {
+        if(width >= screenRect.width)
+        {
+            if(limitX > tempWidth)
+            {
+                tempX = (int)(screenRect.width - width);
+            }
+            else if(limitX < 1)
+            {
                 tempX = x();
             }
-        } else {
+        }
+        else
+        {
             return;
         }
-        if (height >= screenRect.height) {
-            if (limitY > tempHeight) {
-                tempY = (int) (screenRect.height - height);
-            } else if (limitY < 1) {
+        if(height >= screenRect.height)
+        {
+            if(limitY > tempHeight)
+            {
+                tempY = (int)(screenRect.height - height);
+            }
+            else if(limitY < 1)
+            {
                 tempY = y();
             }
-        } else {
+        }
+        else
+        {
             return;
         }
         this.cam_x = tempX;
@@ -202,33 +228,49 @@ public abstract class LComponent extends LObject implements ActionBind, XY,
         this.setLocation(cam_x, cam_y);
     }
 
-    protected boolean isNotMoveInScreen(int x, int y) {
-        if (!this.isLimitMove) {
+    protected boolean isNotMoveInScreen(int x, int y)
+    {
+        if(!this.isLimitMove)
+        {
             return false;
         }
-        int width = (int) (getWidth() - screenRect.width);
-        int height = (int) (getHeight() - screenRect.height);
+        int width = (int)(getWidth() - screenRect.width);
+        int height = (int)(getHeight() - screenRect.height);
         int limitX = x + width;
         int limitY = y + height;
-        if (getWidth() >= screenRect.width) {
-            if (limitX >= width - 1) {
-                return true;
-            } else if (limitX <= 1) {
+        if(getWidth() >= screenRect.width)
+        {
+            if(limitX >= width - 1)
+            {
                 return true;
             }
-        } else {
-            if (!screenRect.contains(x, y, getWidth(), getHeight())) {
+            else if(limitX <= 1)
+            {
                 return true;
             }
         }
-        if (getHeight() >= screenRect.height) {
-            if (limitY >= height - 1) {
-                return true;
-            } else if (limitY <= 1) {
+        else
+        {
+            if(!screenRect.contains(x, y, getWidth(), getHeight()))
+            {
                 return true;
             }
-        } else {
-            if (!screenRect.contains(x, y, getWidth(), getHeight())) {
+        }
+        if(getHeight() >= screenRect.height)
+        {
+            if(limitY >= height - 1)
+            {
+                return true;
+            }
+            else if(limitY <= 1)
+            {
+                return true;
+            }
+        }
+        else
+        {
+            if(!screenRect.contains(x, y, getWidth(), getHeight()))
+            {
                 return true;
             }
         }
@@ -240,22 +282,26 @@ public abstract class LComponent extends LObject implements ActionBind, XY,
      *
      * @return
      */
-    public boolean isContainer() {
+    public boolean isContainer()
+    {
         return false;
     }
 
     /**
      * 更新组件状态
-     *
      */
-    public void update(long elapsedTime) {
-        if (isClose) {
+    public void update(long elapsedTime)
+    {
+        if(isClose)
+        {
             return;
         }
-        if (parent != null) {
+        if(parent != null)
+        {
             validatePosition();
         }
-        if (Call != null) {
+        if(Call != null)
+        {
             Call.act(elapsedTime);
         }
     }
@@ -268,27 +314,36 @@ public abstract class LComponent extends LObject implements ActionBind, XY,
      *
      * @param g
      */
-    public void createUI(GLEx g) {
-        if (isClose) {
+    public void createUI(GLEx g)
+    {
+        if(isClose)
+        {
             return;
         }
-        if (!this.visible) {
+        if(!this.visible)
+        {
             return;
         }
-        if (_alpha < 0.01) {
+        if(_alpha < 0.01)
+        {
             return;
         }
-        synchronized (this) {
+        synchronized(this)
+        {
             boolean update = _rotation != 0 || !(scaleX == 1f && scaleY == 1f);
-            try {
-                final int width = (int) this.getWidth();
-                final int height = (int) this.getHeight();
-                if (this.elastic) {
+            try
+            {
+                final int width = (int)this.getWidth();
+                final int height = (int)this.getHeight();
+                if(this.elastic)
+                {
                     g.setClip(this.screenX, this.screenY, width, height);
                 }
-                if (update) {
+                if(update)
+                {
                     g.saveTx();
-                    if (!(scaleX == 1f && scaleY == 1f)) {
+                    if(!(scaleX == 1f && scaleY == 1f))
+                    {
                         Affine2f transform = g.tx();
                         float centerX = this.screenX + width / 2;
                         float centerY = this.screenY + height / 2;
@@ -296,47 +351,63 @@ public abstract class LComponent extends LObject implements ActionBind, XY,
                         transform.preScale(scaleX, scaleY);
                         transform.translate(-centerX, -centerY);
                     }
-                    if (_rotation != 0) {
+                    if(_rotation != 0)
+                    {
                         float centerX = this.screenX + width / 2;
                         float centerY = this.screenY + height / 2;
                         g.rotate(centerX, centerY, _rotation);
                     }
                 }
                 // 变更透明度
-                if (_alpha < 1.0) {
+                if(_alpha < 1.0)
+                {
                     float tmp = g.alpha();
                     g.setAlpha(_alpha);
-                    if (background != null) {
+                    if(background != null)
+                    {
                         g.draw(background, this.screenX, this.screenY, width,
-                                height);
+                               height);
                     }
-                    if (this.customRendering) {
+                    if(this.customRendering)
+                    {
                         this.createCustomUI(g, this.screenX, this.screenY,
-                                width, height);
-                    } else {
+                                            width, height);
+                    }
+                    else
+                    {
                         this.createUI(g, this.screenX, this.screenY, this,
-                                this.imageUI);
+                                      this.imageUI);
                     }
                     g.setAlpha(tmp);
                     // 不变更
-                } else {
-                    if (background != null) {
+                }
+                else
+                {
+                    if(background != null)
+                    {
                         g.draw(background, this.screenX, this.screenY, width,
-                                height);
+                               height);
                     }
-                    if (this.customRendering) {
+                    if(this.customRendering)
+                    {
                         this.createCustomUI(g, this.screenX, this.screenY,
-                                width, height);
-                    } else {
+                                            width, height);
+                    }
+                    else
+                    {
                         this.createUI(g, this.screenX, this.screenY, this,
-                                this.imageUI);
+                                      this.imageUI);
                     }
                 }
-            } finally {
-                if (update) {
+            }
+            finally
+            {
+                if(update)
+                {
                     g.restoreTx();
                 }
-                if (this.elastic) {
+                if(this.elastic)
+                {
                     g.clearClip();
                 }
             }
@@ -352,14 +423,17 @@ public abstract class LComponent extends LObject implements ActionBind, XY,
      * @param w
      * @param h
      */
-    protected void createCustomUI(GLEx g, int x, int y, int w, int h) {
+    protected void createCustomUI(GLEx g, int x, int y, int w, int h)
+    {
     }
 
-    public boolean contains(float x, float y) {
+    public boolean contains(float x, float y)
+    {
         return contains(x, y, 0, 0);
     }
 
-    public boolean contains(float x, float y, float width, float height) {
+    public boolean contains(float x, float y, float width, float height)
+    {
         return (this.visible)
                 && (x >= this.screenX
                 && y >= this.screenY
@@ -367,7 +441,8 @@ public abstract class LComponent extends LObject implements ActionBind, XY,
                 * scaleY)));
     }
 
-    public boolean intersects(float x1, float y1) {
+    public boolean intersects(float x1, float y1)
+    {
         return (this.visible)
                 && (x1 >= this.screenX
                 && x1 <= this.screenX + this.width * scaleX
@@ -375,7 +450,8 @@ public abstract class LComponent extends LObject implements ActionBind, XY,
                 + this.height * scaleY);
     }
 
-    public boolean intersects(LComponent comp) {
+    public boolean intersects(LComponent comp)
+    {
         return (this.visible)
                 && (comp.isVisible())
                 && (this.screenX + this.width * scaleX >= comp.screenX
@@ -384,23 +460,28 @@ public abstract class LComponent extends LObject implements ActionBind, XY,
                 + comp.height);
     }
 
-    public void close() {
+    public void close()
+    {
         this.isClose = true;
         this.desktop.setComponentStat(this, false);
-        if (this.parent != null) {
+        if(this.parent != null)
+        {
             this.parent.remove(this);
         }
         this.desktop = Desktop.EMPTY_DESKTOP;
         this.input = null;
         this.parent = null;
-        if (imageUI != null) {
-            for (int i = 0; i < imageUI.length; i++) {
+        if(imageUI != null)
+        {
+            for(int i = 0; i < imageUI.length; i++)
+            {
                 imageUI[i].close();
                 imageUI[i] = null;
             }
             this.imageUI = null;
         }
-        if (background != null) {
+        if(background != null)
+        {
             this.background.close();
             this.background = null;
         }
@@ -408,75 +489,94 @@ public abstract class LComponent extends LObject implements ActionBind, XY,
         this.visible = false;
     }
 
-    public boolean isVisible() {
+    public boolean isVisible()
+    {
         return this.visible;
     }
 
-    public void setVisible(boolean visible) {
-        if (this.visible == visible) {
+    public void setVisible(boolean visible)
+    {
+        if(this.visible == visible)
+        {
             return;
         }
         this.visible = visible;
         this.desktop.setComponentStat(this, this.visible);
     }
 
-    public boolean isEnabled() {
+    public boolean isEnabled()
+    {
         return (this.parent == null) ? this.enabled
                 : (this.enabled && this.parent.isEnabled());
     }
 
-    public void setEnabled(boolean b) {
-        if (this.enabled == b) {
+    public void setEnabled(boolean b)
+    {
+        if(this.enabled == b)
+        {
             return;
         }
         this.enabled = b;
         this.desktop.setComponentStat(this, this.enabled);
     }
 
-    public boolean isSelected() {
+    public boolean isSelected()
+    {
         return this.selected;
     }
 
-    final void setSelected(boolean b) {
+    final void setSelected(boolean b)
+    {
         this.selected = b;
     }
 
-    public boolean requestFocus() {
+    public boolean requestFocus()
+    {
         return this.desktop.selectComponent(this);
     }
 
-    public void transferFocus() {
-        if (this.isSelected() && this.parent != null) {
+    public void transferFocus()
+    {
+        if(this.isSelected() && this.parent != null)
+        {
             this.parent.transferFocus(this);
         }
     }
 
-    public void transferFocusBackward() {
-        if (this.isSelected() && this.parent != null) {
+    public void transferFocusBackward()
+    {
+        if(this.isSelected() && this.parent != null)
+        {
             this.parent.transferFocusBackward(this);
         }
     }
 
-    public boolean isFocusable() {
+    public boolean isFocusable()
+    {
         return this.focusable;
     }
 
-    public void setFocusable(boolean b) {
+    public void setFocusable(boolean b)
+    {
         this.focusable = b;
     }
 
-    public LContainer getContainer() {
+    public LContainer getContainer()
+    {
         return this.parent;
     }
 
-    final void setContainer(LContainer container) {
+    final void setContainer(LContainer container)
+    {
         this.parent = container;
 
         this.validatePosition();
     }
 
-    final void setDesktop(Desktop desktop) {
-        if (this.desktop == desktop) {
+    final void setDesktop(Desktop desktop)
+    {
+        if(this.desktop == desktop)
+        {
             return;
         }
 
@@ -484,406 +584,518 @@ public abstract class LComponent extends LObject implements ActionBind, XY,
         this.input = desktop.input;
     }
 
-    public void setBounds(float dx, float dy, int width, int height) {
+    public void setBounds(float dx, float dy, int width, int height)
+    {
         setLocation(dx, dy);
-        if (this.width != width || this.height != height) {
+        if(this.width != width || this.height != height)
+        {
             this.width = width;
             this.height = height;
-            if (width == 0) {
+            if(width == 0)
+            {
                 width = 1;
             }
-            if (height == 0) {
+            if(height == 0)
+            {
                 height = 1;
             }
             this.validateSize();
         }
     }
 
-    public void setX(Integer x) {
-        if (this.getX() != x || x == 0) {
+    public void setX(Integer x)
+    {
+        if(this.getX() != x || x == 0)
+        {
             super.setX(x);
             this.validatePosition();
         }
     }
 
-    public void setX(float x) {
-        if (this.getX() != x || x == 0) {
+    public void setX(float x)
+    {
+        if(this.getX() != x || x == 0)
+        {
             super.setX(x);
             this.validatePosition();
         }
     }
 
-    public void setY(Integer y) {
-        if (this.getY() != y || y == 0) {
+    public void setY(Integer y)
+    {
+        if(this.getY() != y || y == 0)
+        {
             super.setY(y);
             this.validatePosition();
         }
     }
 
-    public void setY(float y) {
-        if (this.getY() != y || y == 0) {
+    public void setY(float y)
+    {
+        if(this.getY() != y || y == 0)
+        {
             super.setY(y);
             this.validatePosition();
         }
     }
 
     @Override
-    public void setLocation(Vector2f _location) {
+    public void setLocation(Vector2f _location)
+    {
         setLocation(_location.x, _location.y);
     }
 
     @Override
-    public void setLocation(float dx, float dy) {
-        if (this.getX() != dx || this.getY() != dy || dx == 0 || dy == 0) {
+    public void setLocation(float dx, float dy)
+    {
+        if(this.getX() != dx || this.getY() != dy || dx == 0 || dy == 0)
+        {
             super.setLocation(dx, dy);
             this.validatePosition();
         }
     }
 
     @Override
-    public void move(float dx, float dy) {
-        if (dx != 0 || dy != 0) {
-            if (dx > -100 && dx < 100 && dy > -100 && dy < 100) {
+    public void move(float dx, float dy)
+    {
+        if(dx != 0 || dy != 0)
+        {
+            if(dx > -100 && dx < 100 && dy > -100 && dy < 100)
+            {
                 super.move(dx, dy);
                 this.validatePosition();
             }
         }
     }
 
-    public void setSize(int w, int h) {
-        if (this.width != w || this.height != h) {
+    public void setSize(int w, int h)
+    {
+        if(this.width != w || this.height != h)
+        {
             this.width = w;
             this.height = h;
-            if (this.width == 0) {
+            if(this.width == 0)
+            {
                 this.width = 1;
             }
-            if (this.height == 0) {
+            if(this.height == 0)
+            {
                 this.height = 1;
             }
             this.validateSize();
         }
     }
 
-    protected void validateSize() {
+    protected void validateSize()
+    {
     }
 
-    public void validatePosition() {
-        if (parent != null) {
+    public void validatePosition()
+    {
+        if(parent != null)
+        {
             this.screenX = _location.x() + this.parent.getScreenX();
             this.screenY = _location.y() + this.parent.getScreenY();
-        } else {
+        }
+        else
+        {
             this.screenX = _location.x();
             this.screenY = _location.y();
         }
     }
 
-    public int getScreenX() {
+    public int getScreenX()
+    {
         return this.screenX;
     }
 
-    public int getScreenY() {
+    public int getScreenY()
+    {
         return this.screenY;
     }
 
-    public void setHeight(float height) {
+    public void setHeight(float height)
+    {
         this.height = height;
     }
 
-    public void setWidth(float width) {
+    public void setWidth(float width)
+    {
         this.width = width;
     }
 
-    public float getWidth() {
+    public float getWidth()
+    {
         return (this.width * scaleX);
     }
 
-    public float getHeight() {
+    public float getHeight()
+    {
         return (this.height * scaleY);
     }
 
-    public int width() {
-        return (int) getWidth();
+    public int width()
+    {
+        return (int)getWidth();
     }
 
-    public int height() {
-        return (int) getHeight();
+    public int height()
+    {
+        return (int)getHeight();
     }
 
-    public RectBox getCollisionBox() {
-        if (_rect == null) {
+    public RectBox getCollisionBox()
+    {
+        if(_rect == null)
+        {
             _rect = new RectBox(screenX, screenY, width * scaleX, height
                     * scaleY);
-        } else {
+        }
+        else
+        {
             _rect.setBounds(screenX, screenY, width * scaleX, height * scaleY);
         }
         return _rect;
     }
 
-    public String getToolTipText() {
+    public String getToolTipText()
+    {
         return this.tooltip;
     }
 
-    public void setToolTipText(String text) {
+    public void setToolTipText(String text)
+    {
         this.tooltip = text;
     }
 
-    public void doClick() {
-        if (Click != null) {
+    public void doClick()
+    {
+        if(Click != null)
+        {
             Click.DoClick(this);
         }
     }
 
-    public void downClick() {
-        if (Click != null) {
+    public void downClick()
+    {
+        if(Click != null)
+        {
             Click.DownClick(this, input.getTouchX(), input.getTouchY());
         }
     }
 
-    public void dragClick() {
-        if (Click != null) {
+    public void dragClick()
+    {
+        if(Click != null)
+        {
             Click.DragClick(this, input.getTouchX(), input.getTouchY());
         }
     }
 
-    public void upClick() {
-        if (Click != null) {
+    public void upClick()
+    {
+        if(Click != null)
+        {
             Click.UpClick(this, input.getTouchX(), input.getTouchY());
         }
     }
 
-    protected void processTouchClicked() {
+    protected void processTouchClicked()
+    {
         this.doClick();
     }
 
-    protected void processTouchPressed() {
+    protected void processTouchPressed()
+    {
         this.downClick();
     }
 
-    protected void processTouchReleased() {
+    protected void processTouchReleased()
+    {
         this.upClick();
     }
 
-    protected void processTouchDragged() {
+    protected void processTouchDragged()
+    {
         this.dragClick();
     }
 
-    protected void processTouchMoved() {
+    protected void processTouchMoved()
+    {
     }
 
-    protected void processTouchEntered() {
+    protected void processTouchEntered()
+    {
     }
 
-    protected void processTouchExited() {
+    protected void processTouchExited()
+    {
     }
 
     // 键盘操作
-    protected void processKeyPressed() {
+    protected void processKeyPressed()
+    {
 
     }
 
-    protected void processKeyReleased() {
+    protected void processKeyReleased()
+    {
     }
 
-    void keyPressed() {
+    void keyPressed()
+    {
         this.checkFocusKey();
         this.processKeyPressed();
     }
 
     /**
      * 检测键盘事件焦点
-     *
      */
-    protected void checkFocusKey() {
-        if (this.input.getKeyPressed() == SysKey.ENTER) {
+    protected void checkFocusKey()
+    {
+        if(this.input.getKeyPressed() == SysKey.ENTER)
+        {
 
             this.transferFocus();
 
-        } else {
+        }
+        else
+        {
             this.transferFocusBackward();
         }
     }
 
-    public LTexture[] getImageUI() {
+    public LTexture[] getImageUI()
+    {
         return this.imageUI;
     }
 
-    public void setImageUI(LTexture[] imageUI, boolean processUI) {
-        if (imageUI != null) {
-            this.width = (int) imageUI[0].width();
-            this.height = (int) imageUI[0].height();
+    public void setImageUI(LTexture[] imageUI, boolean processUI)
+    {
+        if(imageUI != null)
+        {
+            this.width = (int)imageUI[0].width();
+            this.height = (int)imageUI[0].height();
         }
 
         this.imageUI = imageUI;
     }
 
-    public void setImageUI(int index, LTexture imageUI) {
-        if (imageUI != null) {
-            this.width = (int) imageUI.width();
-            this.height = (int) imageUI.height();
+    public void setImageUI(int index, LTexture imageUI)
+    {
+        if(imageUI != null)
+        {
+            this.width = (int)imageUI.width();
+            this.height = (int)imageUI.height();
         }
         this.imageUI[index] = imageUI;
     }
 
     public abstract String getUIName();
 
-    public LTexture getBackground() {
+    public LTexture getBackground()
+    {
         return background;
     }
 
-    public void clearBackground() {
+    public void clearBackground()
+    {
         this.setBackground(TextureUtils.createTexture(1, 1, LColor.white));
     }
 
-    public void setBackground(String fileName) {
+    public void setBackground(String fileName)
+    {
         this.setBackground(LTextures.loadTexture(fileName));
     }
 
-    public void setBackground(LColor color) {
-        setBackground(TextureUtils.createTexture((int) getWidth(),
-                (int) getHeight(), color));
+    public void setBackground(LColor color)
+    {
+        setBackground(TextureUtils.createTexture((int)getWidth(), (int)getHeight(), color));
     }
 
-    public void setBackground(LTexture background) {
-        if (background == null) {
+    public void setBackground(LTexture background)
+    {
+        if(background == null)
+        {
             return;
         }
         LTexture oldImage = this.background;
-        if (oldImage != background && oldImage != null) {
+        if(oldImage != background && oldImage != null)
+        {
             oldImage.close();
             oldImage = null;
         }
         this.background = background;
         this.setAlpha(1.0F);
-        this.width = (int) background.width();
-        this.height = (int) background.height();
-        if (this.width <= 0) {
+        this.width = (int)background.width();
+        this.height = (int)background.height();
+        if(this.width <= 0)
+        {
             this.width = 1;
         }
-        if (this.height <= 0) {
+        if(this.height <= 0)
+        {
             this.height = 1;
         }
     }
 
-    public int getCamX() {
+    public int getCamX()
+    {
         return cam_x == 0 ? x() : cam_x;
     }
 
-    public int getCamY() {
+    public int getCamY()
+    {
         return cam_y == 0 ? y() : cam_y;
     }
 
-    protected void createCustomUI(int w, int h) {
+    protected void createCustomUI(int w, int h)
+    {
     }
 
-    public boolean isClose() {
+    public boolean isClose()
+    {
         return isClose;
     }
 
-    public boolean isAutoDestroy() {
+    public boolean isAutoDestroy()
+    {
         return autoDestroy;
     }
 
-    public void setAutoDestroy(boolean autoDestroy) {
+    public void setAutoDestroy(boolean autoDestroy)
+    {
         this.autoDestroy = autoDestroy;
     }
 
     @Override
-    public Field2D getField2D() {
+    public Field2D getField2D()
+    {
         return null;
     }
 
     float scaleX = 1, scaleY = 1;
 
-    public void setScale(final float s) {
+    public void setScale(final float s)
+    {
         this.setScale(s, s);
     }
 
-    public void setScale(final float sx, final float sy) {
-        if (this.scaleX == sx && this.scaleY == sy) {
+    public void setScale(final float sx, final float sy)
+    {
+        if(this.scaleX == sx && this.scaleY == sy)
+        {
             return;
         }
         this.scaleX = sx;
         this.scaleY = sy;
     }
 
-    public float getScaleX() {
+    public float getScaleX()
+    {
         return this.scaleX;
     }
 
-    public float getScaleY() {
+    public float getScaleY()
+    {
         return this.scaleY;
     }
 
-    public boolean isBounded() {
+    public boolean isBounded()
+    {
         return true;
     }
 
-    public boolean inContains(float x, float y, float w, float h) {
-        if (parent != null) {
+    public boolean inContains(float x, float y, float w, float h)
+    {
+        if(parent != null)
+        {
             return parent.contains(x, y, w, h);
         }
         return false;
     }
 
-    public float getTouchX() {
-        if (parent == null) {
+    public float getTouchX()
+    {
+        if(parent == null)
+        {
             return SysTouch.getX() - getX();
-        } else {
-            if (parent instanceof LScrollContainer) {
+        }
+        else
+        {
+            if(parent instanceof LScrollContainer)
+            {
                 return SysTouch.getX()
-                        + ((LScrollContainer) parent).getScrollX()
+                        + ((LScrollContainer)parent).getScrollX()
                         - parent.getX() - getX();
-            } else {
+            }
+            else
+            {
                 return SysTouch.getX() - parent.getX() - getX();
             }
         }
     }
 
-    public float getTouchY() {
-        if (parent == null) {
+    public float getTouchY()
+    {
+        if(parent == null)
+        {
             return SysTouch.getY() - getY();
-        } else {
-            if (parent instanceof LScrollContainer) {
+        }
+        else
+        {
+            if(parent instanceof LScrollContainer)
+            {
                 return SysTouch.getY()
-                        + ((LScrollContainer) parent).getScrollY()
+                        + ((LScrollContainer)parent).getScrollY()
                         - parent.getY() - getY();
-            } else {
+            }
+            else
+            {
                 return SysTouch.getY() - parent.getY() - getY();
             }
         }
     }
 
-    public RectBox getRectBox() {
+    public RectBox getRectBox()
+    {
         return getCollisionBox();
     }
 
     @Override
-    public float getContainerWidth() {
+    public float getContainerWidth()
+    {
         return parent.getWidth();
     }
 
     @Override
-    public float getContainerHeight() {
+    public float getContainerHeight()
+    {
         return parent.getHeight();
     }
 
-    public LayoutConstraints getConstraints() {
-        if (constraints == null) {
+    public LayoutConstraints getConstraints()
+    {
+        if(constraints == null)
+        {
             constraints = new LayoutConstraints();
         }
         return constraints;
     }
 
-    public LayoutPort getLayoutPort() {
+    public LayoutPort getLayoutPort()
+    {
         return new LayoutPort(this, getConstraints());
     }
 
     public LayoutPort getLayoutPort(final RectBox newBox,
-                                    final LayoutConstraints newBoxConstraints) {
+                                    final LayoutConstraints newBoxConstraints)
+    {
         return new LayoutPort(newBox, newBoxConstraints);
     }
 
-    public LayoutPort getLayoutPort(final LayoutPort src) {
+    public LayoutPort getLayoutPort(final LayoutPort src)
+    {
         return new LayoutPort(src);
     }
 }

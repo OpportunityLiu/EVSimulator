@@ -94,7 +94,7 @@ public class TileMap extends LContainer implements LRelease
         this.setOffset(offset);
     }
 
-    public void draw(GLEx g)
+    private void draw(GLEx g)
     {
         final float offsetX = offset.getX(), offsetY = offset.getY();
 
