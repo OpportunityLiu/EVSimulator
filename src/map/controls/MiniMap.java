@@ -43,7 +43,7 @@ public class MiniMap extends LComponent
         if(mapPresenter != null)
             mapPresenter.close();
         final MeterXY.MapTileInfo tileInfo = center.getTileOfThis(scale);
-        mapPresenter = new TileMap((int)(getWidth() - 2 * padding), (int)(getHeight() - 2 * padding), tileInfo.x - 1, tileInfo.x + 2, tileInfo.y - 1, tileInfo.y + 2, scale);
+        mapPresenter = new TileMap((int)(getWidth() - 2 * padding), (int)(getHeight() - 2 * padding), tileInfo.x - 1, tileInfo.x + 2, tileInfo.y - 1, tileInfo.y + 2, scale, null);
         mapPresenter.setCanDrag(false);
         mapPresenter.setTileHeight(mapPresenter.height());
         mapPresenter.setTileWidth(mapPresenter.width());

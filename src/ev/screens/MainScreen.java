@@ -30,26 +30,26 @@ class MainScreen extends Screen
     private float scale;
 
     private boolean animating = true;
-    
+
     //for background
     private LTexture p1, p2, p3, p4;
     private float r1, r2, r3, r4;
     private LPanel c1, c2, c3, c4;
     private LTexture backgroundTexture;
-    
+
     private LPanel logo;
-    
+
     //for main menu
     private LPanel mainMenu;
     private MButton mButtonStart, mButtonExit;
-    
+
     //for select menu
     private LPanel selectMenu, sPanel;
     private MButton sButtonStart, sButtonBack;
     private MTextList<CityInfo.Province> provinceList;
     private MTextList<CityInfo.City> cityList;
     private MiniMap mapPanel;
-    
+
     @Override
     public void draw(GLEx g)
     {
@@ -64,7 +64,7 @@ class MainScreen extends Screen
         g.draw(p3, 155.68f, 750.56f, p3.width() / scale, p3.height() / scale, r3);
         g.draw(p4, 1077.68f, 446.4f, p4.width() / scale, p4.height() / scale, r4);
     }
-    
+
     /**
      * 初始化时加载的数据
      */
@@ -80,14 +80,14 @@ class MainScreen extends Screen
         initBackground();
         initMain();
         initSelect();
-        
+
         logo = new LPanel(0, 50, 1, 1);
         logo.setBackground(Resources.images("home/logo.png"));
         logo.setSize(500, 120);
         logo.setX(getHalfWidth() - logo.getWidth() / 2);
         logo.setAlpha(0);
         add(logo);
-        
+
         add(new MFadeEffect(MFadeEffect.TYPE_FADE_IN, LColor.black)
         {
             @Override
@@ -100,7 +100,7 @@ class MainScreen extends Screen
             }
         });
     }
-    
+
     private void initBackground()
     {
         backgroundTexture = Resources.images("home/background.png");
@@ -111,42 +111,50 @@ class MainScreen extends Screen
         p2 = Resources.images("home/p2.png");
         p3 = Resources.images("home/p3.png");
         p4 = Resources.images("home/p4.png");
-        
+
         c3 = new LPanel(-500, 0, 0, 0);
         c3.setBackground(Resources.images("home/car3.png"));
         c3.setScale(0.8f);
         add(c3);
         addAction(repeatMoveActionDelay(1300, 830, -300, 830, 20), c3);
-        
+
         c1 = new LPanel(-500, 0, 0, 0);
         c1.setBackground(Resources.images("home/car1.png"));
         c1.setScale(0.8f);
         add(c1);
         addAction(repeatMoveActionDelay(-300, 820, 1300, 820, 17), c1);
-        
+
         c2 = new LPanel(-500, 0, 0, 0);
         c2.setBackground(Resources.images("home/car2.png"));
         c2.setScale(0.8f);
         add(c2);
         addAction(repeatMoveActionDelay(-300, 820, 1300, 820, 14), c2);
-        
+
         c4 = new LPanel(-500, 0, 0, 0);
         c4.setBackground(Resources.images("home/car4.png"));
         c4.setScale(0.8f);
         add(c4);
         addAction(repeatMoveActionDelay(-300, 800, 1300, 800, 11), c4);
     }
-    
+
     private void initMain()
     {
-        Texture[] btn1 = new Texture[]{Resources.controls("blue_button02"), Resources.controls("blue_button04"), Resources.controls("blue_button03")};
-        Texture[] btn2 = new Texture[]{Resources.controls("red_button02"), Resources.controls("red_button04"), Resources.controls("red_button03")};
+        Texture[] btn1 = new Texture[]{
+                Resources.controls("blue_button02"),
+                Resources.controls("blue_button04"),
+                Resources.controls("blue_button03")
+        };
+        Texture[] btn2 = new Texture[]{
+                Resources.controls("red_button02"),
+                Resources.controls("red_button04"),
+                Resources.controls("red_button03")
+        };
 
         mainMenu = new LPanel(getHalfWidth() - 125, getHalfHeight() - 150, 250, 178);
         LColor c = new LColor(1f, 1f, 1f, 0.5f);
         mainMenu.setBackground(c);
         mainMenu.setAlpha(0);
-        
+
         mButtonStart = new MButton(btn1, "Start", (mainMenu.width() - 190) / 2, 30, 190, 49);
         mButtonStart.setFont(Resources.fonts("menu"));
         mButtonStart.setOffsetTop(2);
@@ -161,7 +169,7 @@ class MainScreen extends Screen
                 toSelect();
             }
         });
-        
+
         mButtonExit = new MButton(btn2, "Exit", (mainMenu.width() - 190) / 2, 100, 190, 49);
         mButtonExit.setFont(Resources.fonts("menu"));
         mButtonExit.setOffsetTop(2);
@@ -177,7 +185,7 @@ class MainScreen extends Screen
                     System.exit(0);
                 }
             };
-            
+
             @Override
             public void DoClick(LComponent comp)
             {
@@ -188,14 +196,14 @@ class MainScreen extends Screen
                     add(fade);
             }
         });
-        
+
         mainMenu.add(mButtonStart);
         mainMenu.add(mButtonExit);
 
         mainMenu.setVisible(false);
         add(mainMenu);
     }
-    
+
     private void showMain()
     {
         mainMenu.setVisible(true);
@@ -208,7 +216,7 @@ class MainScreen extends Screen
 
         animating = false;
     }
-    
+
     private void toMain()
     {
         animating = true;
@@ -247,7 +255,7 @@ class MainScreen extends Screen
         addAction(fadeMap, mapPanel);
         addAction(fadeM, selectMenu);
     }
-    
+
     private void initSelect()
     {
         selectMenu = new LPanel(0, 0, getWidth(), getHeight());
@@ -260,8 +268,16 @@ class MainScreen extends Screen
         sPanel.setAlpha(0);
         selectMenu.add(sPanel);
 
-        Texture[] btn1 = new Texture[]{Resources.controls("green_button02"), Resources.controls("green_button04"), Resources.controls("green_button03")};
-        Texture[] btn2 = new Texture[]{Resources.controls("blue_button02"), Resources.controls("blue_button04"), Resources.controls("blue_button03")};
+        Texture[] btn1 = new Texture[]{
+                Resources.controls("green_button02"),
+                Resources.controls("green_button04"),
+                Resources.controls("green_button03")
+        };
+        Texture[] btn2 = new Texture[]{
+                Resources.controls("blue_button02"),
+                Resources.controls("blue_button04"),
+                Resources.controls("blue_button03")
+        };
 
         sButtonStart = new MButton(btn1, "Start", (sPanel.width() - 190) / 2, 30, 190, 49);
         sButtonStart.setFont(Resources.fonts("menu"));
@@ -282,7 +298,7 @@ class MainScreen extends Screen
                         addScreen("game", s);
                     }
                     MapTile tile = city.getTile();
-                    s.init(tile.getX() * 16, tile.getY() * 16, 16, 16);
+                    s.init(tile.getX() * 16, tile.getY() * 16, 16, 16, city.name);
                     runScreen("game");
                     animating = false;
                 }
@@ -425,7 +441,7 @@ class MainScreen extends Screen
 
         animating = false;
     }
-    
+
     private void toSelect()
     {
         animating = true;
@@ -453,12 +469,12 @@ class MainScreen extends Screen
         addAction(fadeP, mainMenu);
         addAction(moveLogo, logo);
     }
-    
+
     private ActionEvent repeatMoveActionDelay(float x1, float y1, float x2, float y2, int speed)
     {
         return ActionHelper.runAfter(MathUtils.random(10f), repeatMoveAction(x1, y1, x2, y2, speed));
     }
-    
+
     private ActionEvent repeatMoveAction(float x1, float y1, float x2, float y2, int speed)
     {
         MoveBy r = new MoveBy(x2, y2, MathUtils.random(speed - 1, speed + 2));
@@ -469,7 +485,7 @@ class MainScreen extends Screen
             {
                 o.setLocation(x1, y1);
             }
-            
+
             @Override
             public void stop(ActionBind o)
             {
@@ -506,49 +522,49 @@ class MainScreen extends Screen
             needRefreshImage = false;
         }
     }
-    
+
     @Override
     public void resize(int width, int height)
     {
-        
+
     }
-    
+
     @Override
     public void touchDown(GameTouch e)
     {
-        
+
     }
-    
+
     @Override
     public void touchUp(GameTouch e)
     {
-        
+
     }
-    
+
     @Override
     public void touchMove(GameTouch e)
     {
-        
+
     }
-    
+
     @Override
     public void touchDrag(GameTouch e)
     {
-        
+
     }
-    
+
     @Override
     public void resume()
     {
-        
+
     }
-    
+
     @Override
     public void pause()
     {
-        
+
     }
-    
+
     /**
      * 释放函数内资源
      */

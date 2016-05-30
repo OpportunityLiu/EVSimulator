@@ -1,7 +1,7 @@
 package ev.controls;
 
 import loon.LTexture;
-import loon.component.LComponent;
+import loon.opengl.GLEx;
 
 /**
  * Created by liuzh on 2016/5/4.
@@ -9,78 +9,54 @@ import loon.component.LComponent;
  */
 public class Pile extends MapComponent
 {
-    private float maxPower = 10000;
-    private float totalComsumption;
+    private float power = 1;
 
-    private boolean charging;
+    private LTexture image;
 
-    private Vehicle vehicle;
+    @Override
+    public boolean intersects(float x1, float y1)
+    {
+        return super.intersects(x1 + getWidth() / 2, y1 + getHeight() / 2);
+    }
 
     public Pile(int x, int y, int width, int height, LTexture texture)
     {
         super(x, y, width, height, texture);
+        image = texture;
+        setSize(width, height);
     }
 
     public Pile(int x, int y, LTexture texture)
     {
         super(x, y, texture);
+        image = texture;
     }
 
-    public Vehicle getVehicle()
+    public float getPower()
     {
-        return vehicle;
+        return power;
     }
 
-    public void setVehicle(Vehicle vehicle)
+    public void setPower(float power)
     {
-        this.vehicle = vehicle;
-    }
-
-    public float getMaxPower()
-    {
-        return maxPower;
-    }
-
-    public void setMaxPower(float maxPower)
-    {
-        this.maxPower = maxPower;
-    }
-
-    public float getTotalComsumption()
-    {
-        return totalComsumption;
-    }
-
-    public void resetTotalComsumption()
-    {
-        this.totalComsumption = 0;
-    }
-
-    public boolean isCharging()
-    {
-        return charging;
+        this.power = power;
     }
 
     @Override
     public void update(long elapsedTime)
     {
         super.update(elapsedTime);
-        if(vehicle != null)
-        {
-            float energy = maxPower * elapsedTime * getController().timeScale();
-            charging = !vehicle.charge(energy);
-            if(charging)
-                totalComsumption += energy;
-        }
-        else
-        {
-            charging = false;
-        }
     }
 
     @Override
     public String getUIName()
     {
         return "Pile";
+    }
+
+    @Override
+    public void createUI(GLEx g)
+    {
+        g.draw(image, screenX - getWidth() / 2, screenY - getHeight() / 2, getWidth(), getHeight(), getRotation());
     }
 }

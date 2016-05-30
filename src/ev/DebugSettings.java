@@ -16,5 +16,5 @@ public class DebugSettings
     }
 
     public static boolean skipSplash = false;
-    public static boolean fullscreen = true;
+    public static boolean fullscreen = false;
 }

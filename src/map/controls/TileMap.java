@@ -10,6 +10,7 @@ import loon.geom.RectBox;
 import loon.geom.Vector2f;
 import loon.opengl.GLEx;
 import loon.utils.MathUtils;
+import loon.utils.StringUtils;
 import map.MapTile;
 import map.MeterXY;
 
@@ -60,7 +61,14 @@ public class TileMap extends LContainer implements LRelease
 
     private Vector2f offset, maxOffset;
 
-    public TileMap(int width, int height, int minRawX, int maxRawX, int minRawY, int maxRawY, int scale)
+    private String region;
+
+    public String getRegion()
+    {
+        return region;
+    }
+
+    public TileMap(int width, int height, int minRawX, int maxRawX, int minRawY, int maxRawY, int scale, String region)
     {
         super(0, 0, width, height);
         setBackground(new LColor("#f5f3f0"));
@@ -79,10 +87,12 @@ public class TileMap extends LContainer implements LRelease
             arrays[i] = new MapTile[getRow()];
             for(int j = 0; j < getRow(); j++)
             {
-                arrays[i][j] = MapTile.getTile(minRawX + i, maxRawY - 1 - j, scale).onComplete(event -> loadingProgress++);
+                arrays[i][j] = MapTile.getTile(minRawX + i, maxRawY - 1 - j, scale)
+                                      .onComplete(event -> loadingProgress++);
             }
         }
         recalculateMaxOffset();
+        this.region = region;
     }
 
     protected void recalculateMaxOffset()
@@ -167,10 +177,24 @@ public class TileMap extends LContainer implements LRelease
      * @param y 距整个地图上边的距离
      * @return 坐标
      */
-    public Vector2f tilesToPixels(float x, float y)
+    public Vector2f tilesToScreenPixels(float x, float y)
     {
         float xprime = tilesToPixelsX(x) - offset.x;
         float yprime = tilesToPixelsY(y) - offset.y;
+        return new Vector2f(xprime, yprime);
+    }
+
+    /**
+     * 转换坐标为像素坐标
+     *
+     * @param x 距整个地图左边的距离
+     * @param y 距整个地图上边的距离
+     * @return 坐标
+     */
+    public Vector2f tilesToPixels(float x, float y)
+    {
+        float xprime = tilesToPixelsX(x);
+        float yprime = tilesToPixelsY(y);
         return new Vector2f(xprime, yprime);
     }
 
@@ -181,10 +205,24 @@ public class TileMap extends LContainer implements LRelease
      * @param y 距控件上边的距离
      * @return 坐标
      */
-    public Vector2f pixelsToTiles(float x, float y)
+    public Vector2f screenPixelsToTiles(float x, float y)
     {
         float xprime = (x + offset.x) / tileWidth;
         float yprime = (y + offset.y) / tileHeight;
+        return new Vector2f(xprime, yprime);
+    }
+
+    /**
+     * 转换像素坐标至坐标
+     *
+     * @param x 距地图左边的距离
+     * @param y 距地图上边的距离
+     * @return 坐标
+     */
+    public Vector2f pixelsToTiles(float x, float y)
+    {
+        float xprime = x / tileWidth;
+        float yprime = y / tileHeight;
         return new Vector2f(xprime, yprime);
     }
 

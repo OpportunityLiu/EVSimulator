@@ -46,27 +46,6 @@
     "cars/yellow_3.png",
     "cars/yellow_4.png",
     "cars/yellow_5.png",
-    "characters/black_blue.png",
-    "characters/black_green.png",
-    "characters/black_red.png",
-    "characters/black_white.png",
-    "characters/blonde_blue.png",
-    "characters/blonde_green.png",
-    "characters/blonde_red.png",
-    "characters/blonde_white.png",
-    "characters/brown_blue.png",
-    "characters/brown_green.png",
-    "characters/brown_red.png",
-    "characters/brown_white.png",
-    "drivers/black.png",
-    "drivers/blue.png",
-    "drivers/green.png",
-    "drivers/red.png",
-    "drivers/yellow.png",
-    "motorcycles/black.png",
-    "motorcycles/blue.png",
-    "motorcycles/green.png",
-    "motorcycles/red.png",
-    "motorcycles/yellow.png"
+    "pile.png"
   ]
 }
